@@ -1,4 +1,4 @@
-/* We have abided bu the UNCG Academic Integrity Policy. Kylia Hurley Preston, Diego Kahlie. 
+/* We have abided by the UNCG Academic Integrity Policy. Kylia Hurley Preston, Diego Kahlie. 
 2/4/2020 
 This desktop application is named HeyFriday!. It allows user to choose an activity in their area 
 on specific day and time to go and do. For example users will have the option to save a profile and choose to
