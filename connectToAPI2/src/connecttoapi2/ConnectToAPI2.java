@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import org.json.*;
 /**
  * @author Diego
+ *gets popular cuisines and resturaunts around the specified coordinates
  */
 public class ConnectToAPI2 {
 
@@ -58,8 +59,8 @@ public class ConnectToAPI2 {
             
             //parse data from stringBuffer object using JSONObject
             JSONObject obj = new JSONObject(content.toString());
-            String movieName = obj.getString("popularity");
-            System.out.println("Top Cuisines: " + movieName);
+            String popularity = obj.getString("popularity");
+            System.out.println("Top Cuisines: " + popularity);
             
         } catch (Exception ex) {
             Logger.getLogger(ConnectToAPI2.class.getName()).log(Level.SEVERE, null, ex);
