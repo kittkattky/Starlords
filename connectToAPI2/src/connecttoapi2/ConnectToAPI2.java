@@ -18,11 +18,13 @@ public class ConnectToAPI2 {
      * @param args the command line arguments
      */
      public static void main(String[] args) {
-        String baseUrl = "https://api.themoviedb.org";
-        String callAction = "/3/movie/";
-        String movieId = "299536";
+        String baseUrl = "https://developers.zomato.com/api";
+        String version = "/v2.1";
+        String getRequest = "/geocode";
+        final String lat = "lat=36.066984";
+        final String lon = "lon=-79.800178";
         String apiKey = "680201a1d38ff559b9c8b20ffde6db61";
-        String urlString = "https://developers.zomato.com/api/v2.1/geocode?lat=36.066984&lon=-79.800178";
+        String urlString = baseUrl + version + getRequest + "?" + lat + "&" + lon;
         
         URL url;
         System.out.println("Marker 1");
