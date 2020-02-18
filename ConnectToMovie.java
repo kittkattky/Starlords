@@ -17,7 +17,7 @@ public class ConnectToMovie {
         String apiKey = "B502B332-D4BC-4B0B-B376-3C5F3DA28308";
         String urlString = "http://developers.amctheatres.com/GettingStarted/"
                 + "NewVendorSuccess?key=b502b332-d4bc-4b0b-b376-3c5f3da28308";
-        
+
         URL url;
         System.out.println("Marker 1");
         try {
@@ -30,7 +30,7 @@ public class ConnectToMovie {
         System.out.println("Marker 3");
 
             int status = con.getResponseCode();
-            
+
             System.out.println("Response Code: " + status);
             StringBuffer content;
             try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
@@ -46,6 +46,6 @@ public class ConnectToMovie {
             Logger.getLogger(ConnectToMovie.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }
 
