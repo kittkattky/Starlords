@@ -1,7 +1,7 @@
 package Csc340Project;
 
 /**
- * This class is
+ * This class is the FXMLDocumentController and displays and confingures the login page
  *
  * @author Kahlie Last Updated: 2/17/2020
  */
