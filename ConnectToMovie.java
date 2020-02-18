@@ -1,3 +1,4 @@
+package ConnectToMovie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +8,11 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class ConnectToMovie {
+    /**
+     *
+     * @Author Kylia
+     * finds movies in the area at local AMC theaters
+     */
 
     /*
      * @param args the command line arguments
@@ -25,7 +31,7 @@ public class ConnectToMovie {
             url = new URL(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Accept", "application/json" );
-            con.setRequestProperty("user-key", "0a71dc953812d0958a14168a49b5acfd" );
+            con.setRequestProperty("user-key", "31dd5ae1-9562-4b1f-b718-f8b1a3a97492" );
             con.setRequestMethod("GET");
         System.out.println("Marker 3");
 
