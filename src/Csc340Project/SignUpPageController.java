@@ -56,7 +56,7 @@ public class SignUpPageController implements Initializable {
     public void handleButtonAction3(MouseEvent event) throws IOException{
 
         if (event.getSource() == signInBtn) {
-            if (SignUp().equals("Success")) {
+            if (signUp().equals("Success")) {
                 try {
                 
                     Node node = (Node) event.getSource();
@@ -96,7 +96,7 @@ public class SignUpPageController implements Initializable {
     //Contains results of the SQL query
     ResultSet ResultSet = null;
 
-   private String SignUp() {
+   private String signUp() {
         String status = "Success";
         String email = suEmail.getText();
         String password = suPassword.getText();
