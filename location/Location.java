@@ -1,11 +1,39 @@
 package location;
 
 import API.*;
+import java.io.*;
 import java.net.MalformedURLException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONException;
+import org.apache.poi.xssf.usermodel.*;
 
 public class Location {
-     public static void main(String[] args) throws JSONException {
+    public static void main (String [] a) throws IOException {
+        String filePath = System.getProperty("user.dir") + "\\test.xlsx";
+        
+        XSSFWorkbook wb = new XSSFWorkbook ();
+        
+        XSSFSheet sheet = wb.createSheet("Action1");
+        XSSFRow row = sheet.createRow(0);
+        XSSFCell cell = row.createCell(0);
+        cell.setCellValue("testing123");
+        
+        FileOutputStream out = new FileOutputStream(new File(filePath));
+        wb.write(out);
+        out.close ();
+        
+        System.out.println (sheet.getSheetName());
+        
+        wb.close();
+        
+        wb = new XSSFWorkbook (filePath);
+        wb.getSheetAt(0);
+        wb.close ();
+    }
+            
+    
+     public static void main_(String[] args) throws JSONException {
 
         //parameters needed for urlString
         final int KEY = 0, VALUE = 1;
