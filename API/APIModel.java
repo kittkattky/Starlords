@@ -74,8 +74,6 @@ public class APIModel {
         
         config = config.concat(parameters);
         
-        System.out.println (config);
-        
         try {
             //instantiate new URL object with config string and open connection.
             this.url = new URL (config);
