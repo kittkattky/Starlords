@@ -43,7 +43,7 @@ public class ConnectToAPI2 {
             System.out.println("Response Code: " + status);
             
             //wrap InputStream in BufferedReader
-     `      //read data from the input stream and store it in a string. 
+            //read data from the input stream and store it in a string. 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuffer content = new StringBuffer();
