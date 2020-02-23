@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
@@ -68,9 +69,13 @@ public class APIModel {
         String parameters = "";
         String ret = "";
         StringBuffer strBuff;
+        Set <String> set = this.config.keySet();
         
-        for (String key : this.config.keySet())
-            parameters = parameters.concat(key + "=" + this.config.get(key));
+        for (String key : set) {
+            //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
+            char delimiter = ( parameters.isEmpty() ? '?' : '&');
+            parameters = parameters.concat( delimiter + key + "=" + this.config.get(key));
+        }
         
         config = config.concat(parameters);
         
@@ -81,12 +86,6 @@ public class APIModel {
             
             //set the request method.
             this.connect.setRequestMethod(_requestMethod);
-            
-            //>>>>>>>>>>>>>>>>
-            //NOTE: Consider removing call. it looks like the request will still work if you inject the key into the request URL, but this may not be universal.
-            this.connect.setRequestProperty("user-key", _userKey );
-            this.connect.setRequestProperty ("Accept", "application/json" );
-            //<<<<<<<<<<<<<<<<
             
             //switch statement dedicated to dictating next steps based on request method.
             switch (_requestMethod.toLowerCase()) {

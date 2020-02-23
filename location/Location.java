@@ -1,5 +1,6 @@
 package location;
 
+import Utilities.*;
 import API.*;
 import java.io.*;
 import java.net.MalformedURLException;
@@ -9,29 +10,22 @@ import org.json.JSONException;
 import org.apache.poi.xssf.usermodel.*;
 
 public class Location {
-    public static void main (String [] a) throws IOException {
-        String filePath = System.getProperty("user.dir") + "\\test.xlsx";
+    public static void main (String [] a) throws IOException, Exception {
+        boolean setsecure = true;
+        String filePath = System.getProperty("user.dir") + "\\datastore\\test.xlsx";
+        String [] headers = new String []{"CUSTOMER_NUMER", "CUSTOMER_ADDRESS", "CUSTOMER_CITY", "CUSTOMER_STATE", "CUSTOMER_ZIP", "PASSWORD_HASH"};
         
-        XSSFWorkbook wb = new XSSFWorkbook ();
+        File file = new File (filePath);
+        if (file.exists()) file.delete();
         
-        XSSFSheet sheet = wb.createSheet("Action1");
-        XSSFRow row = sheet.createRow(0);
-        XSSFCell cell = row.createCell(0);
-        cell.setCellValue("testing123");
-        
-        FileOutputStream out = new FileOutputStream(new File(filePath));
-        wb.write(out);
-        out.close ();
-        
-        System.out.println (sheet.getSheetName());
-        
-        wb.close();
-        
-        wb = new XSSFWorkbook (filePath);
-        wb.getSheetAt(0);
-        wb.close ();
+        ExcelUtil excel = new ExcelUtil ();
+        excel.createWorkbook(filePath, setsecure);
+        excel.createWorksheet("CUSTOMER", headers);        
+        excel.closeWorkbook();
+        excel.openWorkbook(filePath, setsecure);
+        excel.setCellData("CUSTOMER", 3, 5, "test this");
+        excel.closeWorkbook();
     }
-            
     
      public static void main_(String[] args) throws JSONException {
 
@@ -41,12 +35,12 @@ public class Location {
         String userKey, lat, ret;
         String geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json";
         String [] [] geoCodeParams = new String [] [] {
-            {"?key", "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU"},
-            {"&address", "27370"}};
+            {"key", "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU"},
+            {"address", "27370"}};
 
         String geoLocationURL = "https://www.googleapis.com/geolocation/v1/geolocate";
         String [] [] geoLocationParams = new String [] [] {
-            {"?key", "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU"}};
+            {"key", "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU"}};
 
         APIModel geoCodeModel = new APIModel ();
         APIController geoCodeControl = new APIController (geoCodeModel);
