@@ -13,9 +13,9 @@ public class APIController {
     /**
      * public APIController constructor class.
      * @param _model: APIModel parameter that houses the internal APIModel configurations.
-     * @param _url
-     * @param _userKey
-     * @param _paramArr
+     * @param _url: Base API URL.
+     * @param _userKey: API user key.
+     * @param _paramArr: API parameters stored in a two-dimensional array.
      */
     public APIController (APIModel _model, String _url, String _userKey, String [] [] _paramArr) {
         this.model = _model;
@@ -29,8 +29,8 @@ public class APIController {
     /**
      * public APIController constructor class.
      * @param _model: APIModel parameter that houses the internal APIModel configurations. Constructor allows model instantiation without providing a userKey.
-     * @param _url
-     * @param _paramArr
+     * @param _url: Base API URL.
+     * @param _paramArr: API parameters stored in a two-dimensional array.
      */
     public APIController (APIModel _model, String _url, String [] [] _paramArr) {
         this.model = _model;
@@ -38,6 +38,7 @@ public class APIController {
             this.model.config.put(_paramArr [i] [this.KEY], _paramArr [i] [this.VALUE]);
         
         this.model.urlSite = _url;
+        this.model.userKey = null;
     }
     
     //================= GETTERS ===============

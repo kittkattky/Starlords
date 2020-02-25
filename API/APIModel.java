@@ -69,7 +69,9 @@ public class APIModel {
             //instantiate new URL object with config string and open connection.
             this.url = new URL (apiURL);
             this.connect = (HttpURLConnection) url.openConnection();
-            this.connect.setRequestProperty("user-key", this.userKey);
+            
+            if (this.userKey != null)
+                this.connect.setRequestProperty("user-key", this.userKey);
             
             //set the request method.
             this.connect.setRequestMethod(_requestMethod);
