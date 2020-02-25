@@ -22,7 +22,7 @@ import org.json.*;
  * @author preston.williamson
  */
 public class APIModel {
-    protected String urlSite, apiReturn;
+    protected String urlSite, apiReturn, userKey;
     protected LinkedHashMap <String, String> config;
     protected URL url;
     protected HttpURLConnection connect;
@@ -33,18 +33,6 @@ public class APIModel {
      */
     public APIModel () {     
         this.config = new LinkedHashMap <> ();
-    }
-    
-    /**
-     * getJSONAttribute: a method that works directly with JSON-formatted return strings. This does NOT attempt a new extraction of a POST/GET request.
-     * @param _attribute: a String representation of the desired attribute from which to parse.
-     * @return
-     * @throws JSONException 
-     */
-    public String getJSONAttribute (String _attribute) throws JSONException {
-        this.formatJSONString();
-        this.json = new JSONObject (this.apiReturn);
-        return this.json.getString(_attribute);
     }
     
     /**
@@ -59,15 +47,13 @@ public class APIModel {
     
     /**
      * getAPIString - a method that handles extraction and parsing from an API POST/GET request.
-     * @param _userKey: API token required for execution
      * @param _requestMethod: Request Method ("GET", "POST")
-     * @param _attribute: a String representation of the desired attribute from which to parse. 
+     * @param _attributes: a String representation of the desired attribute from which to parse. 
      * @return: a String representation of the API output.
      */
-    public String getAPIString(String _userKey, String _requestMethod, String _attribute) {
-        String config = this.urlSite;
+    public String getAPIString(String _requestMethod, String _attributes) {
+        String apiURL = this.urlSite;
         String parameters = "";
-        String ret = "";
         StringBuffer strBuff;
         Set <String> set = this.config.keySet();
         
@@ -77,12 +63,13 @@ public class APIModel {
             parameters = parameters.concat( delimiter + key + "=" + this.config.get(key));
         }
         
-        config = config.concat(parameters);
+        apiURL = apiURL.concat(parameters);
         
         try {
             //instantiate new URL object with config string and open connection.
-            this.url = new URL (config);
+            this.url = new URL (apiURL);
             this.connect = (HttpURLConnection) url.openConnection();
+            this.connect.setRequestProperty("user-key", this.userKey);
             
             //set the request method.
             this.connect.setRequestMethod(_requestMethod);
@@ -117,16 +104,20 @@ public class APIModel {
                 
                 //set the API return variable and format accordingly.
                 this.apiReturn = strBuff.toString();
-                this.formatJSONString ();
                 
-                //parse desired attribute.
-                this.json = new JSONObject (this.apiReturn);
-                ret = this.json.getString (_attribute);
+                String [] attributes = _attributes.split(";");
+                
+                for (String attribute : attributes) {                         
+                    //parse desired attribute.
+                    this.formatJSONString();
+                    this.json = new JSONObject (this.apiReturn);
+                    this.apiReturn = this.json.getString(attribute);
+                }
             }
             
             //disconnect system resources.
             this.connect.disconnect();
-            return ret;
+            return this.apiReturn;
         }
         catch (Exception ex) {
             Logger.getLogger(APIModel.class.getName()).log(Level.SEVERE, null, ex);
