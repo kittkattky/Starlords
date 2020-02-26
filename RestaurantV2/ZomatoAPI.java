@@ -93,7 +93,7 @@ public class ZomatoAPI {
             this.httpConnection.disconnect();
 
         } catch (Exception ex) {
-            Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RestaurantV2.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
