@@ -33,12 +33,7 @@ public class APIController {
      * @param _paramArr: API parameters stored in a two-dimensional array.
      */
     public APIController (APIModel _model, String _url, String [] [] _paramArr) {
-        this.model = _model;
-        for (int i = 0; i < _paramArr.length; i++)
-            this.model.config.put(_paramArr [i] [this.KEY], _paramArr [i] [this.VALUE]);
-        
-        this.model.urlSite = _url;
-        this.model.userKey = null;
+        this (_model, _url, null, _paramArr);
     }
     
     //================= GETTERS ===============
