@@ -1,12 +1,13 @@
 package location;
 
+import LocationAPI.*;
 import API.*;
 import java.util.*;
 import org.json.JSONException;
 
 public class Location {
      public static void main(String[] args) throws JSONException {
-        final String userKey = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
+        /*final String userKey = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
         String lat;
         
         //Sandbox logic for working with GeoCode by ZIP code.
@@ -22,19 +23,11 @@ public class Location {
         for (String key : map.keySet()) {
             Object val = map.get(key);
             System.out.println (key + " = " + val);
-        }
+        }*/
 
-        //Sandbox logic for working with GeoCode by GeoLocation.
-        String geoLocationURL = "https://www.googleapis.com/geolocation/v1/geolocate";
-        String [] [] geoLocationParams = new String [] [] {{"key", userKey}};
-
-        //__________________________________
-
-        APIModel geoLocationModel = new APIModel ();
-        APIController geoLocationControl = new APIController (geoLocationModel, geoLocationURL, geoLocationParams);
-
-        //get API return string.
-        lat = geoLocationControl.getAPIResultString("POST", "location;lat");
-        System.out.println (lat);
+        GeoLocationAPI api = new GeoLocationAPI ();
+        api.postRequest();
+        System.out.println (api.getLatitude());
+        System.out.println (api.getLongitude());
     }
 }

@@ -37,7 +37,9 @@ public class APIController {
      * @throws JSONException
      */
     public LinkedHashMap <String, Object> toMap () throws JSONException {
-        return this.getModel ().toMap(this.model.getJSONObject());
+        APIModel apiModel = this.getModel();
+        apiModel.setJSONObject();
+        return apiModel.toMap(this.model.getJSONObject());
     }
 
     /**
