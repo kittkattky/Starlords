@@ -10,7 +10,7 @@ package LocationAPI;
  * @author prest
  */
 public interface LocationAPIInterface {
-    public void postRequest ();
+    public void submitRequest ();
     public double getLatitude ();
     public double getLongitude ();
 }
