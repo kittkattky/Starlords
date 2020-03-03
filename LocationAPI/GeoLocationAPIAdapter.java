@@ -14,8 +14,8 @@ public class GeoLocationAPIAdapter implements LocationAPIInterface {
     protected static final LocationAPIInterface api = new GeoLocationAPI ();
 
     @Override
-    public void postRequest() {
-        this.api.postRequest();
+    public void submitRequest() {
+        this.api.submitRequest();
     }
     
     @Override
