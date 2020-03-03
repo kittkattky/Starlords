@@ -18,26 +18,28 @@ import org.json.JSONException;
 public class GeoLocationAPI implements LocationAPIInterface {
     protected APIController controller;
     protected double latitude, longitude;
-    protected final String baseURL = "https://www.googleapis.com/geolocation/v1/geolocate";
-    protected final String userKey = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
-    protected final String requestMethod = "POST";
-    protected final String attribute = "location";
-    
-    public GeoLocationAPI () {
-        this.controller = new APIController (new APIModel (), this.baseURL, new String [] [] {{"key", this.userKey}});
-    }
+    protected final String BASE_URL = "https://www.googleapis.com/geolocation/v1/geolocate";
+    protected final String USER_KEY = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
+    protected final String REQUEST_METHOD = "POST";
+    protected final String ATTRIBUTE = "location";
+    protected final String LONG_ATTR = "lng";
+    protected final String LAT_ATTR = "lat";
+    protected final String AUTH_KEY_ATTR = "key";
+    protected final String [] [] API_PARAMS = new String [] [] {{this.AUTH_KEY_ATTR, this.USER_KEY}};
     
     @Override
-    public void postRequest () {
-        this.controller.submitAPIRequest(this.requestMethod, this.attribute);
+    public void submitRequest () {
+        this.controller.submitAPIRequest(this.REQUEST_METHOD, this.ATTRIBUTE);
         
         try {
             LinkedHashMap <String, Object> map = (LinkedHashMap <String, Object>) this.controller.toMap();
-            String lat = map.get ("lat").toString();
-            String lng = map.get ("lng").toString();
             
-            this.setLatitude(Double.parseDouble(lat));
-            this.setLongitude(Double.parseDouble(lng));
+            //parse  latitude and longitude coordinates.
+            double lat = Double.parseDouble(map.get (this.LAT_ATTR).toString());
+            double lng = Double.parseDouble(map.get (this.LONG_ATTR).toString());
+            
+            this.setLatitude(lat);
+            this.setLongitude(lng);
             
         } catch (JSONException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
