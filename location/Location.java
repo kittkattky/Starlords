@@ -25,8 +25,8 @@ public class Location {
             System.out.println (key + " = " + val);
         }*/
 
-        GeoLocationAPI api = new GeoLocationAPI ();
-        api.postRequest();
+        LocationAPIInterface api = new GeoLocationAPIAdapter ();
+        api.submitRequest();
         System.out.println (api.getLatitude());
         System.out.println (api.getLongitude());
     }
