@@ -20,6 +20,23 @@ public class APIController {
      * @param _userKey: API user key.
      * @param _paramArr: API parameters stored in a two-dimensional array.
      */
+    public APIController (String _url, String _userKey, String [] [] _paramArr) {
+        this.model = new APIModel ();
+
+        for (int i = 0; i < _paramArr.length; i++)
+            this.model.setAPIConfigParameter(_paramArr [i] [this.KEY], _paramArr [i] [this.VALUE]);
+
+        this.model.setUserKey(_userKey);
+        this.model.urlSite = _url;
+    }
+    
+    /**
+     * public APIController constructor class.
+     * @param _model: APIModel parameter that houses the internal APIModel configurations.
+     * @param _url: Base API URL.
+     * @param _userKey: API user key.
+     * @param _paramArr: API parameters stored in a two-dimensional array.
+     */
     public APIController (APIModel _model, String _url, String _userKey, String [] [] _paramArr) {
         this.setModel(_model);
 

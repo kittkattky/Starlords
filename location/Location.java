@@ -25,9 +25,16 @@ public class Location {
             System.out.println (key + " = " + val);
         }*/
 
-        LocationAPIInterface api = new GeoLocationAPIAdapter ();
-        api.submitRequest();
-        System.out.println (api.getLatitude());
-        System.out.println (api.getLongitude());
+        GeoCode geoCode = new GeoCode ();
+        geoCode.submitAPIRequest();
+        System.out.println (geoCode.getClass().getName());
+        System.out.println (geoCode.getLatitude());
+        System.out.println (geoCode.getLongitude());
+        
+        GeoLocation geoLocation = new GeoLocation ();
+        geoLocation.submitAPIRequest();
+        System.out.println (geoLocation.getClass().getName());
+        System.out.println (geoLocation.getLatitude());
+        System.out.println (geoCode.getLongitude());        
     }
 }
