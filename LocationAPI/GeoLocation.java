@@ -15,7 +15,7 @@ import org.json.JSONException;
  *
  * @author prest
  */
-public class GeoLocation {
+public class GeoLocation extends LocationAPI {
     protected final String URL = "https://www.googleapis.com/geolocation/v1/geolocate";
     protected final String KEY = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
     protected final String METHOD = "POST";
@@ -25,7 +25,7 @@ public class GeoLocation {
     protected final String KEY_ATTR = "key";
     protected final String [] [] PARAMS = new String [] [] {{this.KEY_ATTR, this.KEY}};
     protected LocationAPIInterface api;
-    
+
     public GeoLocation () {
         this.api = new LocationAPIAdapter ();
         this.api.setURL(this.URL);
@@ -37,15 +37,18 @@ public class GeoLocation {
         this.api.setLatitudeAttributeName(this.LT_ATTR);
         this.api.setAPIConfigParams(this.PARAMS);
     }
-    
-    public void submitAPIRequest () {
+
+    @Override
+    public void submitRequest () {
         this.api.submitRequest();
     }
-    
+
+    @Override
     public double getLatitude () {
         return this.api.getLatitude();
     }
-    
+
+    @Override
     public double getLongitude () {
         return this.api.getLongitude();
     }

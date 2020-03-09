@@ -83,7 +83,7 @@ public class APIModel {
      * @throws Exception
      */
     public void parseAPIResults (String _attributes) throws IOException, Exception {
-        StringBuffer strBuff;
+        String ret = "";
         String inputLine;
         HttpURLConnection connection = this.getConnectionObject();
 
@@ -93,14 +93,14 @@ public class APIModel {
         else {
             //set up buffer reader with the connection input stream.
             BufferedReader response = new BufferedReader ( new InputStreamReader (connection.getInputStream()) );
-            strBuff = new StringBuffer ();
+            //strBuff = new StringBuffer ();
 
             //continue appension until end of the buffer is reached.
             while ((inputLine = response.readLine ()) != null)
-                strBuff.append(inputLine);
+                ret = ret.concat(inputLine);
 
             //set the API return variable and format accordingly.
-            this.setAPIResultString(strBuff.toString());
+            this.setAPIResultString(ret);
 
             String [] attributes = _attributes.split(";");
             for (String attribute : attributes) {

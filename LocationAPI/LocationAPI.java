@@ -31,15 +31,15 @@ public class LocationAPI implements LocationAPIInterface {
     public void submitRequest() {
         this.control = new APIController (new APIModel (), this.getURL(), this.getUserKey(), this.getAPIConfigParams());
         this.control.submitAPIRequest(this.getRequestMethod(), this.getLocationAttributeName());
-        
+
         try {
             LinkedHashMap <String, Object> map = (LinkedHashMap <String, Object>) this.control.toMap();
             String lat = map.get (this.getLatitudeAttributeName()).toString();
             String lng = map.get (this.getLongitudeAttributeName()).toString();
-            
+
             this.setLatitude(Double.parseDouble(lat));
             this.setLongitude(Double.parseDouble(lng));
-            
+
         } catch (JSONException ex) {
             Logger.getLogger(LocationAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -144,5 +144,4 @@ public class LocationAPI implements LocationAPIInterface {
     public void setLongitude(double _lng) {
         this.longitude = _lng;
     }
-    
 }
