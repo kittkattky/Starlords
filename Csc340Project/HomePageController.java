@@ -17,16 +17,8 @@ import org.json.JSONObject;
 
 public class HomePageController implements Initializable {
 
-    
-    
     @FXML
     private Label test;
-    
-    
-    
-    
-    ApiPractice api = new ApiPractice();
-    JSONObject res = api.getRes();
     
     /**
      * Initializes the controller class.
@@ -34,11 +26,7 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        test.setText(res.toString());
         
     }    
-    
-    
-    
     
 }
