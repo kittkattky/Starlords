@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LocationAPI;
 
+import java.util.LinkedHashMap;
+
 /**
- *
- * @author prest
+ * LocationAPIInterface.
+ * Authors: Preston Williamson
+ * Last Updated Date: 10-MAR-2020
  */
 public interface LocationAPIInterface {
     public void submitRequest ();
-    
+
     public String getURL ();
     public String getUserKey ();
     public String getRequestMethod ();
@@ -19,10 +17,11 @@ public interface LocationAPIInterface {
     public String getLatitudeAttributeName ();
     public String getLongitudeAttributeName ();
     public String getUserKeyAttributeName ();
-    public String [] [] getAPIConfigParams ();
+    public LinkedHashMap <String, String> getAPIConfigParamObject ();
+    public String getAPIConfigParameters ();
     public double getLatitude ();
     public double getLongitude ();
-    
+
     public void setURL (String _url);
     public void setUserKey (String _userKey);
     public void setRequestMethod (String _reqMethod);
@@ -30,8 +29,7 @@ public interface LocationAPIInterface {
     public void setLatitudeAttributeName (String _attr);
     public void setLongitudeAttributeName (String _attr);
     public void setUserKeyAttributeName (String _attr);
-    public void setAPIConfigParams (String [] [] _params);
+    public void setAPIConfigParameter (String _key, String _val);
     public void setLatitude (double _lat);
     public void setLongitude (double _lng);
-    
 }

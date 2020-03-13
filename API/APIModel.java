@@ -30,7 +30,7 @@ public class APIModel {
     protected LinkedHashMap <String, String> config;
     protected URL url;
     protected HttpURLConnection connect;
-    protected JSONObject json;
+    protected JSONObject apiParse;
 
     /**
      * public APIModel constructor.
@@ -40,10 +40,10 @@ public class APIModel {
     }
 
     /**
-     * formatJSONString: a helper method that ensures the prospect API return string matches the JSON formatting requirements.
-     * i.e., a JSON return value must start with an opening curly bracket ('{').
+     * formatAPIResultString: a helper method that ensures the prospect API return string matches the APIResult formatting requirements.
+     * i.e., a APIResult return value must start with an opening curly bracket ('{').
      */
-    public void formatJSONString () {
+    public void formatAPIResultString () {
         //continue chopping off leading and trailing characters until the expected first char is obtained.
         String apiRet = this.getAPIResultString();
         while (apiRet.charAt(0) != '{')
@@ -105,9 +105,9 @@ public class APIModel {
             String [] attributes = _attributes.split(";");
             for (String attribute : attributes) {
                 //parse desired attribute.
-                this.formatJSONString();
-                this.setJSONObject();
-                this.setAPIResultString(this.getJSONObject().getString(attribute));
+                this.formatAPIResultString();
+                this.setAPIParseObject();
+                this.setAPIResultString(this.getAPIParseObject().getString(attribute));
             }
         }
     }
@@ -121,18 +121,18 @@ public class APIModel {
 
     /**
      * toMap: a method dedicated to converting the API result string into a LinkedHashMap.
-     * @param _json: JSONObject containing the API result string.
+     * @param _apiParse: JSONObject containing the API result string.
      * @return
      * @throws JSONException
      */
-    public LinkedHashMap<String, Object> toMap(JSONObject _json) throws JSONException {
+    public LinkedHashMap<String, Object> toMap(JSONObject _apiParse) throws JSONException {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
         //continue iteration until end of the key set has been reached.
-        Iterator<String> keyIterator = _json.keys();
+        Iterator<String> keyIterator = _apiParse.keys();
         while(keyIterator.hasNext()) {
             String key = keyIterator.next();
-            Object value = _json.get(key);
+            Object value = _apiParse.get(key);
 
             //determine next steps based on data type of value Object.
             if(value instanceof JSONArray)
@@ -217,11 +217,11 @@ public class APIModel {
     }
 
     /**
-     * getJSONObject: method that returns the internal JSON object model.
+     * getAPIParseObject: method that returns the internal API parse object model.
      * @return JSONObject
      */
-    public JSONObject getJSONObject () {
-        return this.json;
+    public JSONObject getAPIParseObject () {
+        return this.apiParse;
     }
 
     /**
@@ -324,11 +324,11 @@ public class APIModel {
     }
 
     /**
-     * setJSONObject: method dedicated to initializing the internal JSON object model, based on internal API result string.
+     * setAPIParseObject: method dedicated to initializing the internal API parse object model, based on internal API result string.
      * @throws JSONException
      */
-    public void setJSONObject () throws JSONException {
-        this.json = new JSONObject (this.getAPIResultString());
+    public void setAPIParseObject () throws JSONException {
+        this.apiParse = new JSONObject (this.getAPIResultString());
     }
 
     /**
