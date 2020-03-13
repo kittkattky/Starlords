@@ -17,7 +17,7 @@ public class Csc340Project extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LoginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogInPage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

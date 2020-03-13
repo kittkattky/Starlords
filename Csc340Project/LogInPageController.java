@@ -165,4 +165,6 @@ public class LogInPageController implements Initializable {
         labelError.setText(text);
         System.out.println(text);
     }
+    
+    
 }
