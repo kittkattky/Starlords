@@ -31,6 +31,7 @@ public class APIModel {
     protected URL url;
     protected HttpURLConnection connect;
     protected JSONObject apiParse;
+    protected final char START_INIDCATOR = '{';
 
     /**
      * public APIModel constructor.
@@ -46,7 +47,7 @@ public class APIModel {
     public void formatAPIResultString () {
         //continue chopping off leading and trailing characters until the expected first char is obtained.
         String apiRet = this.getAPIResultString();
-        while (apiRet.charAt(0) != '{')
+        while (apiRet.charAt(0) != this.START_INIDCATOR)
             apiRet = apiRet.substring(1, apiRet.length () - 1);
 
         this.setAPIResultString(apiRet);
@@ -72,7 +73,7 @@ public class APIModel {
         }
         catch (Exception ex) {
             //throw exception if caught.
-            Logger.getLogger(APIModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 

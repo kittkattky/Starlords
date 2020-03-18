@@ -9,7 +9,7 @@ public class Location {
 
         //Initialize to geocode object reference
         api = new GeoCode ();
-        api.setAPIConfigParameter("address", "27409");
+        api.setAPIConfigParameter("address", "27370");
         api.submitRequest();
         System.out.println (api.getClass().getName() + " URL [" + api.getURL() + "/" + api.getAPIConfigParameters() + "]");
         System.out.println (api.getLatitude());

@@ -1,6 +1,7 @@
 package LocationAPI;
 
 import API.*;
+import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +22,13 @@ public class LocationAPI implements LocationAPIInterface {
     protected String LONG_ATTR;
     protected String LAT_ATTR;
     protected String AUTH_KEY_ATTR;
-    protected LinkedHashMap <String, String> config = new LinkedHashMap <> ();
+    protected LinkedHashMap <String, String> config;
 
+    public LocationAPI () {
+        this.config = new LinkedHashMap <> ();
+        Field [] fields = this.getClass().getFields();
+    }
+    
     /**
      * submitRequest: method dedicated to submitting the API request and store values from the result string.
      */
@@ -43,7 +49,7 @@ public class LocationAPI implements LocationAPIInterface {
             this.setLongitude(Double.parseDouble(lng));
 
         } catch (JSONException ex) {
-            Logger.getLogger(LocationAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 

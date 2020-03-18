@@ -1,6 +1,7 @@
 package RestaurantV3;
 
 import LocationAPI.*;
+import java.lang.reflect.*;
 
 /**
  * Basic test driver to show that methods work, and information flow is correct.
@@ -9,8 +10,10 @@ import LocationAPI.*;
  */
 public class Driver {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
         LocationAPI api = new GeoLocation ();
+
+        /*
         api.submitRequest();
         
         double lat = api.getLatitude();
@@ -27,7 +30,7 @@ public class Driver {
         System.out.println(modelA.getCuisineList());
 
         modelB = modelB.loadRestaurantsByID(cuisineID, lat, lon);
-        System.out.println(modelB.getRestaurantList());
+        System.out.println(modelB.getRestaurantList());*/
 
     }
 
