@@ -1,17 +1,26 @@
 package RestaurantV3;
 
+
 /**
  * Handles calls
  *
  * @author Diego Rodriguez Updated: 2/27/2020
  */
+
+import java.util.Map;
+
 public class RestaurantModel {
     //varaibles for setters and getters
     protected double lat;
     protected double lon;
     protected int cuisineID;
-    protected String cuisineList;
+    protected Map cuisineMap;
+    protected Map cuisineIDMap;
     protected String restaurantList;
+    
+    //constants that reference the array list returned by adapter methods. 
+    private static final int cuisineMapINDEX = 0;
+    private static final int cuisineIDMapINDEX = 1;
     
     protected final static RestaurantAPIAdapter adapter = new RestaurantAPIAdapter();
 
@@ -23,10 +32,15 @@ public class RestaurantModel {
      */
     public static RestaurantModel loadCusinesByLocation(double _lat, double _lon) {
         RestaurantModel useModel = new RestaurantModel();
+        
         useModel.setLat(_lat);
         useModel.setLon(_lon);
-        String cuisineList = adapter.loadCusineListByLocation(_lat, _lon);
-        useModel.setCuisineList(cuisineList);
+        
+        Map cuisineMap = adapter.loadCuisineListByLocation(_lat, _lon).get(cuisineMapINDEX);
+        useModel.setCuisineMap(cuisineMap);
+        
+        Map cuisineIDMap = adapter.loadCuisineListByLocation(_lat, _lon).get(cuisineIDMapINDEX);
+        useModel.setCuisineIDMap(cuisineIDMap);
 
         return useModel;
     }
@@ -62,8 +76,12 @@ public class RestaurantModel {
         return this.cuisineID;
     }
 
-    public String getCuisineList() {
-        return this.cuisineList;
+    public Map getCuisineMap() {
+        return this.cuisineMap;
+    }
+    
+    public Map getCuisineIDMap() {
+        return this.cuisineIDMap;
     }
 
     public String getRestaurantList() {
@@ -83,8 +101,12 @@ public class RestaurantModel {
         this.cuisineID = _id;
     }
 
-    public void setCuisineList(String _cuisineList) {
-        this.cuisineList = _cuisineList;
+    public void setCuisineMap(Map _cuisineMap) {
+        this.cuisineMap = _cuisineMap;
+    }
+    
+    public void setCuisineIDMap(Map _cuisineIDMap) {
+        this.cuisineIDMap = _cuisineIDMap;
     }
 
     public void setRestaurantList(String _restaurantList) {

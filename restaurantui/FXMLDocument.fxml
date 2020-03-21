@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#handleButtonAction" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurantui.FXMLDocumentController">
+    <children>
+        <Button fx:id="button" layoutX="170.0" layoutY="377.0" onAction="#handleButtonAction" text="Search for cuisines near me" />
+      <VBox alignment="TOP_CENTER" layoutX="101.0" layoutY="77.0" prefHeight="300.0" prefWidth="300.0">
+         <children>
+            <Label text="Cuisines Near You">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listView" fixedCellSize="24.0" prefHeight="239.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

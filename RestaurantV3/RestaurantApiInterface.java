@@ -1,5 +1,8 @@
 package RestaurantV3;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Interface that defines how subsequent restaurant api clases should be defined.
  * @author Diego Rodriguez 
@@ -7,7 +10,7 @@ package RestaurantV3;
  */
 public interface RestaurantApiInterface {
     
-    public String loadCusineListByLocation(double _lat, double _lon);
+    public ArrayList<Map> loadCuisineListByLocation(double _lat, double _lon);
     
     public String loadRestaurantListByID(int _cuisineID, double _lat , double _lon);
 }

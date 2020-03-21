@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
+import java.util.*;
 
 public class ZomatoApi implements RestaurantApiInterface {
 
@@ -30,7 +31,7 @@ public class ZomatoApi implements RestaurantApiInterface {
      * @return
      */
     @Override
-    public String loadCusineListByLocation(double _lat, double _lon) {
+    public ArrayList<Map> loadCuisineListByLocation(double _lat, double _lon) {
         //construct urlString
         this.getRequestType = "cuisines?";
         String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon;
@@ -70,15 +71,31 @@ public class ZomatoApi implements RestaurantApiInterface {
 
             //obj.get() returns an object, so I cast it to JSONArray to make it easier to parse through.
             JSONArray jsonarr = (JSONArray) obj.get("cuisines");
-            //show contents of array for demo purposes.
-            System.out.println(jsonarr.toString());
+            
+            //I am going to store the data I want within maps.
+            //Cuisine map will store cuisine strings in an ascending order starting with 0.
+            //idMap will store cuisine IDs(ints) based on the acutal string name of its corresponding cuisine. 
+            Map<Integer, String> cuisineMap = new HashMap<Integer, String>();
+            Map<String, Integer> idMap = new HashMap<String, Integer>();
+            
+            //JSONObjects needed for parsing data. 
+            JSONObject util;
+            JSONObject util2;
+            
+            //loops through all entries within jsonarr and parses/stores the data from each index within the maps.
+            for(int i = 0; i < jsonarr.length(); i++){
+                util = (JSONObject) jsonarr.get(i);
+                util2 = (JSONObject)util.get("cuisine");
+                cuisineMap.put(i, util2.getString("cuisine_name"));
+                idMap.put(util2.getString("cuisine_name"), util2.getInt("cuisine_id"));
+            }
+            
+            //Store the 2 maps within an array list in order to return both maps.
+            ArrayList<Map> mapsOfCuisinesAndIDs = new ArrayList<Map>();
+            mapsOfCuisinesAndIDs.add(cuisineMap);
+            mapsOfCuisinesAndIDs.add(idMap);
 
-            //I haven't decided how I want to parse the info yet, so here's a demo of how to return the first element in the JSONArray.
-            JSONObject obj2 = (JSONObject) jsonarr.get(0);
-
-            //return first element of JSONArray
-            String cuisineList = obj2.toString();
-            return cuisineList;
+            return mapsOfCuisinesAndIDs;
 
         } catch (Exception ex) {
             //if an exception is caught, return null
