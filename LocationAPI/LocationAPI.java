@@ -26,7 +26,6 @@ public class LocationAPI implements LocationAPIInterface {
 
     public LocationAPI () {
         this.config = new LinkedHashMap <> ();
-        Field [] fields = this.getClass().getFields();
     }
     
     /**
