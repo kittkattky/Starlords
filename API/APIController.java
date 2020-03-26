@@ -67,9 +67,8 @@ public class APIController {
      * @throws JSONException
      */
     public LinkedHashMap <String, Object> toMap () throws JSONException {
-        APIModel apiModel = this.model;
-        apiModel.setAPIParseObject();
-        return apiModel.toMap(this.model.getAPIParseObject());
+        this.model.setAPIParseObject();
+        return this.model.toMap(this.model.getAPIParseObject());
     }
 
     //================= GETTERS ===============
@@ -81,13 +80,12 @@ public class APIController {
      * @return String: String representation of API results.
      */
     public String getAPIResultString (String _requestMethod, String _attributes) {
-        APIModel apiModel = this.model;
 
         //submit request if result string is null.
-        if (apiModel.getAPIResultString() == null)
+        if (this.model.getAPIResultString() == null)
             this.submitAPIRequest(_requestMethod, _attributes);
 
-        return apiModel.getAPIResultString();
+        return this.model.getAPIResultString();
     }
 
     /**
