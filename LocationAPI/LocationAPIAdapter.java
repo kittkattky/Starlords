@@ -27,7 +27,7 @@ public class LocationAPIAdapter implements LocationAPIInterface {
     public LocationAPIAdapter () {
         this.model = new APIModel();
     }
-    
+
     /**
      * submitRequest: method dedicated to submitting the API request and store values from the result string.
      */

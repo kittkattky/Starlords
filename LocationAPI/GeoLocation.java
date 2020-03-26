@@ -31,7 +31,7 @@ public class GeoLocation extends LocationAPIAdapter {
         super.setLocationAttributeName(this.ATTRIBUTE);
         super.setLongitudeAttributeName(this.LONG_ATTR);
         super.setLatitudeAttributeName(this.LAT_ATTR);
-        
+
         //set user key.
         super.setAPIConfigParameter(this.AUTH_KEY_ATTR, this.USER_KEY);
     }
