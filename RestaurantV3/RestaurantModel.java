@@ -30,7 +30,7 @@ public class RestaurantModel {
      * @param _lon
      * @return 
      */
-    public static RestaurantModel loadCusinesByLocation(double _lat, double _lon) {
+    public static RestaurantModel loadCuisinesByLocation(double _lat, double _lon) {
         RestaurantModel useModel = new RestaurantModel();
         
         useModel.setLat(_lat);

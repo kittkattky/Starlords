@@ -14,7 +14,7 @@ public class Driver {
         RestaurantModel modelA = new RestaurantModel();
         RestaurantModel modelB = new RestaurantModel();
 
-        modelA = modelA.loadCusinesByLocation(lat, lon);
+        modelA = modelA.loadCuisinesByLocation(lat, lon);
         System.out.println(modelA.getCuisineMap());
 
         modelB = modelB.loadRestaurantsByID(cuisineID, lat, lon);

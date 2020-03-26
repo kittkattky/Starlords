@@ -32,40 +32,16 @@ public class ZomatoApi implements RestaurantApiInterface {
      */
     @Override
     public ArrayList<Map> loadCuisineListByLocation(double _lat, double _lon) {
-        //construct urlString
-        this.getRequestType = "cuisines?";
-        String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon;
-
-        //try getting data from api server using try/catch block
-        try {
-
-            //create instance of url object and type cast it to httpConection type.
-            URL url = new URL(urlString);
-            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
-
-            //configure HttpURLConnection object
-            httpConnection.setRequestProperty("Accept", "application/json");
-            httpConnection.setRequestProperty("user-key", this.APIKEY);
-            httpConnection.setRequestMethod("GET");
-
-            //check response code
-            int responseCode = httpConnection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
-
-            //wrap InputStream in BufferedReader
-            //read data from the input stream and store it in a string.
-            BufferedReader readData;
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            readData = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
-            while ((inputLine = readData.readLine()) != null) {
-                content.append(inputLine);
-            }
-
-            //close connection
-            readData.close();
-            httpConnection.disconnect();
-
+        
+            //construct urlString
+            this.getRequestType = "cuisines?";
+            String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon;
+            
+            StringBuffer content = connectToAPI(urlString);
+            
+            ArrayList<Map> mapsOfCuisinesAndIDs = new ArrayList<Map>();
+            
+        try {    
             //create JSONObject with the information from api server
             JSONObject obj = new JSONObject(content.toString());
 
@@ -91,17 +67,14 @@ public class ZomatoApi implements RestaurantApiInterface {
             }
             
             //Store the 2 maps within an array list in order to return both maps.
-            ArrayList<Map> mapsOfCuisinesAndIDs = new ArrayList<Map>();
+            
             mapsOfCuisinesAndIDs.add(cuisineMap);
             mapsOfCuisinesAndIDs.add(idMap);
-
-            return mapsOfCuisinesAndIDs;
-
-        } catch (Exception ex) {
-            //if an exception is caught, return null
-            Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            } catch (JSONException ex) {
+            Logger.getLogger(ZomatoApi.class.getName()).log(Level.SEVERE, null, ex);
         }
+            return mapsOfCuisinesAndIDs;
+      
 
     }
 
@@ -170,6 +143,46 @@ public class ZomatoApi implements RestaurantApiInterface {
             Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    public StringBuffer connectToAPI (String urlString){
+        
+        StringBuffer content = new StringBuffer();
+        
+         //try getting data from api server using try/catch block
+        try {
+
+            //create instance of url object and type cast it to httpConection type.
+            URL url = new URL(urlString);
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+
+            //configure HttpURLConnection object
+            httpConnection.setRequestProperty("Accept", "application/json");
+            httpConnection.setRequestProperty("user-key", this.APIKEY);
+            httpConnection.setRequestMethod("GET");
+
+            //check response code
+            int responseCode = httpConnection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            //wrap InputStream in BufferedReader
+            //read data from the input stream and store it in a string.
+            BufferedReader readData;
+            String inputLine;
+            readData = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+            while ((inputLine = readData.readLine()) != null) {
+                content.append(inputLine);
+            }
+
+            //close connection
+            readData.close();
+            httpConnection.disconnect();
+            } catch (Exception ex) {
+            //if an exception is caught, return null
+            Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return content;
     }
 
 }
