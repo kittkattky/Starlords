@@ -1,9 +1,9 @@
 package utils;
 
 /**
- * This class connects to the server database
+ * This class connects to the database
  *
- * @author Kahlie Last Updated: 2/17/2020
+ * @author Kahlie Last Updated: 2/25/2020
  */
 
 import java.sql.Connection;
@@ -11,13 +11,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
-    Connection conn = null;
-    public static Connection conDB(){
+    
+    private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+
+    Connection con = null;
+    
+    public static Connection conDB() throws ClassNotFoundException{
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/databases", "root", "root");
+            Class.forName(DRIVER);
+            Connection con = DriverManager.getConnection("jdbc:derby:test;create=true");
+
+            con.setSchema("APP");
             return con;
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("ConnectionUtil : "+ex.getMessage());
            return null;
         }

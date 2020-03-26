@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Csc340Project.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.HomePageController">
    <children>
-      <BorderPane prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;">
+      <BorderPane prefHeight="800.0" prefWidth="1333.0" styleClass="pane" stylesheets="@../View/css.css">
+         <left>
+            <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="moviePic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lib/Screenshot%20(52).png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="test" layoutX="205.0" layoutY="715.0" />
+               </children>
+            </Pane>
+         </left>
          <center>
-            <TextField alignment="CENTER" text="HOMEPAGE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="84.0" />
-               </font>
-            </TextField>
+            <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="restaurantPic" fitHeight="539.0" fitWidth="383.0" layoutX="18.0" layoutY="188.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lib/Screenshot%20(47).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </center>
-      </BorderPane>
-      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;">
-         <center>
-            <TextField alignment="CENTER" text="HOMEPAGE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="84.0" />
-               </font>
-            </TextField>
-         </center>
+         <right>
+            <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="eventPic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" onMouseClicked="#handleButtonAction" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lib/Screenshot%20(50).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>
