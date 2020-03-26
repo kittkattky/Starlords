@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Csc340Project.LogInPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" stylesheets="@../View/css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LogInPageController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;">
          <left>
@@ -41,7 +42,11 @@
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="signIn" layoutX="390.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="150.0" styleClass="pane" stylesheets="@../Csc340Project/css.css" text="Sign in" />
+                  <Button fx:id="signIn" layoutX="390.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="150.0" styleClass="pane" text="Sign in">
+                     <stylesheets>
+                        <URL value="@../Csc340Project/css.css" />
+                        <URL value="@../View/css.css" />
+                     </stylesheets></Button>
                </children></Pane>
          </right>
       </BorderPane>
