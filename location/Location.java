@@ -1,25 +1,13 @@
 package location;
 
-import LocationAPI.*;
+import LocationAPI.LocationAPIAdapter;
 
 public class Location {
-     public static void main(String[] args) {
-        //Allocate memory for LocationAPI Object.
-        LocationAPI api;
+    protected double latitude, longitude;
+    LocationAPIAdapter api;
 
-        //Initialize to geocode object reference
-        api = new GeoCode ();
-        api.setAPIConfigParameter("address", "27370");
-        api.submitRequest();
-        System.out.println (api.getClass().getName() + " URL [" + api.getURL() + "/" + api.getAPIConfigParameters() + "]");
-        System.out.println (api.getLatitude());
-        System.out.println (api.getLongitude());
+    public Location() {
 
-
-        api = new GeoLocation ();
-        api.submitRequest();
-        System.out.println (api.getClass().getName() + " URL [" + api.getURL() + "/" + api.getAPIConfigParameters() + "]");
-        System.out.println (api.getLatitude());
-        System.out.println (api.getLongitude());
     }
+
 }

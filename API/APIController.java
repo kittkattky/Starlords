@@ -14,44 +14,33 @@ public class APIController {
     protected APIModel model;
 
     /**
-     * public APIController constructor class.
-     * @param _model: APIModel parameter that houses the internal APIModel configurations.
-     * @param _url: Base API URL.
-     * @param _userKey: API user key.
-     * @param _paramArr: API parameters stored in a two-dimensional array.
-     */
-    public APIController (APIModel _model, String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
-        this.model = _model;
-
-        APIModel apiModel = this.model;
-
-        if (_paramArr != null) {
-            for (String key : _paramArr.keySet())
-                apiModel.setAPIConfigParameter(key, _paramArr.get(key));
-        }
-
-        apiModel.setUserKey(_userKey);
-        this.model.urlSite = _url;
-    }
-
-    /**
-     * public APIController constructor class. Constructor allows model instantiation without providing a userKey.
-     * @param _model: APIModel parameter that houses the internal APIModel configurations.
-     * @param _url: Base API URL.
-     * @param _paramArr: API parameters stored in a LinkedHashMap.
-     */
-    public APIController (APIModel _model, String _url, LinkedHashMap <String, String> _paramArr) {
-        this (_model, _url, null, _paramArr);
-    }
-
-    /**
      * public APIController constructor class. Constructor allows model instantiation without providing a user model.
      * @param _url: Base API URL.
      * @param _userKey: API user key.
      * @param _paramArr: API parameters stored in a LinkedHashMap.
      */
     public APIController (String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
-        this (new APIModel (), _url, _userKey, _paramArr);
+        this.model = new APIModel();
+
+        if (_paramArr != null) {
+            for (String key : _paramArr.keySet())
+                this.model.setAPIConfigParameter(key, _paramArr.get(key));
+        }
+
+        this.model.setUserKey(_userKey);
+        this.model.setURLString(_url);
+    }
+
+    public APIController (APIModel _model) {
+        this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
+    }
+
+    /**
+     * public APIController constructor class. Constructor allows model instantiation without providing a userKey.
+     * @param _url: Base API URL.
+     */
+    public APIController (String _url) {
+        this (_url, null, null);
     }
 
     /**
@@ -60,7 +49,7 @@ public class APIController {
      * @param _userKey: API user key.
      */
     public APIController (String _url, String _userKey) {
-        this (new APIModel (), _url, _userKey, null);
+        this (_url, _userKey, null);
     }
 
     /**

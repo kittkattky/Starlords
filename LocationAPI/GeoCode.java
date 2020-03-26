@@ -1,11 +1,13 @@
 package LocationAPI;
 
+import java.lang.reflect.*;
+
 /**
  * GeoCode public class for retrieving lat-lng properties by user-provided parameters.
  * Authors: Preston Williamson
  * Last Updated Date: 10-MAR-2020
  */
-public class GeoCode extends LocationAPI {
+public class GeoCode extends LocationAPIAdapter {
     protected final String BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
     protected final String USER_KEY = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
     protected final String REQUEST_METHOD = "GET";
@@ -18,7 +20,7 @@ public class GeoCode extends LocationAPI {
      * GeoCode constructor.
      */
     public GeoCode () {
-        //set connection properties.
+        super();
         super.setURL(this.BASE_URL);
         super.setUserKey(this.USER_KEY);
         super.setUserKeyAttributeName(this.AUTH_KEY_ATTR);
@@ -26,7 +28,7 @@ public class GeoCode extends LocationAPI {
         super.setLocationAttributeName(this.ATTRIBUTE);
         super.setLongitudeAttributeName(this.LONG_ATTR);
         super.setLatitudeAttributeName(this.LAT_ATTR);
-        
+
         //set user key.
         super.setAPIConfigParameter(this.AUTH_KEY_ATTR, this.USER_KEY);
     }

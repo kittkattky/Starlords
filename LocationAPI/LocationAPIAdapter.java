@@ -12,8 +12,9 @@ import org.json.JSONException;
  * Authors: Preston Williamson
  * Last Updated Date: 10-MAR-2020
  */
-public class LocationAPI implements LocationAPIInterface {
+public class LocationAPIAdapter implements LocationAPIInterface {
     protected APIController control;
+    protected APIModel model;
     protected double latitude, longitude;
     protected String BASE_URL;
     protected String USER_KEY;
@@ -22,10 +23,9 @@ public class LocationAPI implements LocationAPIInterface {
     protected String LONG_ATTR;
     protected String LAT_ATTR;
     protected String AUTH_KEY_ATTR;
-    protected LinkedHashMap <String, String> config;
 
-    public LocationAPI () {
-        this.config = new LinkedHashMap <> ();
+    public LocationAPIAdapter () {
+        this.model = new APIModel();
     }
     
     /**
@@ -35,7 +35,7 @@ public class LocationAPI implements LocationAPIInterface {
     public void submitRequest() {
 
         //submit request.
-        this.control = new APIController (this.getURL(), this.getUserKey(), this.getAPIConfigParamObject());
+        this.control = new APIController(this.model);
         this.control.submitAPIRequest(this.getRequestMethod(), this.getLocationAttributeName());
 
         try {
@@ -44,8 +44,11 @@ public class LocationAPI implements LocationAPIInterface {
             String lat = map.get (this.getLatitudeAttributeName()).toString();
             String lng = map.get (this.getLongitudeAttributeName()).toString();
 
-            this.setLatitude(Double.parseDouble(lat));
-            this.setLongitude(Double.parseDouble(lng));
+            double parseLat = Double.parseDouble(lat);
+            double parseLong = Double.parseDouble(lng);
+
+            this.setLatitude(parseLat);
+            this.setLongitude(parseLong);
 
         } catch (JSONException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +62,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public String getURL() {
-        return this.BASE_URL;
+        return this.model.getURLString();
     }
 
     /**
@@ -68,7 +71,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public String getUserKey() {
-        return this.USER_KEY;
+        return this.model.getUserKey();
     }
 
     /**
@@ -77,7 +80,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public String getRequestMethod() {
-        return this.REQUEST_METHOD;
+        return this.model.getRequestMethod();
     }
 
     /**
@@ -117,15 +120,6 @@ public class LocationAPI implements LocationAPIInterface {
     }
 
     /**
-     * getAPIConfigParamObject: method to retrieve the config map object.
-     * @return LinkedHashMap <String, String>
-     */
-    @Override
-    public LinkedHashMap <String, String> getAPIConfigParamObject() {
-        return this.config;
-    }
-
-    /**
      * getAPIConfigParameters: method to retrieve the String representation of the API parameters.
      * @return String
      */
@@ -159,7 +153,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public void setURL(String _url) {
-        this.BASE_URL = _url;
+        this.model.setURLString(_url);
     }
 
     /**
@@ -168,7 +162,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public void setUserKey(String _userKey) {
-        this.USER_KEY = _userKey;
+        this.model.setUserKey(_userKey);
     }
 
     /**
@@ -177,7 +171,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public void setRequestMethod(String _reqMethod) {
-        this.REQUEST_METHOD = _reqMethod;
+        this.model.setRequestMethod(_reqMethod);
     }
 
     /**
@@ -223,7 +217,7 @@ public class LocationAPI implements LocationAPIInterface {
      */
     @Override
     public void setAPIConfigParameter(String _key, String _val) {
-        this.config.put(_key, _val);
+        this.model.setAPIConfigParameter(_key, _val);
     }
 
     /**

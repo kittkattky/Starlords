@@ -17,7 +17,6 @@ public interface LocationAPIInterface {
     public String getLatitudeAttributeName ();
     public String getLongitudeAttributeName ();
     public String getUserKeyAttributeName ();
-    public LinkedHashMap <String, String> getAPIConfigParamObject ();
     public String getAPIConfigParameters ();
     public double getLatitude ();
     public double getLongitude ();

@@ -11,7 +11,7 @@ import java.lang.reflect.*;
 public class Driver {
 
     public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
-        LocationAPI api = new GeoLocation ();
+        LocationAPIAdapter api = new GeoLocation ();
 
         /*
         api.submitRequest();
