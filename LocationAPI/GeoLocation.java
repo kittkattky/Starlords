@@ -39,6 +39,6 @@ public class GeoLocation extends LocationAPIAdapter {
     @Override
     public void setAPIConfigParameter (String _key, String _val) {
         String className = this.getClass().getName();
-        Logger.getLogger(className).log(Level.SEVERE, null, "Insertion of [key=" + _key + ", value=" + _val + "] not permitted on [" + className + "]");
+        Logger.getLogger(className).log(Level.WARNING, "Insertion of parameter [key=" + _key + ", value=" + _val + "] not permitted on [" + className + "]");
     };
 }

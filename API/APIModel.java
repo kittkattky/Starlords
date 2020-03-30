@@ -26,19 +26,13 @@ import org.json.*;
  * @author preston.williamson
  */
 public class APIModel {
+    protected static final int API_SUCCESS_CODE = 200;
     protected String apiReturn, parameterString, requestMethod, urlSite, userKey;
-    protected LinkedHashMap <String, String> config;
+    protected LinkedHashMap <String, String> config = new LinkedHashMap <> ();
     protected URL url;
     protected HttpURLConnection connect;
     protected JSONObject apiParse;
     protected final char START_INIDCATOR = '{';
-
-    /**
-     * public APIModel constructor.
-     */
-    public APIModel () {
-        this.config = new LinkedHashMap <> ();
-    }
 
     /**
      * formatAPIResultString: a helper method that ensures the prospect API return string matches the APIResult formatting requirements.
@@ -63,7 +57,7 @@ public class APIModel {
         this.setRequestMethod(_requestMethod);
         try {
             //set up connection parameters.
-            this.setConnectionProperties();
+            this.configureConnectionProperties();
 
             //parse API results from the connection input stream.
             this.parseAPIResults(_attributes);
@@ -83,13 +77,13 @@ public class APIModel {
      * @throws IOException
      * @throws Exception
      */
-    public void parseAPIResults (String _attributes) throws IOException, Exception {
+    private void parseAPIResults (String _attributes) throws IOException, Exception {
         String ret = "";
         String inputLine;
         HttpURLConnection connection = this.getConnectionObject();
 
         //verify response code is 200, indicating that request was successful. Otherwise, throw exception.
-        if (connection.getResponseCode() != 200)
+        if (connection.getResponseCode() != this.getClass().newInstance().API_SUCCESS_CODE)
             throw new Exception ("API response code " + connection.getResponseCode() + ": " + connection.getResponseMessage());
         else {
             //set up buffer reader with the connection input stream.
@@ -178,17 +172,14 @@ public class APIModel {
      * @return String: delimited list of combined API parameters.
      */
     public String getAPIConfigParameters () {
-        //skip if parameter string is already set.
-        if (this.parameterString == null) {
-            this.parameterString = "";
-            char delimiter;
-            Set <String> set = this.getConfigObject().keySet();
+        this.parameterString = "";
+        char delimiter;
+        Set <String> set = this.getConfigObject().keySet();
 
-            for (String key : set) {
-                //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
-                delimiter = ( this.parameterString.isEmpty() ? '?' : '&');
-                this.parameterString = this.parameterString.concat( delimiter + key + "=" + this.getConfigObject().get(key));
-            }
+        for (String key : set) {
+            //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
+            delimiter = ( this.parameterString.isEmpty() ? '?' : '&');
+            this.parameterString = this.parameterString.concat( delimiter + key + "=" + this.getConfigObject().get(key));
         }
         return this.parameterString;
     }
@@ -289,7 +280,7 @@ public class APIModel {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public void setConnectionProperties () throws MalformedURLException, IOException, Exception {
+    public void configureConnectionProperties () throws MalformedURLException, IOException, Exception {
         String apiKey = this.getUserKey();
         String reqMethod = this.getRequestMethod();
         this.setURLObject();
