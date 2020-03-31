@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,17 +9,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurantui.RestaurantViewController">
    <children>
-      <VBox layoutX="93.0" layoutY="30.0" prefHeight="408.0" prefWidth="315.0">
+      <VBox layoutX="34.0" layoutY="81.0" prefHeight="325.0" prefWidth="216.0">
          <children>
             <Label alignment="CENTER" prefHeight="79.0" prefWidth="320.0" text="Results">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <ListView fx:id="listViewRestaurantList" prefHeight="256.0" prefWidth="216.0" />
          </children>
       </VBox>
-      <AmbientLight color="CHARTREUSE" layoutX="80.0" layoutY="136.0" lightOn="true" />
+      <HBox layoutX="286.0" layoutY="146.0" prefHeight="37.0" prefWidth="200.0">
+         <children>
+            <Label alignment="TOP_CENTER" prefHeight="46.0" prefWidth="201.0" text="Restaurant Info">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox layoutX="295.0" layoutY="183.0" prefHeight="223.0" prefWidth="182.0">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="123.0" />
+            <TextField />
+            <TextField prefHeight="27.0" prefWidth="182.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

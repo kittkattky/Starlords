@@ -14,13 +14,12 @@ import javafx.stage.Stage;
 public class RestaurantUI extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage _stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("CuisineListUI.fxml"));
-
         Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
+        _stage.setScene(scene);
+        _stage.show();
     }
 
 

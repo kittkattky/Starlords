@@ -10,19 +10,21 @@ public class Driver {
     public static void main(String[] args) {
         double lat = 36.066984;
         double lon = -79.800178;
-        int cuisineID = 1;
+        int cuisineID = 73;
+
+       
         RestaurantModel modelA = new RestaurantModel();
         RestaurantModel modelB = new RestaurantModel();
 
         modelA = modelA.loadCuisinesByLocation(lat, lon);
         System.out.println(modelA.getCuisineMap());
 
-        modelB = modelB.loadRestaurantsByID(cuisineID, lat, lon);
+        modelB = modelA.loadRestaurantsByID(73, lat, lon);
         System.out.println(modelB.getRestaurantNameMap());
         System.out.println(modelB.getRestaurantUrlMap());
         System.out.println(modelB.getRestaurantAddressMap());
         System.out.println(modelB.getRestaurantRatingMap());
-
+        
     }
 
 }

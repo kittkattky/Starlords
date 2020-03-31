@@ -2,9 +2,9 @@ package RestaurantV3;
 
 /**
  * Translator Class Opens/closes connection with Zomato api server. Main job is
- * to return string of data.
+ * to return data to be used in view. 
  *
- * @author Diego Rodriguez Updated: 2/27/2020
+ * @author Diego Rodriguez Updated: 3/30/2020
  */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -90,11 +90,12 @@ public class ZomatoApi implements RestaurantApiInterface {
     public ArrayList<Map> loadRestaurantListByID(int _cuisineID, double _lat, double _lon) {
         //construct urlString
         this.getRequestType = "search?";
-        String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon + "&radius=" + this.RADIUS + "&cusines=" + _cuisineID;
+        String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon + "&radius=" + this.RADIUS + "&cuisines=" + _cuisineID;
+        System.out.println(urlString);
 
         //call helper method
         StringBuffer content = connectToAPI(urlString);
-
+        System.out.println(content);
         ArrayList<Map> mapsOfRestaurantInfo = new ArrayList<Map>();
 
         try {

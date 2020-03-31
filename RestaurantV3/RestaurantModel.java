@@ -3,7 +3,7 @@ package RestaurantV3;
 /**
  * Handles calls
  *
- * @author Diego Rodriguez Updated: 2/27/2020
+ * @author Diego Rodriguez Updated: 3/30/2020
  */
 import java.util.ArrayList;
 import java.util.Map;
@@ -70,7 +70,6 @@ public class RestaurantModel {
         RestaurantModel useModel = new RestaurantModel();
         ArrayList<Map> tempStorageForMaps = adapter.loadRestaurantListByID(_id, _lat, _lon);
         
-        useModel.setID(_id);
         useModel.setLat(_lat);
         useModel.setLon(_lon);
 
@@ -98,7 +97,7 @@ public class RestaurantModel {
         return this.lon;
     }
 
-    public int getCusineID() {
+    public int getCuisineID() {
         return this.cuisineID;
     }
 

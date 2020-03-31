@@ -3,7 +3,7 @@ package RestaurantV3;
 /**
  * Adapter class, tells model which translator/api to use.
  *
- * @author Diego Rodriguez Updated: 2/27/2020
+ * @author Diego Rodriguez Updated: 3/30/2020
  */
 
 import java.util.ArrayList;
