@@ -1,7 +1,7 @@
 package restaurantui;
 
 /**
- * This is the main class for executing the program. 
+ * This is the main class for executing the program.
  */
 
 import javafx.application.Application;
@@ -12,21 +12,20 @@ import javafx.stage.Stage;
 
 
 public class RestaurantUI extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("CuisineListUI.fxml"));
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
 
 
     public static void main(String[] args) {
-
         launch(args);
     }
-    
+
 }

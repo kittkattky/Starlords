@@ -12,5 +12,5 @@ public interface RestaurantApiInterface {
     
     public ArrayList<Map> loadCuisineListByLocation(double _lat, double _lon);
     
-    public String loadRestaurantListByID(int _cuisineID, double _lat , double _lon);
+    public ArrayList<Map> loadRestaurantListByID(int _cuisineID, double _lat , double _lon);
 }

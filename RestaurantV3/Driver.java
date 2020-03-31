@@ -18,7 +18,10 @@ public class Driver {
         System.out.println(modelA.getCuisineMap());
 
         modelB = modelB.loadRestaurantsByID(cuisineID, lat, lon);
-        System.out.println(modelB.getRestaurantList());
+        System.out.println(modelB.getRestaurantNameMap());
+        System.out.println(modelB.getRestaurantUrlMap());
+        System.out.println(modelB.getRestaurantAddressMap());
+        System.out.println(modelB.getRestaurantRatingMap());
 
     }
 

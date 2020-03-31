@@ -20,7 +20,7 @@ public class RestaurantAPIAdapter implements RestaurantApiInterface {
     }
 
     @Override
-    public String loadRestaurantListByID(int _cuisineID, double _lat, double _lon) {
+    public ArrayList<Map> loadRestaurantListByID(int _cuisineID, double _lat, double _lon) {
         return RestaurantAPIAdapter.currentlyUsedApi.loadRestaurantListByID(_cuisineID, _lat, _lon);
     }
 
