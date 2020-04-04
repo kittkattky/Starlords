@@ -139,7 +139,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             return mapsOfRestaurantInfo;
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RestaurantV3.ZomatoApi.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -180,7 +180,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             httpConnection.disconnect();
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(restaurant.ZomatoAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RestaurantV3.ZomatoApi.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return content;
