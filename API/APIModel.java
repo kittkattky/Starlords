@@ -26,27 +26,22 @@ import org.json.*;
  * @author preston.williamson
  */
 public class APIModel {
+    protected static final int API_SUCCESS_CODE = 200;
     protected String apiReturn, parameterString, requestMethod, urlSite, userKey;
-    protected LinkedHashMap <String, String> config;
+    protected LinkedHashMap <String, String> config = new LinkedHashMap <> ();
     protected URL url;
     protected HttpURLConnection connect;
-    protected JSONObject json;
+    protected JSONObject apiParse;
+    protected final char START_INIDCATOR = '{';
 
     /**
-     * public APIModel constructor.
+     * formatAPIResultString: a helper method that ensures the prospect API return string matches the APIResult formatting requirements.
+     * i.e., a APIResult return value must start with an opening curly bracket ('{').
      */
-    public APIModel () {
-        this.config = new LinkedHashMap <> ();
-    }
-
-    /**
-     * formatJSONString: a helper method that ensures the prospect API return string matches the JSON formatting requirements.
-     * i.e., a JSON return value must start with an opening curly bracket ('{').
-     */
-    public void formatJSONString () {
+    public void formatAPIResultString () {
         //continue chopping off leading and trailing characters until the expected first char is obtained.
         String apiRet = this.getAPIResultString();
-        while (apiRet.charAt(0) != '{')
+        while (apiRet.charAt(0) != this.START_INIDCATOR)
             apiRet = apiRet.substring(1, apiRet.length () - 1);
 
         this.setAPIResultString(apiRet);
@@ -62,7 +57,7 @@ public class APIModel {
         this.setRequestMethod(_requestMethod);
         try {
             //set up connection parameters.
-            this.setConnectionProperties();
+            this.configureConnectionProperties();
 
             //parse API results from the connection input stream.
             this.parseAPIResults(_attributes);
@@ -72,7 +67,7 @@ public class APIModel {
         }
         catch (Exception ex) {
             //throw exception if caught.
-            Logger.getLogger(APIModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,32 +77,32 @@ public class APIModel {
      * @throws IOException
      * @throws Exception
      */
-    public void parseAPIResults (String _attributes) throws IOException, Exception {
-        StringBuffer strBuff;
+    private void parseAPIResults (String _attributes) throws IOException, Exception {
+        String ret = "";
         String inputLine;
         HttpURLConnection connection = this.getConnectionObject();
 
         //verify response code is 200, indicating that request was successful. Otherwise, throw exception.
-        if (connection.getResponseCode() != 200)
+        if (connection.getResponseCode() != this.getClass().newInstance().API_SUCCESS_CODE)
             throw new Exception ("API response code " + connection.getResponseCode() + ": " + connection.getResponseMessage());
         else {
             //set up buffer reader with the connection input stream.
             BufferedReader response = new BufferedReader ( new InputStreamReader (connection.getInputStream()) );
-            strBuff = new StringBuffer ();
+            //strBuff = new StringBuffer ();
 
             //continue appension until end of the buffer is reached.
             while ((inputLine = response.readLine ()) != null)
-                strBuff.append(inputLine);
+                ret = ret.concat(inputLine);
 
             //set the API return variable and format accordingly.
-            this.setAPIResultString(strBuff.toString());
+            this.setAPIResultString(ret);
 
             String [] attributes = _attributes.split(";");
             for (String attribute : attributes) {
                 //parse desired attribute.
-                this.formatJSONString();
-                this.setJSONObject();
-                this.setAPIResultString(this.getJSONObject().getString(attribute));
+                this.formatAPIResultString();
+                this.setAPIParseObject();
+                this.setAPIResultString(this.getAPIParseObject().getString(attribute));
             }
         }
     }
@@ -121,18 +116,18 @@ public class APIModel {
 
     /**
      * toMap: a method dedicated to converting the API result string into a LinkedHashMap.
-     * @param _json: JSONObject containing the API result string.
+     * @param _apiParse: JSONObject containing the API result string.
      * @return
      * @throws JSONException
      */
-    public LinkedHashMap<String, Object> toMap(JSONObject _json) throws JSONException {
+    public LinkedHashMap<String, Object> toMap(JSONObject _apiParse) throws JSONException {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
         //continue iteration until end of the key set has been reached.
-        Iterator<String> keyIterator = _json.keys();
+        Iterator<String> keyIterator = _apiParse.keys();
         while(keyIterator.hasNext()) {
             String key = keyIterator.next();
-            Object value = _json.get(key);
+            Object value = _apiParse.get(key);
 
             //determine next steps based on data type of value Object.
             if(value instanceof JSONArray)
@@ -177,17 +172,14 @@ public class APIModel {
      * @return String: delimited list of combined API parameters.
      */
     public String getAPIConfigParameters () {
-        //skip if parameter string is already set.
-        if (this.parameterString == null) {
-            this.parameterString = "";
-            char delimiter;
-            Set <String> set = this.getConfigObject().keySet();
+        this.parameterString = "";
+        char delimiter;
+        Set <String> set = this.getConfigObject().keySet();
 
-            for (String key : set) {
-                //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
-                delimiter = ( this.parameterString.isEmpty() ? '?' : '&');
-                this.parameterString = this.parameterString.concat( delimiter + key + "=" + this.getConfigObject().get(key));
-            }
+        for (String key : set) {
+            //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
+            delimiter = ( this.parameterString.isEmpty() ? '?' : '&');
+            this.parameterString = this.parameterString.concat( delimiter + key + "=" + this.getConfigObject().get(key));
         }
         return this.parameterString;
     }
@@ -217,11 +209,11 @@ public class APIModel {
     }
 
     /**
-     * getJSONObject: method that returns the internal JSON object model.
+     * getAPIParseObject: method that returns the internal API parse object model.
      * @return JSONObject
      */
-    public JSONObject getJSONObject () {
-        return this.json;
+    public JSONObject getAPIParseObject () {
+        return this.apiParse;
     }
 
     /**
@@ -288,7 +280,7 @@ public class APIModel {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public void setConnectionProperties () throws MalformedURLException, IOException, Exception {
+    public void configureConnectionProperties () throws MalformedURLException, IOException, Exception {
         String apiKey = this.getUserKey();
         String reqMethod = this.getRequestMethod();
         this.setURLObject();
@@ -324,11 +316,11 @@ public class APIModel {
     }
 
     /**
-     * setJSONObject: method dedicated to initializing the internal JSON object model, based on internal API result string.
+     * setAPIParseObject: method dedicated to initializing the internal API parse object model, based on internal API result string.
      * @throws JSONException
      */
-    public void setJSONObject () throws JSONException {
-        this.json = new JSONObject (this.getAPIResultString());
+    public void setAPIParseObject () throws JSONException {
+        this.apiParse = new JSONObject (this.getAPIResultString());
     }
 
     /**

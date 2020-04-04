@@ -6,7 +6,6 @@ package RestaurantV3;
  * @author Diego Rodriguez
  */
 public class Driver {
-
     public static void main(String[] args) {
         double lat = 36.066984;
         double lon = -79.800178;
@@ -24,7 +23,6 @@ public class Driver {
         System.out.println(modelB.getRestaurantUrlMap());
         System.out.println(modelB.getRestaurantAddressMap());
         System.out.println(modelB.getRestaurantRatingMap());
-        
     }
 
 }

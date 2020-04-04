@@ -1,40 +1,63 @@
 package location;
 
-import API.*;
-import java.util.*;
-import org.json.JSONException;
+import LocationAPI.LocationAPIAdapter;
+import java.util.LinkedHashMap;
 
 public class Location {
-     public static void main(String[] args) throws JSONException {
-        final String userKey = "AIzaSyAVJFd7htTKbeo7if-p-NxCNOiVDdN7kdU";
-        String lat;
+    protected static final boolean GEO_CODE = false;
+    protected static final boolean GEO_LOCATION = true;
+    
+    private final boolean requestType;
+    private LocationAPIAdapter api;
+    private String GEO_LOCATION_INDICATOR = "api.geolocation.";
+    private String GEO_CODE_INDICATOR = "api.geocode.";
+
+    public Location(boolean _type) throws Exception {
+        String indicator;       
         
-        //Sandbox logic for working with GeoCode by ZIP code.
-        String geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json";
-        String [] [] geoCodeParams = new String [] [] {{"key", userKey}, {"address", "27409"}};
+        if (_type == Location.GEO_CODE)
+            
+            indicator = this.GEO_CODE_INDICATOR;
+        else
+            indicator = this.GEO_LOCATION_INDICATOR;
+        
+        this.requestType = _type;
+        this.api = new LocationAPIAdapter (indicator);
+    }
+    
+    public Location (boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
+        this (_type);
+        for (String key : _paramMap.keySet())
+            this.api.setAPIConfigParameter(key, _paramMap.get(key));
+    }
 
-        APIModel geoCodeModel = new APIModel ();
-        APIController geoCodeControl = new APIController (geoCodeModel, geoCodeURL, userKey, geoCodeParams);
+    public void submitRequest () {
+        this.api.submitRequest();
+    }
 
-        //get API return string.
-        geoCodeControl.submitAPIRequest("GET", "results;geometry;location");
-        LinkedHashMap <String, Object> map = geoCodeControl.toMap();
-        for (String key : map.keySet()) {
-            Object val = map.get(key);
-            System.out.println (key + " = " + val);
-        }
+    public double getLatitude () {
+        return this.api.getLatitude();
+    }
 
-        //Sandbox logic for working with GeoCode by GeoLocation.
-        String geoLocationURL = "https://www.googleapis.com/geolocation/v1/geolocate";
-        String [] [] geoLocationParams = new String [] [] {{"key", userKey}};
+    public double getLongitude () {
+        return this.api.getLongitude();
+    }
 
-        //__________________________________
-
-        APIModel geoLocationModel = new APIModel ();
-        APIController geoLocationControl = new APIController (geoLocationModel, geoLocationURL, geoLocationParams);
-
-        //get API return string.
-        lat = geoLocationControl.getAPIResultString("POST", "location;lat");
-        System.out.println (lat);
+    public void setAPIConfigParameter (String _key, String _val) throws Exception {
+        boolean isGeoCode = (this.requestType == Location.GEO_CODE);
+        boolean isGeoLocation = (this.requestType == Location.GEO_LOCATION);
+        boolean isUserKey = (_key.compareTo(this.api.getUserKeyAttributeName()) == 0);
+        
+        //GeoCode object may have multiple parameters.
+        if (isGeoCode)
+            this.api.setAPIConfigParameter(_key, _val);
+        
+        //GeoLocation will have user key as its sole parameter (authentication). Do not allow other parameters.
+        if (isGeoLocation) {
+            if (isUserKey)
+                this.api.setAPIConfigParameter(_key, _val);
+            else
+                throw new Exception ("Key-Value pair [key=" + _key + ", value=" + _val + "] cannot be added to " + this.GEO_LOCATION_INDICATOR);
+        }        
     }
 }

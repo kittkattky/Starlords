@@ -14,40 +14,42 @@ public class APIController {
     protected APIModel model;
 
     /**
-     * public APIController constructor class.
-     * @param _model: APIModel parameter that houses the internal APIModel configurations.
+     * public APIController constructor class. Constructor allows model instantiation without providing a user model.
      * @param _url: Base API URL.
      * @param _userKey: API user key.
-     * @param _paramArr: API parameters stored in a two-dimensional array.
+     * @param _paramArr: API parameters stored in a LinkedHashMap.
      */
-    public APIController (APIModel _model, String _url, String _userKey, String [] [] _paramArr) {
-        this.setModel(_model);
+    public APIController (String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
+        this.model = new APIModel();
 
-        APIModel apiModel = this.getModel();
-        for (int i = 0; i < _paramArr.length; i++)
-            apiModel.setAPIConfigParameter(_paramArr [i] [this.KEY], _paramArr [i] [this.VALUE]);
+        if (_paramArr != null) {
+            for (String key : _paramArr.keySet())
+                this.model.setAPIConfigParameter(key, _paramArr.get(key));
+        }
 
-        apiModel.setUserKey(_userKey);
-        this.model.urlSite = _url;
+        this.model.setUserKey(_userKey);
+        this.model.setURLString(_url);
+    }
+
+    public APIController (APIModel _model) {
+        this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
     }
 
     /**
-     * toMap: a method which converts the current JSON object model into a LinkedHashMap.
-     * @return LinkedHashMap
-     * @throws JSONException
-     */
-    public LinkedHashMap <String, Object> toMap () throws JSONException {
-        return this.getModel ().toMap(this.model.getJSONObject());
-    }
-
-    /**
-     * public APIController constructor class.
-     * @param _model: APIModel parameter that houses the internal APIModel configurations. Constructor allows model instantiation without providing a userKey.
+     * public APIController constructor class. Constructor allows model instantiation without providing a userKey.
      * @param _url: Base API URL.
-     * @param _paramArr: API parameters stored in a two-dimensional array.
      */
-    public APIController (APIModel _model, String _url, String [] [] _paramArr) {
-        this (_model, _url, null, _paramArr);
+    public APIController (String _url) {
+        this (_url, null, null);
+    }
+
+    /**
+     * public APIController constructor class. Constructor allows model instantiation without providing a user model or config map.
+     * @param _url: Base API URL.
+     * @param _userKey: API user key.
+     */
+    public APIController (String _url, String _userKey) {
+        this (_url, _userKey, null);
     }
 
     /**
@@ -56,17 +58,20 @@ public class APIController {
      * @param _attributes: a String representation of the desired attribute from which to parse.
      */
     public void submitAPIRequest (String _requestMethod, String _attributes) {
-        this.getModel ().submitAPIRequest(_requestMethod, _attributes);
+        this.model.submitAPIRequest(_requestMethod, _attributes);
+    }
+
+    /**
+     * toMap: a method which converts the current JSON object model into a LinkedHashMap.
+     * @return LinkedHashMap
+     * @throws JSONException
+     */
+    public LinkedHashMap <String, Object> toMap () throws JSONException {
+        this.model.setAPIParseObject();
+        return this.model.toMap(this.model.getAPIParseObject());
     }
 
     //================= GETTERS ===============
-    /**
-     * getModel: returns the pre-instantiated API model.
-     * @return APIModel
-     */
-    public APIModel getModel () {
-        return this.model;
-    }
 
     /**
      * getAPIResultString: a method which handles API request submission and extraction of API result string.
@@ -75,21 +80,29 @@ public class APIController {
      * @return String: String representation of API results.
      */
     public String getAPIResultString (String _requestMethod, String _attributes) {
-        APIModel apiModel = this.getModel ();
 
         //submit request if result string is null.
-        if (apiModel.getAPIResultString() == null)
+        if (this.model.getAPIResultString() == null)
             this.submitAPIRequest(_requestMethod, _attributes);
 
-        return apiModel.getAPIResultString();
+        return this.model.getAPIResultString();
+    }
+
+    /**
+     * getAPIConfigParameters: helper method to return parameterized portion of API URL.
+     * @return String
+     */
+    public String getAPIConfigParameters () {
+        return this.model.getAPIConfigParameters();
     }
 
     //================= SETTERS ===============
     /**
-     * setModel: a method that defines the controller's model class.
-     * @param _model
+     * setAPIConfigParameter: utility method that handles creating new key-value pairs into the config map.
+     * @param _key: value of the key
+     * @param _val: value that the key will store.
      */
-    public void setModel (APIModel _model) {
-        this.model = _model;
+    public void setAPIConfigParameter (String _key, String _val) {
+        this.model.setAPIConfigParameter(_key, _val);
     }
 }
