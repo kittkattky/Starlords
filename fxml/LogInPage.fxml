@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" stylesheets="@../View/css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LogInPageController">
+   <children>
+      <BorderPane prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;">
+         <left>
+            <Pane id="pane" prefHeight="800.0" prefWidth="668.0" styleClass="pane" stylesheets="@../Csc340Project/css.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="758.0" fitWidth="619.0" layoutX="25.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../lib/logo.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+         </left>
+         <right>
+            <Pane prefHeight="800.0" prefWidth="666.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="username" layoutX="128.0" layoutY="186.0" prefHeight="68.0" prefWidth="412.0" promptText="Username" />
+                  <PasswordField fx:id="password" layoutX="128.0" layoutY="359.0" prefHeight="68.0" prefWidth="412.0" promptText="Password" />
+                  <Button fx:id="signUp" layoutX="137.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction2" prefHeight="66.0" prefWidth="394.0" styleClass="pane" stylesheets="@../Csc340Project/css.css" text="Sign up" />
+                  <Label fx:id="forgotpassword" layoutX="169.0" layoutY="482.0" prefHeight="53.0" prefWidth="165.0" text="Forgot Password?" />
+                  <Label fx:id="labelError" layoutX="128.0" layoutY="427.0" prefHeight="39.0" prefWidth="414.0" textFill="#ff2525">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="128.0" layoutY="110.0" prefHeight="53.0" prefWidth="165.0" text="Sign In">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="signIn" layoutX="390.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="150.0" styleClass="pane" text="Sign in">
+                     <stylesheets>
+                        <URL value="@../Csc340Project/css.css" />
+                        <URL value="@../View/css.css" />
+                     </stylesheets></Button>
+               </children></Pane>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>
