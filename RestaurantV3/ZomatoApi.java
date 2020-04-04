@@ -91,11 +91,10 @@ public class ZomatoApi implements RestaurantApiInterface {
         //construct urlString
         this.getRequestType = "search?";
         String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon + "&radius=" + this.RADIUS + "&cuisines=" + _cuisineID;
-        System.out.println(urlString);
 
         //call helper method
         StringBuffer content = connectToAPI(urlString);
-        System.out.println(content);
+        
         ArrayList<Map> mapsOfRestaurantInfo = new ArrayList<Map>();
 
         try {
@@ -109,18 +108,26 @@ public class ZomatoApi implements RestaurantApiInterface {
             JSONObject util2;
 
             Map<Integer, String> nameMap = new HashMap<Integer, String>();
-            Map<Integer, String> urlMap = new HashMap<Integer, String>();
-            Map<Integer, String> addressMap = new HashMap<Integer, String>();
-            Map<Integer, String> ratingMap = new HashMap<Integer, String>();
+            Map<String, String> urlMap = new HashMap<String, String>();
+            Map<String, String> addressMap = new HashMap<String, String>();
+            Map<String, String> ratingMap = new HashMap<String, String>();
 
             for (int i = 0; i < jsonarr.length(); i++) {
                 util = (JSONObject) jsonarr.get(i);
                 util2 = (JSONObject) util.get("restaurant");
 
                 nameMap.put(i, (String) util2.get("name"));
-                urlMap.put(i, (String) util2.get("url"));
-                addressMap.put(i, (String) ((JSONObject) util2.get("location")).get("address"));
-                ratingMap.put(i, (String) ((JSONObject) util2.get("user_rating")).get("aggregate_rating"));
+                urlMap.put((String)util2.get("name"), (String) util2.get("url"));
+                addressMap.put((String)util2.get("name"), (String) ((JSONObject) util2.get("location")).get("address"));
+                //This if else statement handles a special situation. If the rating is 0, then util2 retruns an Integer.
+                //This is a problem because it can't be type casted to a string, so I have to manually do it. 
+                if(((JSONObject)util2.get("user_rating")).get("aggregate_rating") instanceof Integer) {
+                    ratingMap.put((String)util2.get("name"), "0");
+                }
+                else {
+                    ratingMap.put((String)util2.get("name"), (String) ((JSONObject) util2.get("user_rating")).get("aggregate_rating"));
+                }
+                
             }
 
             //add maps to array list
