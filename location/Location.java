@@ -1,37 +1,38 @@
 package location;
 
-import LocationAPI.GeoCode;
-import LocationAPI.GeoLocation;
 import LocationAPI.LocationAPIAdapter;
-import LocationAPI.LocationAPIInterface;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.LinkedHashMap;
 
 public class Location {
-    protected static final int GEO_CODE = 0;
-    protected static final int GEO_LOCATION = 1;
-    protected LocationAPIAdapter api;
+    protected static final boolean GEO_CODE = false;
+    protected static final boolean GEO_LOCATION = true;
+    
+    private final boolean requestType;
+    private LocationAPIAdapter api;
+    private String GEO_LOCATION_INDICATOR = "api.geolocation.";
+    private String GEO_CODE_INDICATOR = "api.geocode.";
 
-    public Location(int _type) {
+    public Location(boolean _type) throws Exception {
+        String indicator;       
+        
         if (_type == Location.GEO_CODE)
-            this.api = new GeoCode();
-        else if (_type == Location.GEO_LOCATION)
-            this.api = new GeoLocation();
+            
+            indicator = this.GEO_CODE_INDICATOR;
         else
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, "Invalid location type enum: [" + _type + "]");
+            indicator = this.GEO_LOCATION_INDICATOR;
+        
+        this.requestType = _type;
+        this.api = new LocationAPIAdapter (indicator);
+    }
+    
+    public Location (boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
+        this (_type);
+        for (String key : _paramMap.keySet())
+            this.api.setAPIConfigParameter(key, _paramMap.get(key));
     }
 
     public void submitRequest () {
         this.api.submitRequest();
-    }
-
-    public String getURL () {
-        return this.api.getURL();
-    }
-
-    public String getAPIConfigParameters () {
-        return this.api.getAPIConfigParameters();
     }
 
     public double getLatitude () {
@@ -42,7 +43,21 @@ public class Location {
         return this.api.getLongitude();
     }
 
-    public void setAPIConfigParameter (String _key, String _val) {
-        this.api.setAPIConfigParameter(_key, _val);
+    public void setAPIConfigParameter (String _key, String _val) throws Exception {
+        boolean isGeoCode = (this.requestType == Location.GEO_CODE);
+        boolean isGeoLocation = (this.requestType == Location.GEO_LOCATION);
+        boolean isUserKey = (_key.compareTo(this.api.getUserKeyAttributeName()) == 0);
+        
+        //GeoCode object may have multiple parameters.
+        if (isGeoCode)
+            this.api.setAPIConfigParameter(_key, _val);
+        
+        //GeoLocation will have user key as its sole parameter (authentication). Do not allow other parameters.
+        if (isGeoLocation) {
+            if (isUserKey)
+                this.api.setAPIConfigParameter(_key, _val);
+            else
+                throw new Exception ("Key-Value pair [key=" + _key + ", value=" + _val + "] cannot be added to " + this.GEO_LOCATION_INDICATOR);
+        }        
     }
 }
