@@ -1,37 +1,28 @@
 package RestaurantV3;
 
-import LocationAPI.*;
-import java.lang.reflect.*;
-
 /**
  * Basic test driver to show that methods work, and information flow is correct.
  *
  * @author Diego Rodriguez
  */
 public class Driver {
+    public static void main(String[] args) {
+        double lat = 36.066984;
+        double lon = -79.800178;
+        int cuisineID = 73;
 
-    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
-        //LocationAPIAdapter api = new GeoLocation ();
-
-        /*
-        api.submitRequest();
-        
-        double lat = api.getLatitude();
-        double lon = api.getLongitude();
-        
-        System.out.println ("latitude: " + lat);
-        System.out.println ("longitude: " + lon);
-        
-        int cuisineID = 1;
+       
         RestaurantModel modelA = new RestaurantModel();
         RestaurantModel modelB = new RestaurantModel();
 
-        modelA = modelA.loadCusinesByLocation(lat, lon);
-        System.out.println(modelA.getCuisineList());
+        modelA = modelA.loadCuisinesByLocation(lat, lon);
+        System.out.println(modelA.getCuisineMap());
 
-        modelB = modelB.loadRestaurantsByID(cuisineID, lat, lon);
-        System.out.println(modelB.getRestaurantList());*/
-
+        modelB = modelA.loadRestaurantsByID(959, lat, lon);
+        System.out.println(modelB.getRestaurantNameMap());
+        System.out.println(modelB.getRestaurantUrlMap());
+        System.out.println(modelB.getRestaurantAddressMap());
+        System.out.println(modelB.getRestaurantRatingMap());
     }
 
 }
