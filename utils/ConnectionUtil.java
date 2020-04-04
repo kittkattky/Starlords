@@ -14,7 +14,8 @@ public class ConnectionUtil {
     
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 
-    Connection con = null;
+    private Connection con = null;
+    
     public static Connection conDB() throws ClassNotFoundException{
         try {
             Class.forName(DRIVER);
