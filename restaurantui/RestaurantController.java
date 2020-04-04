@@ -1,8 +1,9 @@
 package restaurantui;
 
 /**
- *
- * @author darod
+ * Restaurant Controller for handling all requests from views and communicating with the Restaurant Model.
+ * @author Diego Rodriguez
+ * Last Updated: 4/4/2020
  */
 
 import RestaurantV3.RestaurantModel;
