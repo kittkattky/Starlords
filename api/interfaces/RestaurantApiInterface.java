@@ -1,4 +1,4 @@
-package RestaurantV3;
+package api.interfaces;
 
 /**
  * Interface that defines how subsequent restaurant api clases should be defined.

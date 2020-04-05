@@ -1,10 +1,11 @@
-package RestaurantV3;
+package models;
 
 /**
  * Handles calls
  *
  * @author Diego Rodriguez Updated: 3/30/2020
  */
+import api.adapters.RestaurantAPIAdapter;
 import java.util.ArrayList;
 import java.util.Map;
 

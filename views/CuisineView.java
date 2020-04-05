@@ -1,10 +1,11 @@
-package restaurantui;
+package views;
 
 /**
  * View that interacts with CuisineListUI.FXML and Restaurant Controller
  *
  * @author Diego Rodriguez Last Updated: 4/4/2020
  */
+import controllers.RestaurantController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;

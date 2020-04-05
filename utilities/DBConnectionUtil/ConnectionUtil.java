@@ -1,4 +1,4 @@
-package utils;
+package utilities.DBConnectionUtil;
 
 /**
  * This class connects to the database

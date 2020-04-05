@@ -1,4 +1,4 @@
-package View;
+package controllers;
 
 /**
  * This class is the log in page which can be used to access the home page and sign up page
@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import utils.ConnectionUtil;
+import utilities.DBConnectionUtil.ConnectionUtil;
 
 public class LogInPageController implements Initializable {
 

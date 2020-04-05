@@ -1,11 +1,13 @@
-package RestaurantV3;
+package test;
+
+import models.RestaurantModel;
 
 /**
  * Basic test driver to show that methods work, and information flow is correct.
  *
  * @author Diego Rodriguez
  */
-public class Driver {
+public class Driver_RestaurantV3 {
     public static void main(String[] args) {
         double lat = 36.066984;
         double lon = -79.800178;

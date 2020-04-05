@@ -1,4 +1,4 @@
-package API;
+package models;
 
 /**
  * APIModel class for facilitating communications between the computer and external APIs.

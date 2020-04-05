@@ -1,4 +1,4 @@
-package appconfig;
+package utilities.AppConfigUtil;
 
 import java.io.FileInputStream;
 import java.util.Properties;

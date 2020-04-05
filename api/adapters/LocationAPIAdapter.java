@@ -1,12 +1,13 @@
-package LocationAPI;
+package api.adapters;
 
-import API.*;
-import appconfig.AppConfigUtil;
-import java.lang.reflect.Field;
+import models.APIModel;
+import controllers.APIController;
+import api.interfaces.LocationAPIInterface;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
+import utilities.AppConfigUtil.AppConfigUtil;
 
 /**
  * LocationAPI public class for implementing LocationAPIInterface

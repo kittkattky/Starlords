@@ -1,4 +1,4 @@
-package restaurantui;
+package main;
 
 /**
  * This is the main class for executing the program.

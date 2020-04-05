@@ -1,4 +1,4 @@
-package View;
+package controllers;
 
 /**
  * This class is the EventsPage

@@ -1,5 +1,6 @@
-package API;
+package controllers;
 
+import models.APIModel;
 import java.util.LinkedHashMap;
 import org.json.JSONException;
 

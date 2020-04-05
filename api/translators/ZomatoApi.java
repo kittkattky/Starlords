@@ -1,4 +1,4 @@
-package RestaurantV3;
+package api.translators;
 
 /**
  * Translator Class Opens/closes connection with Zomato api server. Main job is
@@ -6,6 +6,7 @@ package RestaurantV3;
  *
  * @author Diego Rodriguez Updated: 3/30/2020
  */
+import api.interfaces.RestaurantApiInterface;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -139,7 +140,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             return mapsOfRestaurantInfo;
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(RestaurantV3.ZomatoApi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass ().getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -180,7 +181,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             httpConnection.disconnect();
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(RestaurantV3.ZomatoApi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass ().getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return content;

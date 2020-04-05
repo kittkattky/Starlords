@@ -1,4 +1,4 @@
-package restaurantui;
+package views;
 
 /**
  * View in charge of RestaurantList.FXML and interacts with controller and can
@@ -6,6 +6,7 @@ package restaurantui;
  * Author: Diego Rodriguez 
  * Last Updated: 4/4/2020
  */
+import controllers.RestaurantController;
 import java.io.IOException;
 import java.util.Map;
 import javafx.event.ActionEvent;

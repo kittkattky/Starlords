@@ -1,4 +1,4 @@
-package View;
+package controllers;
 
 /**
  * This class is the sign up page
@@ -25,7 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import utils.ConnectionUtil;
+import utilities.DBConnectionUtil.ConnectionUtil;
 
 public class SignUpPageController implements Initializable {
 

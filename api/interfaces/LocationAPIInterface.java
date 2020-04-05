@@ -1,4 +1,4 @@
-package LocationAPI;
+package api.interfaces;
 
 /**
  * LocationAPIInterface.

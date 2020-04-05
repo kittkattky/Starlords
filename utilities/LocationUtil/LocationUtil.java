@@ -1,21 +1,21 @@
-package location;
+package utilities.LocationUtil;
 
-import LocationAPI.LocationAPIAdapter;
+import api.adapters.LocationAPIAdapter;
 import java.util.LinkedHashMap;
 
-public class Location {
-    protected static final boolean GEO_CODE = false;
-    protected static final boolean GEO_LOCATION = true;
+public class LocationUtil {
+    public static final boolean GEO_CODE = false;
+    public static final boolean GEO_LOCATION = true;
     
     private final boolean requestType;
     private LocationAPIAdapter api;
     private String GEO_LOCATION_INDICATOR = "api.geolocation.";
     private String GEO_CODE_INDICATOR = "api.geocode.";
 
-    public Location(boolean _type) throws Exception {
+    public LocationUtil(boolean _type) throws Exception {
         String indicator;       
         
-        if (_type == Location.GEO_CODE)
+        if (_type == LocationUtil.GEO_CODE)
             
             indicator = this.GEO_CODE_INDICATOR;
         else
@@ -25,7 +25,7 @@ public class Location {
         this.api = new LocationAPIAdapter (indicator);
     }
     
-    public Location (boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
+    public LocationUtil (boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
         this (_type);
         for (String key : _paramMap.keySet())
             this.api.setAPIConfigParameter(key, _paramMap.get(key));
@@ -44,8 +44,8 @@ public class Location {
     }
 
     public void setAPIConfigParameter (String _key, String _val) throws Exception {
-        boolean isGeoCode = (this.requestType == Location.GEO_CODE);
-        boolean isGeoLocation = (this.requestType == Location.GEO_LOCATION);
+        boolean isGeoCode = (this.requestType == LocationUtil.GEO_CODE);
+        boolean isGeoLocation = (this.requestType == LocationUtil.GEO_LOCATION);
         boolean isUserKey = (_key.compareTo(this.api.getUserKeyAttributeName()) == 0);
         
         //GeoCode object may have multiple parameters.

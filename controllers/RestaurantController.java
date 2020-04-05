@@ -1,4 +1,4 @@
-package restaurantui;
+package controllers;
 
 /**
  * Restaurant Controller for handling all requests from views and communicating with the Restaurant Model.
@@ -6,7 +6,7 @@ package restaurantui;
  * Last Updated: 4/4/2020
  */
 
-import RestaurantV3.RestaurantModel;
+import models.RestaurantModel;
 import java.util.Map;
 
 public class RestaurantController {

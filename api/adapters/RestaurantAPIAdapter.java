@@ -1,4 +1,4 @@
-package RestaurantV3;
+package api.adapters;
 
 /**
  * Adapter class, tells model which translator/api to use.
@@ -6,6 +6,8 @@ package RestaurantV3;
  * @author Diego Rodriguez Updated: 3/30/2020
  */
 
+import api.interfaces.RestaurantApiInterface;
+import api.translators.ZomatoApi;
 import java.util.ArrayList;
 import java.util.Map;
 

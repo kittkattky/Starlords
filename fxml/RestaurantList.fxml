@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurantui.RestaurantListView">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.RestaurantListView">
    <children>
       <VBox layoutX="14.0" layoutY="75.0" prefHeight="325.0" prefWidth="216.0">
          <children>

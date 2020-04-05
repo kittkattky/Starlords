@@ -1,4 +1,4 @@
-package View;
+package main;
 
 /**
  * This class is the main class and loads the login screen
