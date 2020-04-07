@@ -9,7 +9,7 @@ import java.util.Properties;
  */
 public class AppConfigUtil {
     private Properties configFile = new java.util.Properties();
-    private final String srcDirectoryPath = System.getProperty("user.dir") + "\\src\\utilities\\AppConfig\\";
+    private final String srcDirectoryPath = System.getProperty("user.dir") + "\\src\\utilities\\AppConfigUtil\\";
     
     public AppConfigUtil(String _filePath)
     {
