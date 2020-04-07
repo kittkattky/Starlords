@@ -82,7 +82,7 @@ public class CuisineView implements Initializable {
                 String cuisineSelected = listViewCuisineList.getSelectionModel().getSelectedItem();
                 this.restaurantController.setCuisineID((Integer) this.restaurantController.getCuisineIDMap().get(cuisineSelected));
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("RestaurantList.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader ().getResource("fxml/RestaurantList.fxml"));
                 //Create parent object based off of loader that knows which fxml file to create a scene of.
                 Parent parentUsingFXML = loader.load();
 

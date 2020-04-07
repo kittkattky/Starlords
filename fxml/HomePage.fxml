@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomePageController">
    <children>
-      <BorderPane prefHeight="800.0" prefWidth="1333.0" styleClass="pane" stylesheets="@../View/css.css">
+      <BorderPane prefHeight="800.0" prefWidth="1333.0" styleClass="pane" stylesheets="@../views/css.css">
          <left>
             <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>

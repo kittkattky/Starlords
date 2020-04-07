@@ -69,7 +69,7 @@ public class RestaurantListView {
      * @throws IOException
      */
     public void backToCuisineScene(ActionEvent _event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CuisineListUI.FXML"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/CuisineListUI.fxml"));
         Parent parentUsingFXML = loader.load();
 
         //preload cuisine list
