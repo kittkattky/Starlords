@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="758.0" fitWidth="619.0" layoutX="25.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../lib/logo.png" />
+                        <Image url="@../gui artifacts/logo.png" />
                      </image>
                   </ImageView>
                </children></Pane>

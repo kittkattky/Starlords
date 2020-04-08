@@ -71,7 +71,7 @@
                   </Label>
                   <ImageView fitHeight="758.0" fitWidth="619.0" layoutX="14.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../lib/logo.png" />
+                        <Image url="@../gui artifacts/logo.png" />
                      </image>
                   </ImageView>
                </children>

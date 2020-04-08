@@ -15,7 +15,7 @@
                <children>
                   <ImageView fx:id="moviePic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../lib/Screenshot%20(52).png" />
+                        <Image url="@../gui artifacts/Screenshot%20(52).png" />
                      </image>
                   </ImageView>
                   <Label fx:id="test" layoutX="205.0" layoutY="715.0" />
@@ -27,7 +27,7 @@
                <children>
                   <ImageView fx:id="restaurantPic" fitHeight="539.0" fitWidth="383.0" layoutX="18.0" layoutY="188.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../lib/Screenshot%20(47).png" />
+                        <Image url="@../gui artifacts/Screenshot%20(47).png" />
                      </image>
                   </ImageView>
                </children>
@@ -38,7 +38,7 @@
                <children>
                   <ImageView fx:id="eventPic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" onMouseClicked="#handleButtonAction" pickOnBounds="true">
                      <image>
-                        <Image url="@../lib/Screenshot%20(50).png" />
+                        <Image url="@../gui artifacts/Screenshot%20(50).png" />
                      </image>
                   </ImageView>
                </children>
