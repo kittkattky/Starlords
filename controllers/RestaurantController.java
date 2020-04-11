@@ -1,18 +1,16 @@
 package controllers;
 
 /**
- * Restaurant Controller for handling all requests from views and communicating with the Restaurant Model.
+ * Restaurant Controller for handling flow of information to/from view and model.
  * @author Diego Rodriguez
- * Last Updated: 4/4/2020
+ * Last Updated: 4/11/2020
  */
 
 import models.RestaurantModel;
 import java.util.Map;
 
 public class RestaurantController {
-    
-    private final double LAT = 36.066984;
-    private final double LON = -79.800178;
+
     protected RestaurantModel restaurantModel = new RestaurantModel();
     protected int cuisineID;
    
@@ -23,8 +21,8 @@ public class RestaurantController {
         return this.cuisineID;
     }
     
-    public Map getCuisineMap() {
-        this.restaurantModel = restaurantModel.loadCuisinesByLocation(this.LAT, this.LON);
+    public Map getCuisineMap() throws Exception {
+        this.restaurantModel = restaurantModel.loadCuisinesByLocation();
         return restaurantModel.getCuisineMap();
     }
     
@@ -39,8 +37,8 @@ public class RestaurantController {
      * Any other get methods that need this info will have it from this reference of restaurantModel.
      * @return 
      */
-    public Map getRestaurantNameMap() {
-        this.restaurantModel = restaurantModel.loadRestaurantsByID(this.cuisineID, this.LAT, this.LON);
+    public Map getRestaurantNameMap() throws Exception {
+        this.restaurantModel = restaurantModel.loadRestaurantsByID(this.cuisineID);
         return this.restaurantModel.getRestaurantNameMap();
     }
     
@@ -62,7 +60,5 @@ public class RestaurantController {
     public void setCuisineID(int _cuisineID) {
         this.cuisineID = _cuisineID;
     }
-    
-    
         
 }

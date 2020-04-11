@@ -1,13 +1,17 @@
 package models;
 
 /**
- * Handles calls
+ * Handles calls to zomato api, also use location util class to get lon/lat
+ * based on zipcode.
  *
- * @author Diego Rodriguez Updated: 3/30/2020
+ * @author Diego Rodriguez Updated: 4/11/2020
  */
+import utilities.LocationUtil.LocationUtil;
 import api.adapters.RestaurantAPIAdapter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RestaurantModel {
 
@@ -29,26 +33,29 @@ public class RestaurantModel {
     private static final int restaurantUrlMapINDEX = 1;
     private static final int restaurantAddressMapINDEX = 2;
     private static final int restaurantRatingMapINDEX = 3;
+    private static final String ZIPCODE = "27403";
 
-    
-    
     protected final static RestaurantAPIAdapter adapter = new RestaurantAPIAdapter();
 
     /**
      * Returns a RestaurantModel object whose instance has a set latitude,
      * longitude, and cuisine list.
      *
-     * @param _lat
-     * @param _lon
      * @return
+     * @throws java.lang.Exception
      */
-    public static RestaurantModel loadCuisinesByLocation(double _lat, double _lon) {
+    public static RestaurantModel loadCuisinesByLocation() throws Exception {
+        //use location util class to get lat/lon based on zip code
+        LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
+        location.setAPIConfigParameter("address", "27403");
+        location.submitRequest();
+
         RestaurantModel useModel = new RestaurantModel();
-        ArrayList<Map> tempStorageForMaps = adapter.loadCuisineListByLocation(_lat, _lon);
-        
-        useModel.setLat(_lat);
-        useModel.setLon(_lon);
-        
+        ArrayList<Map> tempStorageForMaps = adapter.loadCuisineListByLocation(location.getLatitude(), location.getLongitude());
+
+        useModel.setLat(location.getLatitude());
+        useModel.setLon(location.getLongitude());
+
         Map cuisineMap = tempStorageForMaps.get(cuisineMapINDEX);
         useModel.setCuisineMap(cuisineMap);
 
@@ -63,16 +70,20 @@ public class RestaurantModel {
      * latitude, longitude, and restaurant list.
      *
      * @param _id
-     * @param _lat
-     * @param _lon
      * @return
+     * @throws java.lang.Exception
      */
-    public static RestaurantModel loadRestaurantsByID(int _id, double _lat, double _lon) {
+    public static RestaurantModel loadRestaurantsByID(int _id) throws Exception {
+        //use location util class to get lat/lon based on zip code
+        LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
+        location.setAPIConfigParameter("address", "27403");
+        location.submitRequest();
+
         RestaurantModel useModel = new RestaurantModel();
-        ArrayList<Map> tempStorageForMaps = adapter.loadRestaurantListByID(_id, _lat, _lon);
-        
-        useModel.setLat(_lat);
-        useModel.setLon(_lon);
+        ArrayList<Map> tempStorageForMaps = adapter.loadRestaurantListByID(_id, location.getLatitude(), location.getLongitude());
+
+        useModel.setLat(location.getLatitude());
+        useModel.setLon(location.getLongitude());
 
         Map restaurantNameMap = tempStorageForMaps.get(restaurantNameMapINDEX);
         useModel.setRestaurantNameMap(restaurantNameMap);

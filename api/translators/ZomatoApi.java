@@ -2,7 +2,7 @@ package api.translators;
 
 /**
  * Translator Class Opens/closes connection with Zomato api server. Main job is
- * to return data to be used in view. 
+ * to return data to be used in view.
  *
  * @author Diego Rodriguez Updated: 3/30/2020
  */
@@ -15,15 +15,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
 import java.util.*;
+import utilities.AppConfigUtil.AppConfigUtil;
 
 public class ZomatoApi implements RestaurantApiInterface {
 
+    private final AppConfigUtil config = new AppConfigUtil("AppConfig.properties");
     //variables needed for constructing urlString
-    private final String BASEURL = "https://developers.zomato.com/api";
-    private final String APIKEY = "0a71dc953812d0958a14168a49b5acfd";
+    private final String BASEURL = this.config.getProperty("api.zomato.url");
+    private final String APIKEY = this.config.getProperty("api.zomato.APIKEY");
     //Radius is in meters. Default is 15 miles = 24141 meters.
     private final int RADIUS = 24141;
-    protected String version = "/v2.1/";
+    protected String version = this.config.getProperty("api.zomato.version");
     private String getRequestType;
 
     /**
@@ -37,8 +39,9 @@ public class ZomatoApi implements RestaurantApiInterface {
     public ArrayList<Map> loadCuisineListByLocation(double _lat, double _lon) {
 
         //construct urlString
-        this.getRequestType = "cuisines?";
-        String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon;
+        this.getRequestType = this.config.getProperty("api.zomato.cuisineRequestType");
+        String urlString = this.BASEURL + this.version + this.getRequestType + this.config.getProperty("api.zomato.latitudeAttribute") + _lat + this.config.getProperty("api.zomato.longitudeAttribute") + _lon;
+
         //call helper method
         StringBuffer content = connectToAPI(urlString);
 
@@ -80,7 +83,8 @@ public class ZomatoApi implements RestaurantApiInterface {
     }
 
     /**
-     * Returns an array list containing 4 maps of restaurant data (name, url, address, and rating)
+     * Returns an array list containing 4 maps of restaurant data (name, url,
+     * address, and rating)
      *
      * @param _cuisineID
      * @param _lat
@@ -91,11 +95,12 @@ public class ZomatoApi implements RestaurantApiInterface {
     public ArrayList<Map> loadRestaurantListByID(int _cuisineID, double _lat, double _lon) {
         //construct urlString
         this.getRequestType = "search?";
-        String urlString = this.BASEURL + this.version + this.getRequestType + "lat=" + _lat + "&lon=" + _lon + "&radius=" + this.RADIUS + "&cuisines=" + _cuisineID;
+        String urlString = this.BASEURL + this.version + this.getRequestType + this.config.getProperty("api.zomato.latitudeAttribute") + _lat + this.config.getProperty("api.zomato.longitudeAttribute") + _lon
+                + this.config.getProperty("api.zomato.radiusAttribute") + this.RADIUS + this.config.getProperty("api.zomato.cuisineIDAttribute") + _cuisineID;
 
         //call helper method
         StringBuffer content = connectToAPI(urlString);
-        
+
         ArrayList<Map> mapsOfRestaurantInfo = new ArrayList<Map>();
 
         try {
@@ -118,17 +123,16 @@ public class ZomatoApi implements RestaurantApiInterface {
                 util2 = (JSONObject) util.get("restaurant");
 
                 nameMap.put(i, (String) util2.get("name"));
-                urlMap.put((String)util2.get("name"), (String) util2.get("url"));
-                addressMap.put((String)util2.get("name"), (String) ((JSONObject) util2.get("location")).get("address"));
+                urlMap.put((String) util2.get("name"), (String) util2.get("url"));
+                addressMap.put((String) util2.get("name"), (String) ((JSONObject) util2.get("location")).get("address"));
                 //This if else statement handles a special situation. If the rating is 0, then util2 retruns an Integer.
-                //This is a problem because it can't be type casted to a string, so I have to manually do it. 
-                if(((JSONObject)util2.get("user_rating")).get("aggregate_rating") instanceof Integer) {
-                    ratingMap.put((String)util2.get("name"), "0");
+                //This is a problem because it can't be type casted to a string, so I have to manually do it.
+                if (((JSONObject) util2.get("user_rating")).get("aggregate_rating") instanceof Integer) {
+                    ratingMap.put((String) util2.get("name"), "0");
+                } else {
+                    ratingMap.put((String) util2.get("name"), (String) ((JSONObject) util2.get("user_rating")).get("aggregate_rating"));
                 }
-                else {
-                    ratingMap.put((String)util2.get("name"), (String) ((JSONObject) util2.get("user_rating")).get("aggregate_rating"));
-                }
-                
+
             }
 
             //add maps to array list
@@ -140,7 +144,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             return mapsOfRestaurantInfo;
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(this.getClass ().getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -165,8 +169,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             /*
             int responseCode = httpConnection.getResponseCode();
             System.out.println("Response Code: " + responseCode);
-            */
-
+             */
             //wrap InputStream in BufferedReader
             //read data from the input stream and store it in a string.
             BufferedReader readData;
@@ -181,7 +184,7 @@ public class ZomatoApi implements RestaurantApiInterface {
             httpConnection.disconnect();
         } catch (Exception ex) {
             //if an exception is caught, return null
-            Logger.getLogger(this.getClass ().getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return content;

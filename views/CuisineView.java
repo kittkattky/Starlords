@@ -16,12 +16,23 @@ import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.Map;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
 public class CuisineView implements Initializable {
+    @FXML
+    protected AnchorPane anchorPane;
 
     @FXML
     protected Label errorLabel;
@@ -43,7 +54,7 @@ public class CuisineView implements Initializable {
      * @param event
      */
     @FXML
-    private void handleSearchButtonAction(ActionEvent event) {
+    private void handleSearchButtonAction(ActionEvent event) throws Exception {
         this.isSearched = true;
         addCuisinesToList();
     }
@@ -53,8 +64,9 @@ public class CuisineView implements Initializable {
      * button. A call to the api is made through the restaurant model, and the
      * information from the api is returned as a map. Each element from the map
      * is cycled through and added to the listView.
+     * @throws java.lang.Exception
      */
-    public void addCuisinesToList() {
+    public void addCuisinesToList() throws Exception {
         this.cuisineMap = restaurantController.getCuisineMap();
         for (int i = 0; i < this.cuisineMap.size(); i++) {
             this.listViewCuisineList.getItems().add((String) this.cuisineMap.get(i));
@@ -68,11 +80,10 @@ public class CuisineView implements Initializable {
      * Then that cuisine ID is used to pre load a information on the next scene.
      * 
      * @param _event
-     * @param event
      * @throws java.io.IOException
      */
     @FXML
-    public void selectCuisine(ActionEvent _event) throws IOException {
+    public void selectCuisine(ActionEvent _event) throws IOException, Exception {
         if (!isSearched) {
             errorLabel.setText("Please search for cuisines near you");
         } else {
@@ -122,10 +133,18 @@ public class CuisineView implements Initializable {
         }
     }
 
-
+    /**
+     * This method sets the gradient for the anchor pane
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Stop[] stops = new Stop[] {new Stop(0,Color.web("#5C258D")), new Stop(1, Color.web("#4389A2"))};
+        LinearGradient linearGradient = new LinearGradient(0,0,1,0,true, CycleMethod.NO_CYCLE, stops);
+        BackgroundFill fillBackground = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
+        this.anchorPane.setBackground(new Background(fillBackground));
+           
     }
 
 }
