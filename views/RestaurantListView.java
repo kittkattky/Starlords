@@ -89,7 +89,7 @@ public class RestaurantListView implements Initializable {
      * @param _event
      * @throws IOException
      */
-    public void backToCuisineScene(ActionEvent _event) throws IOException {
+    public void backToCuisineScene(ActionEvent _event) throws IOException, Exception {
         //set to false when switching back to cuisine scene
         this.isHyperLinkSet = false;
 
