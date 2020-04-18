@@ -1,4 +1,4 @@
-package test;
+package Drivers;
 
 import models.RestaurantModel;
 
@@ -18,10 +18,10 @@ public class Driver_RestaurantV3 {
         RestaurantModel modelA = new RestaurantModel();
         RestaurantModel modelB = new RestaurantModel();
 
-        modelA = modelA.loadCuisinesByLocation();
+        //modelA = modelA.loadCuisinesByLocation();
         System.out.println(modelA.getCuisineMap());
 
-        modelB = modelA.loadRestaurantsByID(1);
+        //modelB = modelA.loadRestaurantsByID(1);
         System.out.println(modelB.getRestaurantNameMap());
         System.out.println(modelB.getRestaurantUrlMap());
         System.out.println(modelB.getRestaurantAddressMap());

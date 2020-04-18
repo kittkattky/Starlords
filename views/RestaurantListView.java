@@ -54,7 +54,7 @@ public class RestaurantListView implements Initializable {
     @FXML
     protected ListView<String> listViewRestaurantList;
 
-    private RestaurantController restaurantController = new RestaurantController();
+    protected RestaurantController restaurantController = new RestaurantController();
     protected Map restaurantNameMap;
     protected Map restaurantAddressMap;
     protected Map restaurantURLMap;
@@ -96,8 +96,10 @@ public class RestaurantListView implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/CuisineListUI.fxml"));
         Parent parentUsingFXML = loader.load();
 
-        //preload cuisine list
+        //set UUID for restaurant controller in next view and preload cuisine list
         CuisineView view = loader.getController();
+       
+        view.restaurantController.setUUID(this.restaurantController.getUUID());
         view.addCuisinesToList();
         view.isSearched = true;
 
@@ -163,7 +165,6 @@ public class RestaurantListView implements Initializable {
         LinearGradient linearGradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
         BackgroundFill fillBackground = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
         this.anchorPane.setBackground(new Background(fillBackground));
-
     }
 
 }

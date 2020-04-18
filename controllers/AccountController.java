@@ -1,13 +1,14 @@
 package controllers;
 
 /**
- *
- * @author darod
+ * This controller handles all database requests from the LogInPage and SignUpPage Views.
+ * Communicates with adapter to fulfill the requests. 
+ * @author Diego Rodriguez Updated: 4/18/20
  */
 import api.adapters.DatabaseAdapter;
 import java.util.Map;
 
-public class Login_SignUpController {
+public class AccountController {
     
     
     protected DatabaseAdapter dbAdapter = new DatabaseAdapter();
@@ -50,10 +51,12 @@ public class Login_SignUpController {
         }
     }
     
+    //=================  SETTERS ===============
     public void setUUID(String _uuid) {
         this.uuid = _uuid;
     }
     
+    //=================  GETTERS  ===============
     public String getUUID() {
         return this.uuid;
     }

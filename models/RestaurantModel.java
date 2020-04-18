@@ -1,17 +1,16 @@
 package models;
 
 /**
- * Handles calls to zomato api, also use location util class to get lon/lat
- * based on zipcode.
+ * Handles calls to zomato api, also uses location util class to get lon/lat
+ * based on zipcode, and uses DatabaseAdapter to get zip code based on uuid.
  *
  * @author Diego Rodriguez Updated: 4/11/2020
  */
+import api.adapters.DatabaseAdapter;
 import utilities.LocationUtil.LocationUtil;
 import api.adapters.RestaurantAPIAdapter;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RestaurantModel {
 
@@ -26,6 +25,7 @@ public class RestaurantModel {
     protected Map restaurantAddressMap;
     protected Map restaurantRatingMap;
 
+    
     //constants that reference the array list returned by adapter methods.
     private static final int cuisineMapINDEX = 0;
     private static final int cuisineIDMapINDEX = 1;
@@ -33,25 +33,29 @@ public class RestaurantModel {
     private static final int restaurantUrlMapINDEX = 1;
     private static final int restaurantAddressMapINDEX = 2;
     private static final int restaurantRatingMapINDEX = 3;
-    private static final String ZIPCODE = "27403";
+    
+    
 
-    protected final static RestaurantAPIAdapter adapter = new RestaurantAPIAdapter();
-
+    protected final static RestaurantAPIAdapter rAdapter = new RestaurantAPIAdapter();
+    protected final static DatabaseAdapter dbAdapter = new DatabaseAdapter();
+    
     /**
      * Returns a RestaurantModel object whose instance has a set latitude,
      * longitude, and cuisine list.
      *
+     * @param _uuid
      * @return
      * @throws java.lang.Exception
      */
-    public static RestaurantModel loadCuisinesByLocation() throws Exception {
+    public static RestaurantModel loadCuisinesByLocation(String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
         LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
-        location.setAPIConfigParameter("address", "27403");
+        String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
+        location.setAPIConfigParameter("address", zipCode);
         location.submitRequest();
 
         RestaurantModel useModel = new RestaurantModel();
-        ArrayList<Map> tempStorageForMaps = adapter.loadCuisineListByLocation(location.getLatitude(), location.getLongitude());
+        ArrayList<Map> tempStorageForMaps = rAdapter.loadCuisineListByLocation(location.getLatitude(), location.getLongitude());
 
         useModel.setLat(location.getLatitude());
         useModel.setLon(location.getLongitude());
@@ -70,17 +74,20 @@ public class RestaurantModel {
      * latitude, longitude, and restaurant list.
      *
      * @param _id
+     * @param _uuid
      * @return
      * @throws java.lang.Exception
      */
-    public static RestaurantModel loadRestaurantsByID(int _id) throws Exception {
+    public static RestaurantModel loadRestaurantsByID(int _id, String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
         LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
-        location.setAPIConfigParameter("address", "27403");
+        String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
+        
+        location.setAPIConfigParameter("address", zipCode);
         location.submitRequest();
 
         RestaurantModel useModel = new RestaurantModel();
-        ArrayList<Map> tempStorageForMaps = adapter.loadRestaurantListByID(_id, location.getLatitude(), location.getLongitude());
+        ArrayList<Map> tempStorageForMaps = rAdapter.loadRestaurantListByID(_id, location.getLatitude(), location.getLongitude());
 
         useModel.setLat(location.getLatitude());
         useModel.setLon(location.getLongitude());
@@ -136,6 +143,7 @@ public class RestaurantModel {
     public Map getRestaurantRatingMap() {
         return this.restaurantRatingMap;
     }
+    
 
     //=================  SETTERS ===============
     public void setLat(double _lat) {
@@ -173,5 +181,6 @@ public class RestaurantModel {
     public void setRestaurantRatingMap(Map _restaurantRatingMap) {
         this.restaurantRatingMap = _restaurantRatingMap;
     }
+    
 
 }

@@ -36,7 +36,10 @@
                <children>
                   <TextField fx:id="email" layoutX="128.0" layoutY="186.0" prefHeight="68.0" prefWidth="412.0" promptText="Email" />
                   <PasswordField fx:id="password" layoutX="127.0" layoutY="321.0" prefHeight="68.0" prefWidth="412.0" promptText="Password" />
-                  <Button fx:id="signUp" layoutX="136.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleSignUpButtonAction" prefHeight="66.0" prefWidth="394.0" styleClass="pane" stylesheets="@../views/css.css" text="Sign up" textFill="#e5e4e4" />
+                  <Button fx:id="signUp" layoutX="136.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleSignUpButtonAction" prefHeight="66.0" prefWidth="394.0" styleClass="pane" stylesheets="@../views/css.css" text="Sign up" textFill="#e5e4e4">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
                   <Label fx:id="labelError" alignment="CENTER" layoutX="127.0" layoutY="491.0" prefHeight="39.0" prefWidth="414.0" textFill="#ff2525">
                      <font>
                         <Font size="12.0" />
@@ -51,7 +54,10 @@
                      <stylesheets>
                         <URL value="@../views/css.css" />
                         <URL value="@../fxml/css.css" />
-                     </stylesheets></Button>
+                     </stylesheets>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
                </children></Pane>
          </right>
       </BorderPane>

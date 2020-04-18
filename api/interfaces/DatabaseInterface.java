@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package api.interfaces;
 
+/**
+ * Interface to define how translators should work
+ * Author: Diego Rodriguez Updated: 4/17/20
+ */
 import java.util.Map;
 
-/**
- *
- * @author darod
- */
 public interface DatabaseInterface {
     
     public boolean insertIntoDatabase(Map<String, String> _userInformation);

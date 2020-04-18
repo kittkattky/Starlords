@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -17,19 +18,29 @@
          <left>
             <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="moviePic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" pickOnBounds="true">
+                  <ImageView fx:id="moviePic" fitHeight="420.0" fitWidth="300.0" layoutX="72.0" layoutY="184.0" pickOnBounds="true">
                      <image>
                         <Image url="@../gui artifacts/Screenshot%20(52).png" />
                      </image>
                   </ImageView>
                   <Label fx:id="test" layoutX="205.0" layoutY="715.0" />
+                  <Label layoutX="14.0" layoutY="20.0" prefHeight="99.0" prefWidth="165.0" text="Welcome" textFill="#e4e5e5">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameLabel" layoutX="179.0" layoutY="20.0" prefHeight="99.0" prefWidth="540.0" text="&lt;Insert name here&gt;" textFill="#e4e5e5">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </left>
          <center>
             <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="restaurantPic" fitHeight="539.0" fitWidth="383.0" layoutX="18.0" layoutY="188.0" onMouseClicked="#handleButtonAction" pickOnBounds="true">
+                  <ImageView fx:id="restaurantPic" fitHeight="420.0" fitWidth="300.0" layoutX="56.0" layoutY="190.0" pickOnBounds="true">
                      <image>
                         <Image url="@../gui artifacts/Screenshot%20(47).png" />
                      </image>
@@ -40,11 +51,13 @@
          <right>
             <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="eventPic" fitHeight="539.0" fitWidth="383.0" layoutX="22.0" layoutY="98.0" onMouseClicked="#handleButtonAction" pickOnBounds="true">
+                  <ImageView fx:id="eventPic" fitHeight="420.0" fitWidth="300.0" layoutX="42.0" layoutY="190.0" pickOnBounds="true">
                      <image>
                         <Image url="@../gui artifacts/Screenshot%20(50).png" />
                      </image>
                   </ImageView>
+                  <Button layoutX="152.0" layoutY="57.0" mnemonicParsing="false" text="My Account" />
+                  <Button layoutX="152.0" layoutY="115.0" mnemonicParsing="false" text="Calendar" />
                </children>
             </Pane>
          </right>

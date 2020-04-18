@@ -1,8 +1,10 @@
 package api.translators;
 
 /**
- *
- * @author darod
+ * Translator that defines how interface methods should work with ApacheDerby
+ * Utilizes a helper class (PreparedStatementUtil) for constructing prepared statements. 
+ * 
+ * @author Diego Rodriguez Updated: 4/17/2020
  */
 import api.interfaces.DatabaseInterface;
 import java.sql.Connection;

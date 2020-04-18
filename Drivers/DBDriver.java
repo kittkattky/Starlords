@@ -33,7 +33,7 @@ public class DBDriver {
         String uuid = "5ac1d0ac-7999-4951-aee0-3d69d1b10308";
         Map<String, String> userInformation = new HashMap<>();
         
-        System.out.println(adapter.verifyLoginCredentials("test1@test.com","password"));
+        //System.out.println(adapter.queryForAttribute(, "zipcode"));
         //System.out.println(adapter.updateInformation(uuid, "city", "Charlotte"));
         //System.out.println(adapter.queryForAttribute(uuid, "city"));
 

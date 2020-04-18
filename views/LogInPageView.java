@@ -1,12 +1,12 @@
 package views;
 
 /**
- * This class is the log in page which can be used to access the home page and
- * sign up page
+ * This view handles all events that occur on the Login page scene
+ * All request to the database are routed through the Login_SignUpController
  *
- * @author Kahlie Last Updated: 2/25/2020
+ * @author Kahlie/Diego Rodriguez Updated: 4/17/2020
  */
-import controllers.Login_SignUpController;
+import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LogInPageView implements Initializable {
@@ -45,14 +44,13 @@ public class LogInPageView implements Initializable {
     @FXML
     private Button signUp;
     
-    protected String uuid;
 
-    protected Login_SignUpController loginController = new Login_SignUpController();
+    protected AccountController loginController = new AccountController();
 
     /**
-     * If the username and password match go to the home page
-     *
-     * @param event
+     * This method will switch scenes depending on the result of the logIn() method.
+     * Also this method passes the UUID corresponding with a successful login attempt to the view of the next scene.
+     * @param _event 
      */
     @FXML
     public void handleSignInButtonAction(ActionEvent _event) {
@@ -62,10 +60,10 @@ public class LogInPageView implements Initializable {
                 try {
 
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/HomePage.fxml"));
+                    //loader must be loaded before trying to use the view from the next scene.
                     Parent parent = loader.load();
                     //create referece to view being used in the next scene and set the uuid from that view equal to the one that matches the users login.
                     HomePageView view = loader.getController();
-                    System.out.println(this.loginController.getUUID());
                     view.setUUID(this.loginController.getUUID());
                     
                     Stage stage = (Stage)((Node) _event.getSource()).getScene().getWindow();
@@ -88,15 +86,15 @@ public class LogInPageView implements Initializable {
     /**
      * If the user clicks the signUp button go the the sign up page
      *
-     * @param event
+     * @param _event
      * @throws IOException
      */
     @FXML
-    public void handleSignUpButtonAction(ActionEvent event) throws IOException {
+    public void handleSignUpButtonAction(ActionEvent _event) throws IOException {
 
-        if (event.getSource() == signUp) {
+        if (_event.getSource() == signUp) {
 
-            Node node = (Node) event.getSource();
+            Node node = (Node) _event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SignUpPage.fxml")));
             stage.setScene(scene);
@@ -122,14 +120,14 @@ public class LogInPageView implements Initializable {
      * @return
      */
     private boolean logIn() {
-        String email = this.email.getText();
-        String password = this.password.getText();
+        String userEmail = this.email.getText();
+        String userPassword = this.password.getText();
         
-        if (email.isEmpty() || email.isEmpty()) {
+        if (userEmail.isEmpty() || userPassword.isEmpty()) {
             labelError.setText("Please enter email/password");
             return false;
         } else {
-            this.loginController.setUUID(this.loginController.sendVerificationRequest(email, password));
+            this.loginController.setUUID(this.loginController.sendVerificationRequest(userEmail, userPassword));
             if (this.loginController.getUUID() == null) {
                 return false;
             } else {
@@ -138,17 +136,4 @@ public class LogInPageView implements Initializable {
         }
 
     }
-
-    /**
-     * Label color and text
-     *
-     * @param color
-     * @param text
-     */
-    private void setLabel(Color color, String text) {
-        labelError.setTextFill(color);
-        labelError.setText(text);
-        System.out.println(text);
-    }
-
 }

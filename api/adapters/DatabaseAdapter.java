@@ -1,8 +1,8 @@
 package api.adapters;
 
 /**
- *
- * @author darod
+ * This adapter receives requests from controllers and fulfills them by communicating with the correct translator
+ * @author Diego Rodriguez Updated: 4/18/2020
  */
 
 import api.interfaces.DatabaseInterface;

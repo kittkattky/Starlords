@@ -6,7 +6,7 @@ package views;
  * @author Kahlie Last Updated: 2/25/2020
  */
 import api.adapters.DatabaseAdapter;
-import controllers.Login_SignUpController;
+import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -73,7 +73,7 @@ public class SignUpPageView implements Initializable {
             "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
             "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
 
-    protected Login_SignUpController signUpController = new Login_SignUpController();
+    protected AccountController signUpController = new AccountController();
     boolean signUpSuccessful = false;
 
     /**
