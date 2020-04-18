@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -7,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.HomePageView">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1333.0" styleClass="pane" stylesheets="@../views/css.css">
          <left>
@@ -25,7 +29,7 @@
          <center>
             <Pane prefHeight="800.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="restaurantPic" fitHeight="539.0" fitWidth="383.0" layoutX="18.0" layoutY="188.0" pickOnBounds="true">
+                  <ImageView fx:id="restaurantPic" fitHeight="539.0" fitWidth="383.0" layoutX="18.0" layoutY="188.0" onMouseClicked="#handleButtonAction" pickOnBounds="true">
                      <image>
                         <Image url="@../gui artifacts/Screenshot%20(47).png" />
                      </image>

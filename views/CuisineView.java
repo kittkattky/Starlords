@@ -84,13 +84,13 @@ public class CuisineView implements Initializable {
      */
     @FXML
     public void selectCuisine(ActionEvent _event) throws IOException, Exception {
-        if (!isSearched) {
-            errorLabel.setText("Please search for cuisines near you");
+        if (!this.isSearched) {
+            this.errorLabel.setText("Please search for cuisines near you");
         } else {
-            if (!isSelected) {
-                errorLabel.setText("Please select a cuisine");
+            if (!this.isSelected) {
+                this.errorLabel.setText("Please select a cuisine");
             } else {
-                String cuisineSelected = listViewCuisineList.getSelectionModel().getSelectedItem();
+                String cuisineSelected = this.listViewCuisineList.getSelectionModel().getSelectedItem();
                 this.restaurantController.setCuisineID((Integer) this.restaurantController.getCuisineIDMap().get(cuisineSelected));
 
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader ().getResource("fxml/RestaurantList.fxml"));
@@ -125,10 +125,10 @@ public class CuisineView implements Initializable {
      * this method sets isSelected to true.
      */
     public void isSelected() {
-        if (!isSearched) {
-            errorLabel.setText("Please search for cuisines near you");
+        if (!this.isSearched) {
+            this.errorLabel.setText("Please search for cuisines near you");
         }
-        if (isSearched) {
+        if (this.isSearched) {
             this.isSelected = true;
         }
     }

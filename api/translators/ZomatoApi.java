@@ -57,8 +57,8 @@ public class ZomatoApi implements RestaurantApiInterface {
             //I am going to store the data I want within maps.
             //Cuisine map will store cuisine strings in an ascending order starting with 0.
             //idMap will store cuisine IDs(ints) based on the acutal string name of its corresponding cuisine.
-            Map<Integer, String> cuisineMap = new HashMap<Integer, String>();
-            Map<String, Integer> idMap = new HashMap<String, Integer>();
+            Map<Integer, String> cuisineMap = new HashMap<>();
+            Map<String, Integer> idMap = new HashMap<>();
 
             //JSONObjects needed for parsing data.
             JSONObject util;
@@ -101,7 +101,7 @@ public class ZomatoApi implements RestaurantApiInterface {
         //call helper method
         StringBuffer content = connectToAPI(urlString);
 
-        ArrayList<Map> mapsOfRestaurantInfo = new ArrayList<Map>();
+        ArrayList<Map> mapsOfRestaurantInfo = new ArrayList<>();
 
         try {
             //create JSONObject with the information from api server
@@ -113,10 +113,10 @@ public class ZomatoApi implements RestaurantApiInterface {
             JSONObject util;
             JSONObject util2;
 
-            Map<Integer, String> nameMap = new HashMap<Integer, String>();
-            Map<String, String> urlMap = new HashMap<String, String>();
-            Map<String, String> addressMap = new HashMap<String, String>();
-            Map<String, String> ratingMap = new HashMap<String, String>();
+            Map<Integer, String> nameMap = new HashMap<>();
+            Map<String, String> urlMap = new HashMap<>();
+            Map<String, String> addressMap = new HashMap<>();
+            Map<String, String> ratingMap = new HashMap<>();
 
             for (int i = 0; i < jsonarr.length(); i++) {
                 util = (JSONObject) jsonarr.get(i);
