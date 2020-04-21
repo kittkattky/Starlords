@@ -62,7 +62,7 @@ public class CuisineView implements Initializable {
     }
 
     /**
-     * This method is called when the user clicks the "Search for Cuisines"
+     * This method is called when the user clicks the "Search for Cuisines
      * button. A call to the api is made through the restaurant model, and the
      * information from the api is returned as a map. Each element from the map
      * is cycled through and added to the listView.

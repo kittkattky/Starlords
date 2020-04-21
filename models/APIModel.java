@@ -58,7 +58,7 @@ public class APIModel {
         try {
             //set up connection parameters.
             this.configureConnectionProperties();
-
+            
             //parse API results from the connection input stream.
             this.parseAPIResults(_attributes);
 
@@ -104,6 +104,7 @@ public class APIModel {
                 this.setAPIParseObject();
                 this.setAPIResultString(this.getAPIParseObject().getString(attribute));
             }
+            this.formatAPIResultString();
         }
     }
 
@@ -112,6 +113,11 @@ public class APIModel {
      */
     public void closeConnection () {
         this.getConnectionObject().disconnect();
+    }
+    
+    public LinkedHashMap<String, Object> toMap() throws JSONException {  
+        this.setAPIParseObject();
+        return this.toMap(this.getAPIParseObject());
     }
 
     /**
@@ -188,7 +194,7 @@ public class APIModel {
      * getAPIResultString: method that returns the internal API result.
      * @return String
      */
-    public String getAPIResultString () {
+    public String getAPIResultString () {            
         return this.apiReturn;
     }
 
@@ -272,6 +278,7 @@ public class APIModel {
      * @throws IOException
      */
     public void setConnectionObject () throws IOException {
+        System.out.println (this.getURLObject().toString ());
         this.connect = (HttpURLConnection) this.getURLObject().openConnection();
     }
 

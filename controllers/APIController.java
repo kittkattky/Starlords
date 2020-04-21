@@ -3,6 +3,7 @@ package controllers;
 import models.APIModel;
 import java.util.LinkedHashMap;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * APIController class for facilitating interactions between the computer and the APIModel class.
@@ -83,9 +84,14 @@ public class APIController {
     public String getAPIResultString (String _requestMethod, String _attributes) {
 
         //submit request if result string is null.
-        if (this.model.getAPIResultString() == null)
+        if (this.model.getAPIResultString() == null) {
             this.submitAPIRequest(_requestMethod, _attributes);
+        }
 
+        return this.model.getAPIResultString();
+    }
+    
+    public String getAPIResultString () {
         return this.model.getAPIResultString();
     }
 
@@ -105,5 +111,9 @@ public class APIController {
      */
     public void setAPIConfigParameter (String _key, String _val) {
         this.model.setAPIConfigParameter(_key, _val);
+    }
+
+    public JSONObject getAPIParseObject() {
+        return this.model.getAPIParseObject();
     }
 }
