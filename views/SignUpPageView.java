@@ -5,14 +5,9 @@ package views;
  *
  * @author Kahlie Last Updated: 2/25/2020
  */
-import api.adapters.DatabaseAdapter;
 import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -29,9 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import utilities.DBConnectionUtil.ConnectionUtil;
 
 public class SignUpPageView implements Initializable {
 
