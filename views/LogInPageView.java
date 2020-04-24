@@ -62,10 +62,10 @@ public class LogInPageView implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/HomePage.fxml"));
                     //loader must be loaded before trying to use the view from the next scene.
                     Parent parent = loader.load();
-                    //create referece to view being used in the next scene and set the uuid from that view equal to the one that matches the users login.
+                    //create referece to view being used in the next scene and set the uuid within that view's controller equal to the one that matches the users login.
                     HomePageView view = loader.getController();
-                    view.setUUID(this.loginController.getUUID());
-                    
+                    view.handler.uuidController.setUUID(this.loginController.uuidController.getUUID());
+                    view.setHomePageText("Welcome " + this.loginController.sendQueryRequest("firstname"));
                     Stage stage = (Stage)((Node) _event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(parent);
                     
@@ -127,8 +127,8 @@ public class LogInPageView implements Initializable {
             labelError.setText("Please enter email/password");
             return false;
         } else {
-            this.loginController.setUUID(this.loginController.sendVerificationRequest(userEmail, userPassword));
-            if (this.loginController.getUUID() == null) {
+            this.loginController.uuidController.setUUID(this.loginController.sendVerificationRequest(userEmail, userPassword));
+            if (this.loginController.uuidController.getUUID() == null) {
                 return false;
             } else {
                 return true;

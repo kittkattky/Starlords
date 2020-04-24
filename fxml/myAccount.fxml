@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.myAccountView">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95b3cf" height="122.0" layoutY="-6.0" opacity="0.48" stroke="BLACK" strokeType="INSIDE" width="1300.0" />
+      <Label alignment="CENTER" layoutX="370.0" layoutY="-2.0" prefHeight="115.0" prefWidth="561.0" text="Account Info" textFill="#e4e5e5">
+         <font>
+            <Font name="Corbel Bold" size="36.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
+      <Label alignment="CENTER" layoutY="1.0" prefHeight="115.0" prefWidth="238.0" text="Home" textFill="#e4e5e5">
+         <font>
+            <Font name="Corbel Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox layoutX="154.0" layoutY="170.0" prefHeight="564.0" prefWidth="369.0">
+         <children>
+            <VBox prefHeight="680.0" prefWidth="303.0">
+               <children>
+                  <Label prefHeight="59.0" prefWidth="266.0" text="First Name" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="186.0" text="Last Name" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="69.0" prefHeight="81.0" prefWidth="186.0" text="Street" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="128.0" prefHeight="77.0" prefWidth="186.0" text="City" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="187.0" prefHeight="77.0" prefWidth="186.0" text="State" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="246.0" prefHeight="76.0" prefWidth="186.0" text="Zip Code" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="305.0" prefHeight="81.0" prefWidth="186.0" text="Email" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="303.0">
+               <children>
+                  <Label prefHeight="59.0" prefWidth="266.0" text="First Name" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="186.0" text="Last Name" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="69.0" prefHeight="81.0" prefWidth="186.0" text="Street" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="128.0" prefHeight="77.0" prefWidth="186.0" text="City" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="187.0" prefHeight="77.0" prefWidth="186.0" text="State" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="246.0" prefHeight="76.0" prefWidth="186.0" text="Zip Code" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="305.0" prefHeight="81.0" prefWidth="186.0" text="Email" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox layoutX="678.0" layoutY="479.0" prefHeight="211.0" prefWidth="469.0">
+         <children>
+            <Label prefHeight="59.0" prefWidth="426.0" text="Enter Password To Delete Account" textFill="#e4e5e5">
+               <font>
+                  <Font name="Corbel" size="24.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="31.0" prefWidth="469.0" />
+            <Label prefHeight="25.0" prefWidth="469.0" />
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="500.0" text="CONFIRM DELETE" />
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="490.0" text="ERROR GOES HERE" textFill="#f50303" />
+         </children>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutX="1062.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
+      <Label alignment="CENTER" layoutX="1062.0" layoutY="1.0" prefHeight="115.0" prefWidth="238.0" text="Log Out" textFill="#e4e5e5">
+         <font>
+            <Font name="Corbel Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox layoutX="678.0" layoutY="170.0" prefHeight="301.0" prefWidth="385.0">
+         <children>
+            <VBox prefHeight="289.0" prefWidth="271.0">
+               <children>
+                  <Label prefHeight="59.0" prefWidth="266.0" text="Update Password" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="266.0" text="Enter Current Password" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="41.0" prefWidth="270.0" />
+                  <Label layoutX="10.0" layoutY="69.0" prefHeight="29.0" prefWidth="266.0" text="Enter New Password" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="10.0" layoutY="98.0" prefHeight="41.0" prefWidth="270.0" />
+                  <Label layoutX="10.0" layoutY="139.0" prefHeight="13.0" prefWidth="266.0" textFill="#e4e5e5">
+                     <font>
+                        <Font name="Corbel" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="500.0" text="CONFIRM UPDATE" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

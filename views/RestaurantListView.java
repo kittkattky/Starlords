@@ -99,7 +99,7 @@ public class RestaurantListView implements Initializable {
         //set UUID for restaurant controller in next view and preload cuisine list
         CuisineView view = loader.getController();
        
-        view.restaurantController.setUUID(this.restaurantController.getUUID());
+        view.restaurantController.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
         view.addCuisinesToList();
         view.isSearched = true;
 
