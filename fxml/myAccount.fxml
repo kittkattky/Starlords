@@ -23,7 +23,7 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
-      <Label alignment="CENTER" layoutY="1.0" prefHeight="115.0" prefWidth="238.0" text="Home" textFill="#e4e5e5">
+      <Label fx:id="homePageLabel" alignment="CENTER" layoutY="1.0" onMouseClicked="#backToHomepage" prefHeight="115.0" prefWidth="238.0" text="Home" textFill="#e4e5e5">
          <font>
             <Font name="Corbel Bold" size="36.0" />
          </font>
@@ -71,37 +71,37 @@
             </VBox>
             <VBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="303.0">
                <children>
-                  <Label prefHeight="59.0" prefWidth="266.0" text="First Name" textFill="#e4e5e5">
+                  <Label fx:id="fNameLabel" prefHeight="59.0" prefWidth="266.0" text="First Name" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="186.0" text="Last Name" textFill="#e4e5e5">
+                  <Label fx:id="LNameLabel" layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="186.0" text="Last Name" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="69.0" prefHeight="81.0" prefWidth="186.0" text="Street" textFill="#e4e5e5">
+                  <Label fx:id="streetLabel" layoutX="10.0" layoutY="69.0" prefHeight="81.0" prefWidth="186.0" text="Street" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="128.0" prefHeight="77.0" prefWidth="186.0" text="City" textFill="#e4e5e5">
+                  <Label fx:id="cityLabel" layoutX="10.0" layoutY="128.0" prefHeight="77.0" prefWidth="186.0" text="City" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="187.0" prefHeight="77.0" prefWidth="186.0" text="State" textFill="#e4e5e5">
+                  <Label fx:id="stateLabel" layoutX="10.0" layoutY="187.0" prefHeight="77.0" prefWidth="186.0" text="State" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="246.0" prefHeight="76.0" prefWidth="186.0" text="Zip Code" textFill="#e4e5e5">
+                  <Label fx:id="zipCodeLabel" layoutX="10.0" layoutY="246.0" prefHeight="76.0" prefWidth="186.0" text="Zip Code" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="305.0" prefHeight="81.0" prefWidth="186.0" text="Email" textFill="#e4e5e5">
+                  <Label fx:id="emailLabel" layoutX="10.0" layoutY="305.0" prefHeight="81.0" prefWidth="186.0" text="Email" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="24.0" />
                      </font>
@@ -110,21 +110,28 @@
             </VBox>
          </children>
       </HBox>
-      <VBox layoutX="678.0" layoutY="479.0" prefHeight="211.0" prefWidth="469.0">
+      <VBox layoutX="678.0" layoutY="479.0" prefHeight="287.0" prefWidth="469.0">
          <children>
             <Label prefHeight="59.0" prefWidth="426.0" text="Enter Password To Delete Account" textFill="#e4e5e5">
                <font>
                   <Font name="Corbel" size="24.0" />
                </font>
             </Label>
-            <TextField prefHeight="31.0" prefWidth="469.0" />
+            <PasswordField fx:id="password2" prefHeight="39.0" prefWidth="271.0" />
             <Label prefHeight="25.0" prefWidth="469.0" />
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="500.0" text="CONFIRM DELETE" />
-            <Label alignment="CENTER" prefHeight="35.0" prefWidth="490.0" text="ERROR GOES HERE" textFill="#f50303" />
+            <Button mnemonicParsing="false" onAction="#deleteAccount" prefHeight="39.0" prefWidth="500.0" text="DELETE" />
+            <Label fx:id="deleteLabel" alignment="CENTER" prefHeight="35.0" prefWidth="490.0" textFill="#f5d005" />
+            <HBox prefHeight="49.0" prefWidth="469.0">
+               <children>
+                  <Button fx:id="sureButton" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="39.0" prefWidth="500.0" text="YES I'M SURE!" visible="false" />
+                  <Button fx:id="notSureButton" mnemonicParsing="false" onAction="#notSure" prefHeight="39.0" prefWidth="500.0" text="I'M NOT SURE!" visible="false" />
+               </children>
+            </HBox>
+            <Label fx:id="deleteLabel2" alignment="CENTER" layoutX="10.0" layoutY="172.0" prefHeight="35.0" prefWidth="490.0" textFill="#f5d005" />
          </children>
       </VBox>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutX="1062.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
-      <Label alignment="CENTER" layoutX="1062.0" layoutY="1.0" prefHeight="115.0" prefWidth="238.0" text="Log Out" textFill="#e4e5e5">
+      <Label fx:id="logOutLabel" alignment="CENTER" layoutX="1062.0" layoutY="1.0" onMouseClicked="#logOut" prefHeight="115.0" prefWidth="238.0" text="Log Out" textFill="#e4e5e5">
          <font>
             <Font name="Corbel Bold" size="36.0" />
          </font>
@@ -143,19 +150,20 @@
                         <Font name="Corbel" size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="41.0" prefWidth="270.0" />
+                  <PasswordField fx:id="password" prefHeight="39.0" prefWidth="271.0" />
                   <Label layoutX="10.0" layoutY="69.0" prefHeight="29.0" prefWidth="266.0" text="Enter New Password" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="10.0" layoutY="98.0" prefHeight="41.0" prefWidth="270.0" />
+                  <PasswordField fx:id="newPassword" layoutX="10.0" layoutY="98.0" prefHeight="39.0" prefWidth="271.0" />
                   <Label layoutX="10.0" layoutY="139.0" prefHeight="13.0" prefWidth="266.0" textFill="#e4e5e5">
                      <font>
                         <Font name="Corbel" size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="500.0" text="CONFIRM UPDATE" />
+                  <Button mnemonicParsing="false" onAction="#updatePassword" prefHeight="39.0" prefWidth="500.0" text="CONFIRM UPDATE" />
+                  <Label fx:id="updateErrorLabel" alignment="CENTER" prefHeight="35.0" prefWidth="490.0" textFill="#f5d005" />
                </children>
             </VBox>
          </children>

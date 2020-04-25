@@ -1,4 +1,3 @@
-
 package controllers;
 
 /**
@@ -7,7 +6,7 @@ package controllers;
  * The idea is to make it easy to pass a UUID from class to class using instances of this universal controller.
  * It also reduces redundancies across classes that need a get/set method to handle a UUID.
  * @author Diego Rodriguez
- * 
+ * @date 4/25/20
  */
 public class UUIDController {
     

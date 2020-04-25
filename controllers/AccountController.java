@@ -1,7 +1,7 @@
 package controllers;
 
 /**
- * This controller handles all database requests from the LogInPage and SignUpPage Views.
+ * This controller handles all database requests from the starting pages (login, signup, home, myaccount)
  * Communicates with adapter to fulfill the requests. 
  * @author Diego Rodriguez Updated: 4/18/20
  */
@@ -13,7 +13,6 @@ public class AccountController {
     
     protected DatabaseAdapter dbAdapter = new DatabaseAdapter();
     public UUIDController uuidController = new UUIDController();
-    protected String uuid;
 
     /**
      * Returns true if the the data is able to be inserted into database.
@@ -56,12 +55,12 @@ public class AccountController {
      * Returns attribute value that correspond with the given UUID.
      * If a value returned is null print message and return null
      *
-     * @param _email
-     * @param _password
+     * @param _attribute
      * @return
      */
     public String sendQueryRequest(String _attribute) {
         String attribute = this.dbAdapter.queryForAttribute(this.uuidController.getUUID(), _attribute);
+
         if (attribute != null) {
             return attribute;
         } else {
@@ -70,13 +69,12 @@ public class AccountController {
         }
     }
     
-    //=================  SETTERS ===============
-    public void setUUID(String _uuid) {
-        this.uuid = _uuid;
+    public boolean sendUpdateRequest(String _attribute, String _update) {      
+        return this.dbAdapter.updateInformation(this.uuidController.getUUID(), _attribute, _update);
     }
     
-    //=================  GETTERS  ===============
-    public String getUUID() {
-        return this.uuid;
+    public boolean sendDeleteRequest() {      
+        return this.dbAdapter.deleteAccount(this.uuidController.getUUID());
     }
+    
 }
