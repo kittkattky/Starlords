@@ -12,8 +12,8 @@ import java.util.Map;
 public class RestaurantController {
 
     protected RestaurantModel restaurantModel = new RestaurantModel();
+    public UUIDController uuidController = new UUIDController();
     protected int cuisineID;
-    protected String uuid;
 
     //=================  GETTERS ===============
     
@@ -22,7 +22,7 @@ public class RestaurantController {
     }
     
     public Map getCuisineMap() throws Exception {
-        this.restaurantModel = restaurantModel.loadCuisinesByLocation(this.uuid);
+        this.restaurantModel = restaurantModel.loadCuisinesByLocation(this.uuidController.getUUID());
         return restaurantModel.getCuisineMap();
     }
     
@@ -38,7 +38,7 @@ public class RestaurantController {
      * @return 
      */
     public Map getRestaurantNameMap() throws Exception {
-        this.restaurantModel = restaurantModel.loadRestaurantsByID(this.cuisineID, this.uuid);
+        this.restaurantModel = restaurantModel.loadRestaurantsByID(this.cuisineID, this.uuidController.getUUID());
         return this.restaurantModel.getRestaurantNameMap();
     }
     
@@ -58,15 +58,12 @@ public class RestaurantController {
     }
     
     public String getUUID() {
-        return this.uuid;
+        return this.uuidController.getUUID();
     }
     //=================  SETTERS ===============
     public void setCuisineID(int _cuisineID) {
         this.cuisineID = _cuisineID;
     }
     
-    public void setUUID(String _uuid) {
-        this.uuid = _uuid;
-    }
         
 }

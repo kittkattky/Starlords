@@ -50,7 +50,7 @@
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="signIn" layoutX="260.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="50.0" prefWidth="150.0" styleClass="pane" text="Sign in" textFill="#e5e4e4">
+                  <Button fx:id="signIn" layoutX="260.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="50.0" prefWidth="150.0" styleClass="pane" text="Log in" textFill="#e5e4e4">
                      <stylesheets>
                         <URL value="@../views/css.css" />
                         <URL value="@../fxml/css.css" />
@@ -58,6 +58,11 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
+                  <Label fx:id="logOutLabel" alignment="CENTER" layoutX="128.0" layoutY="697.0" prefHeight="39.0" prefWidth="414.0" textFill="#16dd48">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
                </children></Pane>
          </right>
       </BorderPane>
