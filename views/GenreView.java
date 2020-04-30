@@ -72,6 +72,8 @@ public class GenreView implements Initializable {
             MovieListView movieView = this.switchScenes(_event, "fxml/MovieList.fxml").getController();
             
             movieView.passUUIDToController(this.control.getUUID ());
+            
+            System.out.println (selectedItems);
             movieView.addMoviesToList (selectedItems);
         }
     }

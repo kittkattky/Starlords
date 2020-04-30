@@ -3,7 +3,7 @@ package models;
 /**
  * APIModel class for facilitating communications between the computer and external APIs.
  * Authors: Preston Williamson
- * Last Updated Date: 21-APR-2020
+ * Last Updated Date: 27-FEB-2020
  */
 
 import java.io.BufferedReader;
@@ -16,9 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
@@ -48,30 +46,6 @@ public class APIModel {
 
         this.setAPIResultString(apiRet);
     }
-    
-    
-    /**
-     * convertAPIConfigParameter: a helper method that converts a map into a delimited parameter String.
-     * @param _key: unique key in the map
-     * @param _map: map to be converted
-     * @param _delimiter: delimiter that will separate each instance in the parameter string.
-     */
-    public void convertAPIConfigParameter (String _key, TreeMap <Integer, String> _map, String _delimiter) {
-        String ret = "";
-        
-        //convert map to string, separated by delimiter.
-        for (Object key : _map.keySet())
-            ret = ret.concat(String.valueOf(key) + _delimiter);
-        
-        int delimiterLen = _delimiter.length();
-        int resultLen = ret.length();
-        
-        //remove the trailing delimiter in the string.
-        int removeChar = (delimiterLen < resultLen) ? (resultLen - delimiterLen) : delimiterLen;
-        
-        //set API parameter.
-        this.setAPIConfigParameter(_key, ret.substring(0, removeChar));
-    }    
 
     /**
      * submitAPIRequest - a method that handles parsing from an API POST/GET request.
@@ -96,46 +70,6 @@ public class APIModel {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    /**
-     * configureConnectionProperties: method that handles setting up the connection object model.
-     * @throws MalformedURLException
-     * @throws IOException
-     */
-    public void configureConnectionProperties () throws MalformedURLException, IOException, Exception {
-        String apiKey = this.getUserKey();
-        String reqMethod = this.getRequestMethod();
-        this.setURLObject();
-        this.setConnectionObject();
-
-        //get connection object with pre-configured URL.
-        HttpURLConnection connection = this.getConnectionObject();
-
-        //only set the user key if it is not null.
-        if (apiKey != null)
-            connection.setRequestProperty("user-key", apiKey);
-
-        //set request method.
-        this.setRequestMethod(reqMethod);
-
-        //switch statement dedicated to dictating next steps based on request method.
-        switch (reqMethod.toLowerCase()) {
-            case "post":
-                //enable output.
-                connection.setDoOutput(true);
-
-                //POST results to server.
-                DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
-                wr.writeUTF(this.getAPIConfigParameters());
-                break;
-
-            //no further action defined for "GET" request methods.
-            case "get":
-                break;
-            default:
-                throw new Exception ("[" + reqMethod + "] is not a valid API request method.");
-        }
-    }
 
     /**
      * parseAPIResults: a method that extracts the API result string from connection input stream.
@@ -147,7 +81,6 @@ public class APIModel {
         String ret = "";
         String inputLine;
         HttpURLConnection connection = this.getConnectionObject();
-        System.out.println (connection.getURL().toString());
 
         //verify response code is 200, indicating that request was successful. Otherwise, throw exception.
         if (connection.getResponseCode() != this.getClass().newInstance().API_SUCCESS_CODE)
@@ -345,7 +278,48 @@ public class APIModel {
      * @throws IOException
      */
     public void setConnectionObject () throws IOException {
+        System.out.println (this.getURLObject().toString ());
         this.connect = (HttpURLConnection) this.getURLObject().openConnection();
+    }
+
+    /**
+     * setConnectionProperties: method that handles setting up the connection object model.
+     * @throws MalformedURLException
+     * @throws IOException
+     */
+    public void configureConnectionProperties () throws MalformedURLException, IOException, Exception {
+        String apiKey = this.getUserKey();
+        String reqMethod = this.getRequestMethod();
+        this.setURLObject();
+        this.setConnectionObject();
+
+        //get connection object with pre-configured URL.
+        HttpURLConnection connection = this.getConnectionObject();
+
+        //only set the user key if it is not null.
+        if (apiKey != null)
+            connection.setRequestProperty("user-key", apiKey);
+
+        //set request method.
+        this.setRequestMethod(reqMethod);
+
+        //switch statement dedicated to dictating next steps based on request method.
+        switch (reqMethod.toLowerCase()) {
+            case "post":
+                //enable output.
+                connection.setDoOutput(true);
+
+                //POST results to server.
+                DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
+                wr.writeUTF(this.getAPIConfigParameters());
+                break;
+
+            //no further action defined for "GET" request methods.
+            case "get":
+                break;
+            default:
+                throw new Exception ("[" + reqMethod + "] is not a valid API request method.");
+        }
     }
 
     /**

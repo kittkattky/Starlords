@@ -89,19 +89,6 @@ public class HomePageView implements Initializable {
                 _event.consume();
             }
         });
-        this.moviePic.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent _event) {
-                GenreView view;
-                try {
-                    view = switchScenes(_event, "fxml/GenreList.fxml").getController();
-                    view.passUUIDtoController(getUUID());
-                } catch (IOException ex) {
-                    Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                _event.consume();
-            }
-        });
     }
 
     //=================  SETTERS =============== 

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * APIController class for facilitating interactions between the computer and the APIModel class.
  * Authors: Preston Williamson
- * Last Updated Date: 21-APR-2020
+ * Last Updated Date: 27-FEB-2020
  */
 
 public class APIController {
@@ -33,10 +33,6 @@ public class APIController {
         this.model.setURLString(_url);
     }
 
-    /**
-     * public APIController constructor class. Constructor allows model instantiation with only the APIModel.
-     * @param _model: Base API URL.
-     */    
     public APIController (APIModel _model) {
         this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
     }
@@ -92,13 +88,9 @@ public class APIController {
             this.submitAPIRequest(_requestMethod, _attributes);
         }
 
-        return this.getAPIResultString ();
+        return this.model.getAPIResultString();
     }
-
-    /**
-     * getAPIResultString: a method which returns the internally stored API result string value.
-     * @return String: String representation of API results.
-     */
+    
     public String getAPIResultString () {
         return this.model.getAPIResultString();
     }
@@ -121,10 +113,6 @@ public class APIController {
         this.model.setAPIConfigParameter(_key, _val);
     }
 
-    /**
-     * getAPIParseObject: a method which returns the internally stored API parsing mechanism object reference.
-     * @return JSONObject: JSONObject
-     */
     public JSONObject getAPIParseObject() {
         return this.model.getAPIParseObject();
     }
