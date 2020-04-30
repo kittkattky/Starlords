@@ -12,11 +12,14 @@ import org.json.JSONException;
  *
  * @author Preston.Williamson
  */
-public interface MovieAPIInterface {    
+public interface MovieAPIInterface {
     public void submitRequest ();
-    public String getRawMovieData ();
-    public void setAPIConfigParameter (String _key, String _value);
-    public TreeMap <Integer, TreeMap <String, String>> setMovieCollection(TreeMap<Integer, String> _map);
-    
+    public String getAPIIndicator ();
+    public String getConfigProperty (String _key);;
     public TreeMap <Integer, String> getGenreMap () throws JSONException;
+    
+    public TreeMap <Integer, TreeMap <String, String>> getMovieCollection(TreeMap<Integer, String> _map);
+    
+    public String getAPIResultString ();
+    public void setAPIConfigParameter (String _key, String _value);    
 }

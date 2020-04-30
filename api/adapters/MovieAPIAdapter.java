@@ -23,8 +23,8 @@ public class MovieAPIAdapter implements MovieAPIInterface {
     }
 
     @Override
-    public String getRawMovieData() {
-        return this.api.getRawMovieData();
+    public String getAPIResultString() {
+        return this.api.getAPIResultString();
     }
     
     @Override
@@ -33,12 +33,22 @@ public class MovieAPIAdapter implements MovieAPIInterface {
     }
 
     @Override
-    public TreeMap <Integer, TreeMap <String, String>> setMovieCollection(TreeMap<Integer, String> _map) {
-        return this.api.setMovieCollection(_map);
+    public TreeMap <Integer, TreeMap <String, String>> getMovieCollection(TreeMap<Integer, String> _map) {
+        return this.api.getMovieCollection(_map);
     }
 
     @Override
     public void setAPIConfigParameter(String _key, String _value) {
         this.api.setAPIConfigParameter(_key, _value);
+    }
+
+    @Override
+    public String getAPIIndicator() {
+        return this.api.getAPIIndicator();
+    }
+
+    @Override
+    public String getConfigProperty(String _key) {
+        return this.api.getConfigProperty(_key);
     }
 }

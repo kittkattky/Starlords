@@ -49,7 +49,7 @@ public class MovieModel {
     }
     
     public String getAPIResultString () {
-        return this.api.getRawMovieData();
+        return this.api.getAPIResultString();
     }
     
     public void submitRequest () {
@@ -65,6 +65,6 @@ public class MovieModel {
     }
     
     public TreeMap <Integer, TreeMap <String, String>> setMovieCollection (TreeMap <Integer, String> _map) {
-        return this.api.setMovieCollection (_map);
+        return this.api.getMovieCollection (_map);
     }
 }
