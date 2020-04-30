@@ -4,7 +4,7 @@ package views;
  * This view handles all events that occur on the Login page scene
  * All request to the database are routed through the Login_SignUpController
  *
- * @author Kahlie/Diego Rodriguez Updated: 4/17/2020
+ * @author Kahlie/Diego Rodriguez Updated: 4/24/2020
  */
 import controllers.AccountController;
 import java.io.IOException;
@@ -24,23 +24,25 @@ import javafx.stage.Stage;
 
 public class LogInPageView implements Initializable {
 
-    //A label that appears if an error occurs
+ 
     @FXML
     private Label labelError;
+    
+    @FXML
+    private Label logOutLabel;
 
-    //Username/email text field
     @FXML
     private TextField email;
 
-    //Password text field
+
     @FXML
     private TextField password;
 
-    //Sign in button
+
     @FXML
     private Button signIn;
 
-    //Sign up button
+
     @FXML
     private Button signUp;
     
@@ -62,10 +64,11 @@ public class LogInPageView implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/HomePage.fxml"));
                     //loader must be loaded before trying to use the view from the next scene.
                     Parent parent = loader.load();
-                    //create referece to view being used in the next scene and set the uuid from that view equal to the one that matches the users login.
+                    //create referece to view being used in the next scene and set the uuid within that view's controller equal to the one that matches the users login.
                     HomePageView view = loader.getController();
-                    view.setUUID(this.loginController.getUUID());
-                    
+                    view.handler.uuidController.setUUID(this.loginController.uuidController.getUUID());
+                    String firstName = ((this.loginController.sendQueryRequest("firstname") == null) ? "" : this.loginController.sendQueryRequest("firstname"));
+                    view.setHomePageText("Welcome " + firstName);
                     Stage stage = (Stage)((Node) _event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(parent);
                     
@@ -122,18 +125,22 @@ public class LogInPageView implements Initializable {
     private boolean logIn() {
         String userEmail = this.email.getText();
         String userPassword = this.password.getText();
-        
+        this.logOutLabel.setText("");
         if (userEmail.isEmpty() || userPassword.isEmpty()) {
             labelError.setText("Please enter email/password");
             return false;
         } else {
-            this.loginController.setUUID(this.loginController.sendVerificationRequest(userEmail, userPassword));
-            if (this.loginController.getUUID() == null) {
+            this.loginController.uuidController.setUUID(this.loginController.sendVerificationRequest(userEmail, userPassword));
+            if (this.loginController.uuidController.getUUID() == null) {
                 return false;
             } else {
                 return true;
             }
         }
 
+    }
+    
+    public void setLogOutLabel(String _message) {
+        this.logOutLabel.setText(_message);
     }
 }

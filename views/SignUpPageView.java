@@ -1,18 +1,13 @@
 package views;
 
 /**
- * This class is the sign up page
+ * View for handling all events on sign up page
  *
- * @author Kahlie Last Updated: 2/25/2020
+ * @author Kahlie/Diego Last Updated: 4/25/2020 by Diego
  */
-import api.adapters.DatabaseAdapter;
 import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -21,17 +16,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import utilities.DBConnectionUtil.ConnectionUtil;
+import utilities.Homepage.EventHandlers;
 
 public class SignUpPageView implements Initializable {
 
@@ -68,34 +58,32 @@ public class SignUpPageView implements Initializable {
     @FXML
     protected Label errorLabel;
 
-    ObservableList<String> list = FXCollections.observableArrayList("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii",
+    private final ObservableList<String> STATELIST = FXCollections.observableArrayList("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii",
             "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska",
             "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
             "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
 
     protected AccountController signUpController = new AccountController();
+    //EventHandlers has transition method for moving from one scene to the next.
+    protected EventHandlers handler = new EventHandlers();
     boolean signUpSuccessful = false;
 
     /**
-     * When button is clicked, check if sign up was successful, if yes then return to login page scene.
-     * @param event
+     * When button is clicked, check if sign up was successful, if yes then
+     * return to login page scene.
+     *
+     * @param _event
      * @throws IOException
      */
     @FXML
-    public void handleSignUpButtonAction(ActionEvent event) throws IOException {
+    public void handleSignUpButtonAction(ActionEvent _event) throws IOException {
 
-        if (event.getSource() == this.signUpBtn) {
+        if (_event.getSource() == this.signUpBtn) {
             //send crendentials to DB and store result in signUpSuccessful
             this.signUpSuccessful = sendCredentialsToController();
             if (this.signUpSuccessful) {
                 try {
-
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogInPage.fxml")));
-                    stage.setScene(scene);
-                    stage.show();
-
+                    this.handler.switchScenes(_event, "fxml/LogInPage.fxml");
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());
                 }
@@ -105,22 +93,17 @@ public class SignUpPageView implements Initializable {
 
     /**
      * Returns to login page scene when button is clicked.
-     * @param event
-     * @throws IOException 
+     *
+     * @param _event
+     * @throws IOException
      */
     @FXML
-    public void handleBackButtonAction(ActionEvent event) throws IOException {
+    public void handleBackButtonAction(ActionEvent _event) throws IOException {
 
-        if (event.getSource() == this.backBtn) {
+        if (_event.getSource() == this.backBtn) {
 
             try {
-
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogInPage.fxml")));
-                stage.setScene(scene);
-                stage.show();
-
+                this.handler.switchScenes(_event, "fxml/LogInPage.fxml");
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
@@ -130,18 +113,20 @@ public class SignUpPageView implements Initializable {
 
     /**
      * Initializes the scene elements associated with this view class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        combobox.setItems(list);
+        this.combobox.setItems(STATELIST);
     }
 
     /**
-     * Checks if credentials are valid using helper method.
-     * If valid, then put credentials into map and send to controller.
-     * Returns true if successful, and false if not.
+     * Checks if credentials are valid using helper method. If valid, then put
+     * credentials into map and send to controller. Returns true if successful,
+     * and false if not.
+     *
      * @return
      */
     private boolean sendCredentialsToController() {
