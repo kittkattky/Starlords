@@ -1,7 +1,7 @@
 package utilities.DBConnectionUtil;
 
 /**
- *
+ * Helper class for creating prepared statements.
  * @author Diego Rodriguez
  */
 
@@ -71,6 +71,12 @@ public class PreparedStatementUtil {
         return this.statementToReturn;
     }
     
+    /**
+     * Creates prepared statement for performing a query to check if email exists.
+     * @param _email
+     * @param _con
+     * @return 
+     */
     public PreparedStatement statementToCheckEmail(String _email, Connection _con) {
         String selectStatement = "SELECT uuid FROM users WHERE email = ?";
         try {
@@ -87,6 +93,7 @@ public class PreparedStatementUtil {
     /**
      * Returns a prepared statement that queries for any attribute in the database based on UUID.
      * Checks to make sure passed attribute is valid using helper method.
+     * Also note, SQL does not allow prepared statements to use ? after select clause.
      * @param _uuid
      * @param _attribute
      * @param _con

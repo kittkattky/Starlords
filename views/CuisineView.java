@@ -6,6 +6,7 @@ package views;
  * @author Diego Rodriguez Last Updated: 4/4/2020
  */
 import controllers.RestaurantController;
+import controllers.UUIDController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,11 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.Map;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -28,7 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.stage.Stage;
+import utilities.Homepage.EventHandlers;
 
 public class CuisineView implements Initializable {
 
@@ -40,12 +37,13 @@ public class CuisineView implements Initializable {
 
     @FXML
     protected ListView<String> listViewCuisineList;
-    
 
     protected boolean isSearched = false;
     protected boolean isSelected = false;
-    protected RestaurantController restaurantController = new RestaurantController();
+    public RestaurantController restaurantController = new RestaurantController();
+    public UUIDController uuidController = new UUIDController();
     protected RestaurantListView instanceToSwitchScene = new RestaurantListView();
+    protected EventHandlers handler = new EventHandlers();
 
     protected Map cuisineMap;
     protected Map cuisineIDMap;
@@ -96,54 +94,36 @@ public class CuisineView implements Initializable {
                 String cuisineSelected = this.listViewCuisineList.getSelectionModel().getSelectedItem();
                 this.restaurantController.setCuisineID((Integer) this.restaurantController.getCuisineIDMap().get(cuisineSelected));
 
-                
                 /**
-                 * These next lines are pre loading the restaurant list onto
-                 * the next scene. We can create an instance of the view that
+                 * These next lines are pre loading the restaurant list onto the
+                 * next scene. We can create an instance of the view that
                  * corresponds with the scene we are switching to by using the
-                 * loader. From there we can alter items on the next scene before
-                 * its shown by calling methods from the view instance. This
-                 * allows us to use information from this scene to set the next
-                 * scene.
+                 * loader. From there we can alter items on the next scene
+                 * before its shown by calling methods from the view instance.
+                 * This allows us to use information from this scene to set the
+                 * next scene.
                  */
-                RestaurantListView view = switchScenes(_event, "fxml/RestaurantList.fxml").getController();
+                RestaurantListView view = this.handler.switchScenes(_event, "fxml/RestaurantList.fxml").getController();
                 //Set the UUID in the instance of the restaurant controller created in the RestaurantListView
-                view.restaurantController.setUUID(this.restaurantController.getUUID());
+                view.restaurantController.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
                 view.addRestaurantsToList(this.restaurantController.getCuisineID());
-                view.setCuisineLabel(cuisineSelected);     
+                view.setCuisineLabel(cuisineSelected);
             }
         }
     }
-    
-    public void homeButton(ActionEvent _event) throws IOException {
-        switchScenes(_event, "fxml/HomePage.fxml");
-    }
-    
+
     /**
-     * Helper method for switching scenes based on an ActionEvent
+     * Switch back to home page when button is pressed. 
      * @param _event
-     * @param fxml
-     * @return
      * @throws IOException 
      */
-    public FXMLLoader switchScenes(ActionEvent _event, String fxml) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxml));
-        //Create parent object based off of loader that knows which fxml file to create a scene of.
-        Parent parentUsingFXML = loader.load();
- 
-        //create a refernce to the stage that the event is coming from.
-        Stage referenceStage = (Stage) ((Node) _event.getSource()).getScene().getWindow();
+    public void homeButton(ActionEvent _event) throws IOException {
+        HomePageView view = this.handler.switchScenes(_event, "fxml/HomePage.fxml").getController();
+        view.handler.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
+        view.setHomePageText("Select an option");
         
-        //create scene using parent object
-        Scene sceneToSwitchTo = new Scene(parentUsingFXML);
-        
-        //set the scene onto our referenced stage and show it.
-        referenceStage.setScene(sceneToSwitchTo);
-        referenceStage.show();
-        return loader;
-
     }
+
 
     /**
      * When an area of list view is clicked, meaning the user selects a cuisine,
@@ -171,10 +151,6 @@ public class CuisineView implements Initializable {
         BackgroundFill fillBackground = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
         this.anchorPane.setBackground(new Background(fillBackground));
 
-    }
-
-    public void passUUIDtoController(String _uuid) {
-        this.restaurantController.setUUID(_uuid);
     }
 
 }
