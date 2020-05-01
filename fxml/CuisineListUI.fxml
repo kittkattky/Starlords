@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CuisineView">
+    <children>
+        <Button fx:id="button" layoutX="171.0" layoutY="377.0" onAction="#handleSearchButtonAction" text="Search for cuisines near me" />
+      <Button fx:id="button1" layoutX="182.0" layoutY="437.0" onAction="#selectCuisine" text="Confirm Cuisine Choice" />
+      <VBox alignment="TOP_CENTER" layoutX="101.0" layoutY="77.0" prefHeight="300.0" prefWidth="300.0">
+         <children>
+            <Label fx:id="labelCuisinesNearYou" text="Cuisines Near You" textFill="#e5e4e4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewCuisineList" fixedCellSize="24.0" onMouseClicked="#isSelected" prefHeight="250.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+      <HBox layoutX="124.0" layoutY="471.0" prefHeight="26.0" prefWidth="255.0">
+         <children>
+            <Label fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="266.0" textFill="#00ff47" />
+         </children>
+      </HBox>
+      <Button layoutX="226.0" layoutY="524.0" onAction="#homeButton" text="Home" />
+    </children>
+</AnchorPane>
