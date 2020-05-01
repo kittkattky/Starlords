@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class PreparedStatementUtil {
 
-    protected PreparedStatement statementToReturn = null;
+    PreparedStatement statementToReturn = null;
 
     /**
      * Creates a prepared statement for inserting a new tuple with 9 attributes

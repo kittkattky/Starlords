@@ -32,58 +32,58 @@ import utilities.Homepage.EventHandlers;
 public class myAccountView implements Initializable {
 
     @FXML
-    protected AnchorPane anchorPane;
+    AnchorPane anchorPane;
 
     @FXML
-    protected Label fNameLabel;
+    Label fNameLabel;
 
     @FXML
-    protected Label LNameLabel;
+    Label LNameLabel;
 
     @FXML
-    protected Label streetLabel;
+    Label streetLabel;
 
     @FXML
-    protected Label cityLabel;
+    Label cityLabel;
 
     @FXML
-    protected Label stateLabel;
+    Label stateLabel;
 
     @FXML
-    protected Label zipCodeLabel;
+    Label zipCodeLabel;
 
     @FXML
-    protected Label emailLabel;
+    Label emailLabel;
 
     @FXML
-    protected Label logOutLabel;
+    Label logOutLabel;
 
     @FXML
-    protected Label homePageLabel;
+    Label homePageLabel;
 
     @FXML
-    protected Label updateErrorLabel;
+    Label updateErrorLabel;
 
     @FXML
-    protected Label deleteLabel;
+    Label deleteLabel;
     
     @FXML
-    protected Label deleteLabel2;
+    Label deleteLabel2;
 
     @FXML
-    protected PasswordField password;
+    PasswordField password;
 
     @FXML
-    protected PasswordField password2;
+    PasswordField password2;
 
     @FXML
-    protected PasswordField newPassword;
+    PasswordField newPassword;
     
     @FXML
-    protected Button sureButton;
+    Button sureButton;
     
     @FXML
-    protected Button notSureButton;
+    Button notSureButton;
 
     private Boolean areYouSure = false;
     protected EventHandlers handler = new EventHandlers();

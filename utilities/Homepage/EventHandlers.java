@@ -11,6 +11,7 @@ package utilities.Homepage;
  */
 
 import controllers.AccountController;
+import controllers.EventsController;
 import controllers.UUIDController;
 import java.io.IOException;
 import java.util.HashMap;
@@ -44,13 +45,13 @@ public class EventHandlers {
      * Helper method for switching scenes
      *
      * @param _event
-     * @param _fxml
+     * @param fxml
      * @return
      * @throws IOException
      */
-    public FXMLLoader switchScenes(Event _event, String _fxml) throws IOException {
+    public FXMLLoader switchScenes(Event _event, String fxml) throws IOException {
 
-        this.loader = new FXMLLoader(getClass().getClassLoader().getResource(_fxml));
+        this.loader = new FXMLLoader(getClass().getClassLoader().getResource(fxml));
         this.parent = loader.load();
         this.sceneToSwitchTo = new Scene(this.parent);
         this.referenceStage = (Stage) ((Node) _event.getSource()).getScene().getWindow();
@@ -96,7 +97,45 @@ public class EventHandlers {
         };
         return handler;
     }
+    
+        public EventHandler<MouseEvent> createEventsEventHandler() {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent _event) {
+                EventsView view;
+                try {
+                    view = switchScenes(_event, "fxml/EventsMainView.fxml").getController();
+                    System.out.println("passing this UUID in eventEventhandler: " + getUUID());
+                    view.eventsController.uuidController.setUUID(getUUID());
+                } catch (IOException ex) {
+                    Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+            }
+        };
+        return handler;
+    }
+
+    public EventHandler<MouseEvent> changeToDarkRectangle(Rectangle _rectangle) {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent _event) {
+
+                _rectangle.setFill(Color.valueOf("6b7497"));
+            }
+        };
+        return handler;
+    }
+
+    public EventHandler<MouseEvent> changeToLightRectangle(Rectangle _rectangle) {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent _event) {
+                _rectangle.setFill(Color.valueOf("95a1cf"));
+            }
+        };
+        return handler;
+    }
 
 
     //================= GETTERS =============== 
@@ -115,6 +154,12 @@ public class EventHandlers {
         String email = _view.myAccountController.sendQueryRequest("email");
 
         _view.setUserInfoLabels(firstName, lastName, street, city, state, zipCode, email);
+    }
+    
+    public void setZipCode(EventsController events){
+      // String zipcode1 = "74126"; 
+       String zipcode1 = accountController.sendQueryRequest("zipCode");
+       events.zipCode(zipcode1);
     }
 
 }

@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LogInPageView implements Initializable {
+public class LogInPageView extends SetWindow implements Initializable {
 
  
     @FXML
@@ -105,6 +105,12 @@ public class LogInPageView implements Initializable {
         }
     }
 
+    /**
+     * Checks if the application is connected to the database
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -69,6 +70,7 @@ public class HomePageView implements Initializable {
         
         this.restaurantPic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createCuisineEventHandler());
         this.myAccountLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createMyAccountEventHandler());
+        this.eventPic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createEventsEventHandler());
 
         Stop[] stops = new Stop[]{new Stop(0, Color.web("#5C258D")), new Stop(1, Color.web("#4389A2"))};
         LinearGradient linearGradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);

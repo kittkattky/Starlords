@@ -21,8 +21,8 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
 
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
     private Connection con = null;
-    protected PreparedStatementUtil createPreparedStatement = new PreparedStatementUtil();
-    protected PreparedStatement pStatement;
+    PreparedStatementUtil createPreparedStatement = new PreparedStatementUtil();
+    PreparedStatement pStatement;
 
     /**
      * This method stores user information from sign up page into database.

@@ -10,7 +10,7 @@ public interface DatabaseInterface {
     
     public boolean insertIntoDatabase(Map<String, String> _userInformation);
     
-    public String queryForAttribute(String _uuid, String _attributeNeeded);
+    public String queryForAttribute(String _uuid, String attributeNeeded);
     
     public boolean checkIfEmailExists(String _email);
     

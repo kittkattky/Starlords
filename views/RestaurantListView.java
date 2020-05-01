@@ -98,6 +98,25 @@ public class RestaurantListView implements Initializable {
         view.isSearched = true;
     }
 
+    //=================  SETTERS ===============
+    public void setCuisineLabel(String _cuisineChoice) {
+        this.cuisineLabel.setText(_cuisineChoice);
+    }
+
+    /**
+     * This method sets all labels and the url when an item is selected from the
+     * list view.
+     */
+    public void setRestaurantLabels() {
+        String restaurantName = this.listViewRestaurantList.getSelectionModel().getSelectedItem();
+        this.restaurantNameLabel.setText(restaurantName);
+
+        this.restaurantRatingLabel.setText((String) restaurantRatingMap.get(restaurantName));
+        this.restaurantAddressLabel.setText((String) restaurantAddressMap.get(restaurantName));
+        this.restaurantURL.setText((String) restaurantURLMap.get(restaurantName));
+        this.isHyperLinkSet = true;
+    }
+
     /**
      * This method allows the hyperlink to be opened using the desktop's default
      * web browser
@@ -130,30 +149,11 @@ public class RestaurantListView implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL _url, ResourceBundle _rb) {
+    public void initialize(URL url, ResourceBundle rb) {
         Stop[] stops = new Stop[]{new Stop(0, Color.web("#5C258D")), new Stop(1, Color.web("#4389A2"))};
         LinearGradient linearGradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
         BackgroundFill fillBackground = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
         this.anchorPane.setBackground(new Background(fillBackground));
-    }
-    
-        //=================  SETTERS ===============
-    public void setCuisineLabel(String _cuisineChoice) {
-        this.cuisineLabel.setText(_cuisineChoice);
-    }
-
-    /**
-     * This method sets all labels and the url when an item is selected from the
-     * list view.
-     */
-    public void setRestaurantLabels() {
-        String restaurantName = this.listViewRestaurantList.getSelectionModel().getSelectedItem();
-        this.restaurantNameLabel.setText(restaurantName);
-
-        this.restaurantRatingLabel.setText((String) restaurantRatingMap.get(restaurantName));
-        this.restaurantAddressLabel.setText((String) restaurantAddressMap.get(restaurantName));
-        this.restaurantURL.setText((String) restaurantURLMap.get(restaurantName));
-        this.isHyperLinkSet = true;
     }
 
 }

@@ -149,7 +149,7 @@ public class ZomatoApi implements RestaurantApiInterface {
         }
     }
 
-    public StringBuffer connectToAPI(String _urlString) {
+    public StringBuffer connectToAPI(String urlString) {
 
         StringBuffer content = new StringBuffer();
 
@@ -157,7 +157,7 @@ public class ZomatoApi implements RestaurantApiInterface {
         try {
 
             //create instance of url object and type cast it to httpConection type.
-            URL url = new URL(_urlString);
+            URL url = new URL(urlString);
             HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
 
             //configure HttpURLConnection object
