@@ -8,7 +8,6 @@ package views;
  * @date 4/29/20
  */
 import controllers.EventsController;
-import controllers.UUIDController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,6 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -59,7 +59,7 @@ public class EventsView extends SetWindow implements Initializable {
     protected Map<String, String> VenueAddressMap;
 
     public EventsController eventsController = new EventsController();
-    public UUIDController uuidController = new UUIDController();
+
 
     /**
      * Builds the flow pane by populating with image views
@@ -1060,9 +1060,9 @@ public class EventsView extends SetWindow implements Initializable {
             AnchorPane posterView = loader.load();
             EventsImageView controller = loader.getController();
             controller.setEventName(_category);
-            posterView.setOnMouseClicked((mouseEvent) -> {
+            posterView.setOnMouseClicked((_mouseEvent) -> {
                 try {
-                    EventImageClicked(_category, _picture, _description, _venueName, _venueAddress, _venueUrl);
+                    EventImageClicked(_category, _picture, _description, _venueName, _venueAddress, _venueUrl, _mouseEvent);
                 } catch (JSONException ex) {
                     Logger.getLogger(EventsView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1109,9 +1109,9 @@ public class EventsView extends SetWindow implements Initializable {
      * @param venueUrl
      * @throws JSONException 
      */
-    private void EventImageClicked(String title, String image, String description, String venueName, String venueAddress, String venueUrl) throws JSONException {
+    private void EventImageClicked(String title, String image, String description, String venueName, String venueAddress, String venueUrl, Event _event) throws JSONException {
         // Request main application to set new scene to hand over control to the event info controller
-        Main.transitionToEventInfoView(title, image, description, venueName, venueAddress, venueUrl);
+        Main.transitionToEventInfoView(this.eventsController.uuidController.getUUID(), title, image, description, venueName, venueAddress, venueUrl);
     }
 
     /**
@@ -1280,5 +1280,6 @@ public class EventsView extends SetWindow implements Initializable {
     @FXML
     public void backToHomePageButtonClick(ActionEvent _event) throws IOException {
         HomePageView view = this.handler.switchScenes(_event, "fxml/HomePage.fxml").getController();
+        view.handler.uuidController.setUUID(this.eventsController.uuidController.getUUID());
     }
 }

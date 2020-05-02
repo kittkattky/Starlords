@@ -41,7 +41,7 @@ public class EventInfoView extends SetWindow {
     @FXML
     private GridPane GridPane;
 
-    private EventsController eventsController = new EventsController();
+    public EventsController eventsController = new EventsController();
     
     protected EventHandlers handler = new EventHandlers();
 
@@ -84,8 +84,7 @@ public class EventInfoView extends SetWindow {
     @FXML
     public void backToEventsButtonClick(ActionEvent _event) throws IOException {
         EventsView view = this.handler.switchScenes(_event, "fxml/EventsMainView.fxml").getController();
-        view.handler.uuidController.setUUID(this.eventsController.uuidController.getUUID());
-        System.out.println(this.eventsView.uuidController.getUUID());
+        view.eventsController.uuidController.setUUID(this.eventsController.uuidController.getUUID());
     }
 
     /**

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 import utilities.DBConnectionUtil.ConnectionUtil;
 import api.adapters.DatabaseAdapter;
+import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,26 +29,47 @@ public class DBDriver {
         DatabaseAdapter adapter = new DatabaseAdapter();
         Connection con = ConnectionUtil.conDB();
         //PreparedStatement preparedStatement = con.prepareStatement("CREATE TABLE users (uuid VARCHAR(36), firstName VARCHAR(50), lastName VARCHAR(50), street VARCHAR(20), city VARCHAR(20), state VARCHAR(20), zipcode VARCHAR(5), email VARCHAR(50), password VARCHAR(50))");
-        //PreparedStatement preparedStatement2 = con.prepareStatement("select * from users");
+        PreparedStatement preparedStatement2 = con.prepareStatement("INSERT INTO users (UUID, firstName, lastName, STREET, CITY, STATE, ZIPCODE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+        PreparedStatement preparedStatement3 = con.prepareStatement("select * from users");
         //UUID uuid = UUID.randomUUID();
         String uuid = "5ac1d0ac-7999-4951-aee0-3d69d1b10308";
         Map<String, String> userInformation = new HashMap<>();
         
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
-        System.out.println(dbAdapter.queryForAttribute("5ac1d0ac-7999-4951-aee0-3d69d1b10308", "password"));
+        System.out.println(dbAdapter.queryForAttribute("879189c2-e2b5-48a3-b849-47e3a84f4b59", "uuid"));
         //System.out.println(adapter.queryForAttribute(, "zipcode"));
         //System.out.println(adapter.updateInformation(uuid, "city", "Charlotte"));
         //System.out.println(adapter.queryForAttribute(uuid, "city"));
+        preparedStatement2.setString(1, "e62330fa-9072-44ab-9cc2-ae9283c98233");
+        preparedStatement2.setString(2, "Diego");
+        preparedStatement2.setString(3, "Rodriguez");
+        preparedStatement2.setString(4, "street");
+        preparedStatement2.setString(5, "state");
+        preparedStatement2.setString(6, "city");
+        preparedStatement2.setString(7, "23456");
+        preparedStatement2.setString(8, "test@test.com");
+        preparedStatement2.setString(9, "password");
+        preparedStatement2.executeUpdate();
+        
+        ResultSet rs = preparedStatement3.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
 
+        while (rs.next()) {        
+            for (int i = 1; i <= columnsNumber; i++) {
 
-        //PreparedStatement.executeUpdate();
-//        ResultSet resultSet = preparedStatement2.executeQuery();
-//
-//        if (!resultSet.next()) {
-//            System.out.println("No results found");
-//        } else {
-//     
-//                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+                System.out.print(rs.getString(i) + " "); //Print one element of a row
+
+            }
+
+            System.out.println();//Move to the next line to print the next row.           
+
+        }
+        
+        
+        
+        
+        
             
         }
     }

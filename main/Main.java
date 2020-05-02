@@ -6,6 +6,7 @@ package main;
  * @author Kahlie Last Updated: 2/17/2020
  */
 
+import controllers.UUIDController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ public class Main extends Application {
     private static Stage window;
     private static Scene eventScene;
     private static AnchorPane rootLayout;
+
 
     /**
      * Starts the application
@@ -77,7 +79,7 @@ public class Main extends Application {
      * @param venueUrl
      * @throws JSONException 
      */
-    public static void transitionToEventInfoView(String title, String image, String description, String venueName, String venueAddress, String venueUrl) throws JSONException {
+    public static void transitionToEventInfoView(String uuid, String title, String image, String description, String venueName, String venueAddress, String venueUrl) throws JSONException {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/fxml/EventInfoView.fxml"));
@@ -85,8 +87,10 @@ public class Main extends Application {
 
             // setup view
             EventInfoView view = loader.getController();
+            view.eventsController.uuidController.setUUID(uuid);
             view.setWindow(window);
             view.setEvent(title, image, description, venueName, venueAddress, venueUrl);
+
             window.setScene(new Scene(layout));
         }
         catch (IOException ex) {

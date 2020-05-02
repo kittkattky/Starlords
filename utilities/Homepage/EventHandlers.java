@@ -116,26 +116,6 @@ public class EventHandlers {
         return handler;
     }
 
-    public EventHandler<MouseEvent> changeToDarkRectangle(Rectangle _rectangle) {
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent _event) {
-
-                _rectangle.setFill(Color.valueOf("6b7497"));
-            }
-        };
-        return handler;
-    }
-
-    public EventHandler<MouseEvent> changeToLightRectangle(Rectangle _rectangle) {
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent _event) {
-                _rectangle.setFill(Color.valueOf("95a1cf"));
-            }
-        };
-        return handler;
-    }
 
 
     //================= GETTERS =============== 
@@ -144,7 +124,7 @@ public class EventHandlers {
     }
 
     public void loadUserAccountInfo(myAccountView _view) {
-
+        System.out.println("setting user info with: " + _view.myAccountController.uuidController.getUUID());
         String firstName = _view.myAccountController.sendQueryRequest("firstname");
         String lastName = _view.myAccountController.sendQueryRequest("lastname");
         String street = _view.myAccountController.sendQueryRequest("street");

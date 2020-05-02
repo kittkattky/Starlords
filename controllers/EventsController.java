@@ -103,7 +103,7 @@ public class EventsController {
     //================= Music ===============
     
      public Map getMusicEventTitleMap() throws IOException, JSONException {
-         this.zipcode = Integer.parseInt(this.da.queryForAttribute(this.uuidController.getUUID(), "zipcode"));
+         this.zipcode = Integer.parseInt(this.da.queryForAttribute("5ac1d0ac-7999-4951-aee0-3d69d1b10308", "zipcode"));
         this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
