@@ -139,8 +139,8 @@ public class SignUpPageView implements Initializable {
             UUID uuid = UUID.randomUUID();
 
             userCredentials.put("uuid", uuid.toString());
-            userCredentials.put("firstname", this.suFName.getText());
-            userCredentials.put("lastname", this.suLName.getText());
+            userCredentials.put("firstName", this.suFName.getText());
+            userCredentials.put("lastName", this.suLName.getText());
             userCredentials.put("street", this.suStreet.getText());
             userCredentials.put("city", this.suCity.getText());
             userCredentials.put("state", this.combobox.getValue());

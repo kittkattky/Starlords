@@ -76,12 +76,12 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getComedyEventTitleMap();
-        this.ImageMap = eventsController.getComedyEventImageMap();
-        this.VenueNameMap = eventsController.getComedyEventVenueNameMap();
-        this.DescriptionMap = eventsController.getComedyEventDescriptionMap();
-        this.VenueAddressMap = eventsController.getComedyEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getComedyEventUrlMap();
+        this.TitleMap = this.eventsController.getComedyEventTitleMap();
+        this.ImageMap = this.eventsController.getComedyEventImageMap();
+        this.VenueNameMap = this.eventsController.getComedyEventVenueNameMap();
+        this.DescriptionMap = this.eventsController.getComedyEventDescriptionMap();
+        this.VenueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
+        this.VenueUrlMap = this.eventsController.getComedyEventUrlMap();
         for (int i = 0; i < this.TitleMap.size(); i++) {
             title = this.TitleMap.get(i);
             image = this.ImageMap.get(title);
@@ -110,12 +110,12 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getMusicEventTitleMap();
-        this.ImageMap = eventsController.getMusicEventImageMap();
-        this.DescriptionMap = eventsController.getMusicEventDescriptionMap();
-        this.VenueNameMap = eventsController.getMusicEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getMusicEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getMusicEventUrlMap();
+        this.TitleMap = this.eventsController.getMusicEventTitleMap();
+        this.ImageMap = this.eventsController.getMusicEventImageMap();
+        this.DescriptionMap = this.eventsController.getMusicEventDescriptionMap();
+        this.VenueNameMap = this.eventsController.getMusicEventVenueNameMap();
+        this.VenueAddressMap = this.eventsController.getMusicEventVenueAddressMap();
+        this.VenueUrlMap = this.eventsController.getMusicEventUrlMap();
         for (int i = 0; i < this.TitleMap.size(); i++) {
             title = this.TitleMap.get(i);
             image = this.ImageMap.get(title);
@@ -1092,11 +1092,11 @@ public class EventsView extends SetWindow implements Initializable {
      * This method adds the categories to the listview
      */
     public void addCategoriesToList() throws IOException, JSONException {
-        this.categoriesMap = eventsController.getCategoriesMap();
+        this.categoriesMap = this.eventsController.getCategoriesMap();
         for (int i = 0; i < this.categoriesMap.size(); i++) {
             this.categoriesListView.getItems().add((String) this.categoriesMap.get(i));
         }
-        categoriesListView.getSelectionModel().select(0);
+        this.categoriesListView.getSelectionModel().select(0);
     }
 
     /**

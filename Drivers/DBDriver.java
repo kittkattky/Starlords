@@ -31,6 +31,7 @@ public class DBDriver {
         //PreparedStatement preparedStatement = con.prepareStatement("CREATE TABLE users (uuid VARCHAR(36), firstName VARCHAR(50), lastName VARCHAR(50), street VARCHAR(20), city VARCHAR(20), state VARCHAR(20), zipcode VARCHAR(5), email VARCHAR(50), password VARCHAR(50))");
         PreparedStatement preparedStatement2 = con.prepareStatement("INSERT INTO users (UUID, firstName, lastName, STREET, CITY, STATE, ZIPCODE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
         PreparedStatement preparedStatement3 = con.prepareStatement("select * from users");
+        PreparedStatement delete = con.prepareStatement("delete from users where uuid = '12797caf-5c2b-49d9-ba02-2fdc0c74c419'");
         //UUID uuid = UUID.randomUUID();
         String uuid = "5ac1d0ac-7999-4951-aee0-3d69d1b10308";
         Map<String, String> userInformation = new HashMap<>();
@@ -40,16 +41,16 @@ public class DBDriver {
         //System.out.println(adapter.queryForAttribute(, "zipcode"));
         //System.out.println(adapter.updateInformation(uuid, "city", "Charlotte"));
         //System.out.println(adapter.queryForAttribute(uuid, "city"));
-        preparedStatement2.setString(1, "e62330fa-9072-44ab-9cc2-ae9283c98233");
-        preparedStatement2.setString(2, "Diego");
-        preparedStatement2.setString(3, "Rodriguez");
-        preparedStatement2.setString(4, "street");
-        preparedStatement2.setString(5, "state");
-        preparedStatement2.setString(6, "city");
-        preparedStatement2.setString(7, "23456");
-        preparedStatement2.setString(8, "test@test.com");
-        preparedStatement2.setString(9, "password");
-        preparedStatement2.executeUpdate();
+//        preparedStatement2.setString(1, "e62330fa-9072-44ab-9cc2-ae9283c98233");
+//        preparedStatement2.setString(2, "Diego");
+//        preparedStatement2.setString(3, "Rodriguez");
+//        preparedStatement2.setString(4, "street");
+//        preparedStatement2.setString(5, "state");
+//        preparedStatement2.setString(6, "city");
+//        preparedStatement2.setString(7, "23456");
+//        preparedStatement2.setString(8, "test@test.com");
+//        preparedStatement2.setString(9, "password");
+        delete.executeUpdate();
         
         ResultSet rs = preparedStatement3.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
