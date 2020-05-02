@@ -50,7 +50,7 @@ public class DBDriver {
 //        preparedStatement2.setString(7, "23456");
 //        preparedStatement2.setString(8, "test@test.com");
 //        preparedStatement2.setString(9, "password");
-        delete.executeUpdate();
+        //delete.executeUpdate();
         
         ResultSet rs = preparedStatement3.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();

@@ -1096,7 +1096,7 @@ public class EventsView extends SetWindow implements Initializable {
         for (int i = 0; i < this.categoriesMap.size(); i++) {
             this.categoriesListView.getItems().add((String) this.categoriesMap.get(i));
         }
-        this.categoriesListView.getSelectionModel().select(0);
+        //this.categoriesListView.getSelectionModel().select(0);
     }
 
     /**

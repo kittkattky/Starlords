@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.json.JSONException;
 import views.*;
 
 
@@ -103,6 +104,7 @@ public class EventHandlers {
                     view = switchScenes(_event, "fxml/EventsMainView.fxml").getController();
                     System.out.println("passing this UUID in eventEventhandler: " + getUUID());
                     view.eventsController.uuidController.setUUID(getUUID());
+                    view.eventsController.setZipCode();
                 } catch (IOException ex) {
                     Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -130,12 +132,6 @@ public class EventHandlers {
         String email = _view.myAccountController.sendQueryRequest("email");
 
         _view.setUserInfoLabels(firstName, lastName, street, city, state, zipCode, email);
-    }
-    
-    public void setZipCode(EventsController events){
-      // String zipcode1 = "74126"; 
-       String zipcode1 = accountController.sendQueryRequest("zipCode");
-       events.zipCode(zipcode1);
     }
 
 }

@@ -6,29 +6,20 @@ package controllers;
  * @author Kahlie
  * @date 4/29/20
  */
-
 import api.adapters.DatabaseAdapter;
 import java.io.IOException;
 import java.util.Map;
 import models.EventsModel;
 import org.json.JSONException;
-import utilities.Homepage.EventHandlers;
 
 public class EventsController {
-    
-    public UUIDController uuidController = new UUIDController();
-        
-    
-    DatabaseAdapter da = new DatabaseAdapter();
 
-     //public static int zipcode = 27412;
-    int zipcode;
-    
-    public void zipCode(String zipCode){
-        this.zipcode =Integer.parseInt(zipCode);
-        
-    }
-    
+    public UUIDController uuidController = new UUIDController();
+
+    private DatabaseAdapter da = new DatabaseAdapter();
+
+    private int zipcode;
+
     //All category keys for the events in the categories list
     private final String comedy = "comedy";
     private final String music = "music";
@@ -59,942 +50,773 @@ public class EventsController {
     private final String sports = "sports";
     private final String technology = "technology";
     private final String others = "other";
-    
-    protected EventsModel eventsModel = new EventsModel();   
+
+    protected EventsModel eventsModel = new EventsModel();
 
     //=================  GETTERS ===============
-    
-    public Map getCategoriesMap() throws IOException, JSONException{
+    public Map getCategoriesMap() throws IOException, JSONException {
         this.eventsModel = eventsModel.loadCategories();
         return this.eventsModel.getCategoriesMap();
     }
-    
+
+    //=================  Comedy ===============
     public Map getComedyEventTitleMap() throws IOException, JSONException {
-        System.out.println(this.uuidController.getUUID());
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.comedy, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-   
+
     public Map getComedyEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getComedyEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getComedyEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getComedyEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
+
+    public Map getComedyEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getComedyEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.comedy, this.zipcode);
+
+    public Map getComedyEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
+
     //================= Music ===============
-    
-     public Map getMusicEventTitleMap() throws IOException, JSONException {
-         System.out.println(this.uuidController.getUUID());
-         this.zipcode = Integer.parseInt(this.da.queryForAttribute("5ac1d0ac-7999-4951-aee0-3d69d1b10308", "zipcode"));
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
+    public Map getMusicEventTitleMap() throws IOException, JSONException {
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.music, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getMusicEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getMusicEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getMusicEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getMusicEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
+
+    public Map getMusicEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getMusicEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.music, this.zipcode);
+
+    public Map getMusicEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
+
     //================= Conference ===============
-    
-     public Map getConferenceEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
+    public Map getConferenceEventTitleMap() throws IOException, JSONException {
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.conference, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getConferenceEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getConferenceEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getConferenceEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getConferenceEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
+
+    public Map getConferenceEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getConferenceEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.conference, this.zipcode);
+
+    public Map getConferenceEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
-    } 
-    
+    }
+
     //================= education ===============
-    
-     public Map getEducationEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
+    public Map getEducationEventTitleMap() throws IOException, JSONException {
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.education, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getEducationEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getEducationEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getEducationEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getEducationEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
+
+    public Map getEducationEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getEducationEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.education, this.zipcode);
+
+    public Map getEducationEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
-    } 
-    
+    }
+
     //================= family ===============
-    
     public Map getFamilyEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.family, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getFamilyEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getFamilyEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getFamilyEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getFamilyEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
+
+    public Map getFamilyEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getFamilyEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.family, this.zipcode);
+
+    public Map getFamilyEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
-    } 
-    
-    //================= family ===============
-    
+    }
+
+    //================= festivals ===============
     public Map getFestivalsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.festivals, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getFestivalsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getFestivalsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getFestivalsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getFestivalsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
+
+    public Map getFestivalsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getFestivalsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.festivals, this.zipcode);
+
+    public Map getFestivalsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
-    } 
-    
+    }
+
     //================= film ===============
-    
     public Map getFilmEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.film, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getFilmEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getFilmEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getFilmEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getFilmEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
+
+    public Map getFilmEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getFilmEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.film, this.zipcode);
+
+    public Map getFilmEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-        //================= food&wine ===============
-    
+
+    //================= food&wine ===============
     public Map getFoodandWineEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.foodandWine, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getFoodandWineEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getFoodandWineEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getFoodandWineEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getFoodandWineEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
+
+    public Map getFoodandWineEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getFoodandWineEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.foodandWine, this.zipcode);
+
+    public Map getFoodandWineEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-            //================= fundraisers ===============
-    
+
+    //================= fundraisers ===============
     public Map getCharityEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.charity, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getCharityEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getCharityEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getCharityEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getCharityEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
+
+    public Map getCharityEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getCharityEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.charity, this.zipcode);
+
+    public Map getCharityEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                //================= exhibits ===============
-    
+
+    //================= exhibits ===============
     public Map getExhibitsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.exhibits, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getExhibitsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getExhibitsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getExhibitsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getExhibitsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
+
+    public Map getExhibitsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getExhibitsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.exhibits, this.zipcode);
+
+    public Map getExhibitsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                  //================= health ===============
-    
+
+    //================= health ===============
     public Map getHealthEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.health, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getHealthEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getHealthEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getHealthEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getHealthEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
+
+    public Map getHealthEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getHealthEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.health, this.zipcode);
+
+    public Map getHealthEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                      //================= holiday ===============
-    
+
+    //================= holiday ===============
     public Map getHolidayEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
+        this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.holiday, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getHolidayEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getHolidayEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getHolidayEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getHolidayEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
+
+    public Map getHolidayEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getHolidayEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.holiday, this.zipcode);
+
+    public Map getHolidayEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-             //================= books ===============
-    
+
+    //================= books ===============
     public Map getBooksEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.books, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getBooksEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getBooksEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getBooksEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getBooksEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
+
+    public Map getBooksEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getBooksEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.books, this.zipcode);
+
+    public Map getBooksEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                 //================= attractions ===============
-    
+
+    //================= attractions ===============
     public Map getAttractionsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.attractions, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getAttractionsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getAttractionsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getAttractionsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getAttractionsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
+
+    public Map getAttractionsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getAttractionsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.attractions, this.zipcode);
+
+    public Map getAttractionsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                     //================= Neighborhood ===============
-    
+
+    //================= Neighborhood ===============
     public Map getNeighborhoodEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.neighborhood, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getNeighborhoodEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getNeighborhoodEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getNeighborhoodEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getNeighborhoodEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
+
+    public Map getNeighborhoodEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getNeighborhoodEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.neighborhood, this.zipcode);
+
+    public Map getNeighborhoodEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-              //================= Business ===============
-    
+
+    //================= Business ===============
     public Map getBusinessEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.business, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getBusinessEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getBusinessEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getBusinessEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getBusinessEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
+
+    public Map getBusinessEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getBusinessEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.business, this.zipcode);
+
+    public Map getBusinessEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                  //================= Nightlife ===============
-    
+
+    //================= Nightlife ===============
     public Map getNightlifeEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.nightlife, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getNightlifeEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getNightlifeEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getNightlifeEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getNightlifeEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
+
+    public Map getNightlifeEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getNightlifeEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.nightlife, this.zipcode);
+
+    public Map getNightlifeEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                 //================= University ===============
-    
+
+    //================= University ===============
     public Map getUniversityEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.university, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getUniversityEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getUniversityEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getUniversityEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getUniversityEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
+
+    public Map getUniversityEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getUniversityEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.university, this.zipcode);
+
+    public Map getUniversityEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                     //================= Meetup ===============
-    
+
+    //================= Meetup ===============
     public Map getMeetupEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.meetups, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getMeetupEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getMeetupEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getMeetupEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getMeetupEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
+
+    public Map getMeetupEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getMeetupEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.meetups, this.zipcode);
+
+    public Map getMeetupEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                 //================= Recreation ===============
-    
+
+    //================= Recreation ===============
     public Map getRecreationEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.recreation, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getRecreationEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getRecreationEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getRecreationEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getRecreationEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
+
+    public Map getRecreationEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getRecreationEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.recreation, this.zipcode);
+
+    public Map getRecreationEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-              //================= PerformingArts ===============
-    
+
+    //================= PerformingArts ===============
     public Map getPerformingArtsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.performingArts, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getPerformingArtsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getPerformingArtsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getPerformingArtsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getPerformingArtsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
+
+    public Map getPerformingArtsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getPerformingArtsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.performingArts, this.zipcode);
+
+    public Map getPerformingArtsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                  //================= Pets ===============
-    
+
+    //================= Pets ===============
     public Map getPetsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.pets, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getPetsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getPetsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getPetsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getPetsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
+
+    public Map getPetsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getPetsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.pets, this.zipcode);
+
+    public Map getPetsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                      //================= Politics ===============
-    
+
+    //================= Politics ===============
     public Map getPoliticsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.politics, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getPoliticsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getPoliticsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getPoliticsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getPoliticsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
+
+    public Map getPoliticsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getPoliticsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.politics, this.zipcode);
+
+    public Map getPoliticsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                   //================= Retail ===============
-    
+
+    //================= Retail ===============
     public Map getRetailEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.retail, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getRetailEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getRetailEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getRetailEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getRetailEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
+
+    public Map getRetailEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getRetailEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.retail, this.zipcode);
+
+    public Map getRetailEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                  //================= Science ===============
-    
+
+    //================= Science ===============
     public Map getScienceEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.science, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getScienceEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getScienceEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getScienceEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getScienceEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
+
+    public Map getScienceEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getScienceEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.science, this.zipcode);
+
+    public Map getScienceEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-               //================= Religion ===============
-    
+
+    //================= Religion ===============
     public Map getReligionEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.religion, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getReligionEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getReligionEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getReligionEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getReligionEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
+
+    public Map getReligionEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getReligionEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.religion, this.zipcode);
+
+    public Map getReligionEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                   //================= Sports ===============
-    
+
+    //================= Sports ===============
     public Map getSportsEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.sports, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getSportsEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getSportsEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getSportsEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getSportsEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
+
+    public Map getSportsEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getSportsEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.sports, this.zipcode);
+
+    public Map getSportsEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                       //================= Technology ===============
-    
+
+    //================= Technology ===============
     public Map getTechnologyEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.technology, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getTechnologyEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getTechnologyEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getTechnologyEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getTechnologyEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
+
+    public Map getTechnologyEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getTechnologyEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.technology, this.zipcode);
+
+    public Map getTechnologyEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
     }
-    
-                 //================= Others ===============
-    
+
+    //================= Others ===============
     public Map getOthersEventTitleMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
+        this.eventsModel = eventsModel.setMapsBasedOnEvent(this.others, this.zipcode);
         return this.eventsModel.getEventTitleMap();
     }
-    
+
     public Map getOthersEventDescriptionMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
         return this.eventsModel.getEventDescriptionMap();
     }
 
     public Map getOthersEventVenueNameMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
         return this.eventsModel.getEventVenueNameMap();
     }
 
     public Map getOthersEventImageMap() throws IOException, JSONException {
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
         return this.eventsModel.getEventImageMap();
     }
-    
-    public Map getOthersEventUrlMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
+
+    public Map getOthersEventUrlMap() throws IOException, JSONException {
         return this.eventsModel.getEventUrlMap();
     }
- 
-    public Map getOthersEventVenueAddressMap() throws IOException, JSONException{
-        this.eventsModel = eventsModel.loadEventsByZipcode(this.others, this.zipcode);
+
+    public Map getOthersEventVenueAddressMap() throws IOException, JSONException {
         return this.eventsModel.getEventVenueAddressMap();
-    }  
+    }
+    
+    
+    //================= SETTERS ===============
+    public void setZipCode() {
+        this.zipcode = Integer.parseInt(this.da.queryForAttribute(this.uuidController.getUUID(), "zipcode"));
+        System.out.println("searching for events with zipcode: " + this.zipcode);
+    }
 }

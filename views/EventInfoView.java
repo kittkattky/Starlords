@@ -82,9 +82,10 @@ public class EventInfoView extends SetWindow {
      * @throws IOException 
      */
     @FXML
-    public void backToEventsButtonClick(ActionEvent _event) throws IOException {
+    public void backToEventsButtonClick(ActionEvent _event) throws IOException, JSONException {
         EventsView view = this.handler.switchScenes(_event, "fxml/EventsMainView.fxml").getController();
         view.eventsController.uuidController.setUUID(this.eventsController.uuidController.getUUID());
+        view.eventsController.setZipCode();
     }
 
     /**
@@ -114,12 +115,12 @@ public class EventInfoView extends SetWindow {
      * @throws JSONException
      */
     public void Events() throws IOException, JSONException {
-        this.VenueNameMap = this.eventsController.getComedyEventVenueNameMap();
-        this.TitleMap = this.eventsController.getComedyEventTitleMap();
-        this.DescriptionMap = this.eventsController.getComedyEventDescriptionMap();
-        this.ImageMap = eventsController.getComedyEventImageMap();
-        this.UrlMap = this.eventsController.getComedyEventUrlMap();
-        this.VenueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
+//        this.VenueNameMap = this.eventsController.getComedyEventVenueNameMap();
+//        this.TitleMap = this.eventsController.getComedyEventTitleMap();
+//        this.DescriptionMap = this.eventsController.getComedyEventDescriptionMap();
+//        this.ImageMap = eventsController.getComedyEventImageMap();
+//        this.UrlMap = this.eventsController.getComedyEventUrlMap();
+//        this.VenueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
 
         TitleLabel.setText(this.title);
 

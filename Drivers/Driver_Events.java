@@ -26,7 +26,7 @@ public class Driver_Events {
          System.out.println(zipcode);
          EventsModel modelA = new EventsModel();
     
-        modelA = modelA.loadEventsByZipcode("music", zipcode);
+        //modelA = modelA.loadEventsByZipcode("music", zipcode);
         System.out.println(modelA.getEventTitleMap());
 
     }

@@ -42,7 +42,6 @@ public class CuisineView implements Initializable {
     protected boolean isSelected = false;
     public RestaurantController restaurantController = new RestaurantController();
     public UUIDController uuidController = new UUIDController();
-    protected RestaurantListView instanceToSwitchScene = new RestaurantListView();
     protected EventHandlers handler = new EventHandlers();
 
     protected Map cuisineMap;
