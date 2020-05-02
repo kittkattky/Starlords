@@ -38,7 +38,8 @@ public class EventsModel {
 
     /**
      * Returns the model with set maps that have information regarding the catagory selected
-     *
+     * Implements Lazy Loading by only loading events for selected category.
+     * 
      * @param _category
      * @param _zipcode
      * @return
