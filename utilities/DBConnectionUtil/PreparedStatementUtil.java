@@ -165,8 +165,8 @@ public class PreparedStatementUtil {
     }
 
     /**
-     * Helper method for checking if an attribute matches one of the columns on
-     * the table. If not then return false.
+     * Helper method for checking if an attribute matches one of the columns on 
+     * the table called "users". If not then return false.
      *
      * @param _attribute
      * @return
