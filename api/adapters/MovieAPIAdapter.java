@@ -6,7 +6,7 @@
 package api.adapters;
 
 import api.interfaces.MovieAPIInterface;
-import api.translators.MovieAPI;
+import api.translators.MovieAPITranslator;
 import java.util.TreeMap;
 import org.json.JSONException;
 
@@ -15,7 +15,7 @@ import org.json.JSONException;
  * @author Preston.Williamson
  */
 public class MovieAPIAdapter implements MovieAPIInterface {
-    protected MovieAPIInterface api = new MovieAPI ();
+    protected MovieAPIInterface api = new MovieAPITranslator ();
 
     @Override
     public TreeMap<Integer, String> getGenreMap() throws JSONException {

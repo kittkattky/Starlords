@@ -5,14 +5,14 @@ package controllers;
  * @author Preston Williamson Last Updated Date: 02-MAY-2020
  */
 
-import models.APIModel;
+import api.translators.APITranslator;
 import java.util.LinkedHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class APIController {
     protected final int KEY = 0, VALUE = 1;
-    protected APIModel model;
+    protected APITranslator model;
 
     /**
      * public APIController constructor class. Constructor allows model instantiation without providing a user model.
@@ -21,7 +21,7 @@ public class APIController {
      * @param _paramArr: API parameters stored in a LinkedHashMap.
      */
     public APIController (String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
-        this.model = new APIModel();
+        this.model = new APITranslator();
 
         if (_paramArr != null) {
             for (String key : _paramArr.keySet())
@@ -36,7 +36,7 @@ public class APIController {
      * public APIController constructor class. Constructor allows model instantiation with only the APIModel.
      * @param _model: Base API URL.
      */    
-    public APIController (APIModel _model) {
+    public APIController (APITranslator _model) {
         this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
     }
 

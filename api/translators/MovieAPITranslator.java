@@ -11,7 +11,6 @@ import controllers.APIController;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.APIModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,20 +20,20 @@ import utilities.AppConfigUtil.AppConfigUtil;
  *
  * @author Preston.Williamson
  */
-public class MovieAPI implements MovieAPIInterface {
+public class MovieAPITranslator implements MovieAPIInterface {
     private final String MOVIE_API_INDICATOR = "api.movie.";
     private final String API_DELIMITER = "%2C%20";
     private final AppConfigUtil config = new AppConfigUtil ("AppConfig.properties");
     
     protected APIController control;
-    protected APIModel model = new APIModel ();
+    protected APITranslator model = new APITranslator ();
     protected TreeMap <Integer, TreeMap <String, String>> mapMovieCollection = new TreeMap <> ();
     
     protected String apiReturn;
     
     
-    public MovieAPI () {
-        this.model = new APIModel ();
+    public MovieAPITranslator () {
+        this.model = new APITranslator ();
         
         this.model.setURLString (this.getConfigProperty ("url"));
         this.model.setUserKey (this.getConfigProperty ("userKey"));
