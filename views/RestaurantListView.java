@@ -16,12 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -33,7 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.stage.Stage;
+import utilities.Homepage.EventHandlers;
 
 public class RestaurantListView implements Initializable {
 
@@ -55,6 +51,7 @@ public class RestaurantListView implements Initializable {
     protected ListView<String> listViewRestaurantList;
 
     protected RestaurantController restaurantController = new RestaurantController();
+    protected EventHandlers handler = new EventHandlers();
     protected Map restaurantNameMap;
     protected Map restaurantAddressMap;
     protected Map restaurantURLMap;
@@ -93,20 +90,12 @@ public class RestaurantListView implements Initializable {
         //set to false when switching back to cuisine scene
         this.isHyperLinkSet = false;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/CuisineListUI.fxml"));
-        Parent parentUsingFXML = loader.load();
-
         //set UUID for restaurant controller in next view and preload cuisine list
-        CuisineView view = loader.getController();
+        CuisineView view = this.handler.switchScenes(_event, "fxml/CuisineListUI.fxml").getController();
        
-        view.restaurantController.setUUID(this.restaurantController.getUUID());
+        view.restaurantController.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
         view.addCuisinesToList();
         view.isSearched = true;
-
-        Scene sceneToSwitchTo = new Scene(parentUsingFXML);
-        Stage referenceStage = (Stage) ((Node) _event.getSource()).getScene().getWindow();
-        referenceStage.setScene(sceneToSwitchTo);
-        referenceStage.show();
     }
 
     //=================  SETTERS ===============
