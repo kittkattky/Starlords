@@ -1,6 +1,7 @@
 package views;
 
 import controllers.MovieController;
+import controllers.UUIDController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,17 +14,12 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
 import org.json.JSONException;
+import utilities.Homepage.EventHandlers;
 
 /**
  *
@@ -35,13 +31,15 @@ public class GenreView implements Initializable {
     protected Label errorLabel;
     
     @FXML
-    protected AnchorPane AnchorPane;
+    protected AnchorPane anchorPane;
     
     @FXML
     protected ListView checkListGenres;
     
     protected TreeMap <Integer, String> mapGenres;    
     protected MovieController control = new MovieController ();
+    public UUIDController uuidControl = new UUIDController ();
+    protected EventHandlers handler = new EventHandlers ();
 
     public void populateGenreList () {        
         for (int k : this.mapGenres.keySet ()) {            
@@ -52,6 +50,7 @@ public class GenreView implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //this.handler.setBackground(this.anchorPane);
         try {
             this.mapGenres = this.control.getGenreMap();
         } catch (JSONException ex) {
@@ -69,11 +68,16 @@ public class GenreView implements Initializable {
         }
         else{
             this.errorLabel.setText ("");
-            MovieListView movieView = this.switchScenes(_event, "fxml/MovieList.fxml").getController();
+            MovieListView movieView = this.handler.switchScenes(_event, "fxml/MovieList.fxml").getController();
             
             movieView.passUUIDToController(this.control.getUUID ());
             movieView.addMoviesToList (selectedItems);
         }
+    }
+    
+    @FXML
+    private void handleBackButtonAction (ActionEvent _event) throws IOException {
+        this.handler.switchScenes (_event, "fxml/HomePage.fxml");
     }
     
     public TreeMap <Integer, String> getGenreSelection () {
@@ -100,32 +104,7 @@ public class GenreView implements Initializable {
         }
         
         return selectedItems;
-    }
-    
-    /**
-     * Helper method for switching scenes based on an ActionEvent
-     * @param _event
-     * @param fxml
-     * @return
-     * @throws IOException 
-     */
-    public FXMLLoader switchScenes(ActionEvent _event, String fxml) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxml));
-        //Create parent object based off of loader that knows which fxml file to create a scene of.
-        Parent parentUsingFXML = loader.load();
- 
-        //create a refernce to the stage that the event is coming from.
-        Stage referenceStage = (Stage) ((Node) _event.getSource()).getScene().getWindow();
-        
-        //create scene using parent object
-        Scene sceneToSwitchTo = new Scene(parentUsingFXML);
-        
-        //set the scene onto our referenced stage and show it.
-        referenceStage.setScene(sceneToSwitchTo);
-        referenceStage.show();
-        return loader;
-    }    
+    } 
     
     public void passUUIDtoController(String _uuid) {
         this.control.setUUID(_uuid);

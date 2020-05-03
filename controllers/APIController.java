@@ -1,15 +1,14 @@
 package controllers;
 
+/**
+ * APIController class for facilitating interactions between the computer and the APIModel class.
+ * @author Preston Williamson Last Updated Date: 02-MAY-2020
+ */
+
 import models.APIModel;
 import java.util.LinkedHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-/**
- * APIController class for facilitating interactions between the computer and the APIModel class.
- * Authors: Preston Williamson
- * Last Updated Date: 21-APR-2020
- */
 
 public class APIController {
     protected final int KEY = 0, VALUE = 1;

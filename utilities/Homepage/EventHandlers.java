@@ -96,6 +96,22 @@ public class EventHandlers {
         };
         return handler;
     }
+    
+    public EventHandler<MouseEvent> createGenreEventHandler() {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent _event) {
+                GenreView view;
+                try {
+                    view = switchScenes(_event, "fxml/GenreList.fxml").getController();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        };
+        return handler;
+    }
 
     public EventHandler<MouseEvent> changeToDarkRectangle(Rectangle _rectangle) {
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
@@ -136,5 +152,4 @@ public class EventHandlers {
 
         _view.setUserInfoLabels(firstName, lastName, street, city, state, zipCode, email);
     }
-
 }

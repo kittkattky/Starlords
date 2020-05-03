@@ -1,18 +1,26 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : Feb 9, 2020, 6:29:00 PM
     Author     : Kahlie
 */
 
-.pane{
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2
-)
-        
+.root{
+    -fx-font-size: 11px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
+    -fx-text-fill: #FFFFFF;
 }
-/*.panel:hover{
-    -fx-fill: #1F1E1E
-}*/
+
+.fieldPageTitle {
+    -fx-font-style: normal;
+    -fx-font-weight: bold;
+    -fx-font-family: System;
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button {
+    
+}
+
+.titleHomePage {
+    
+}
