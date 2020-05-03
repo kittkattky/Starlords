@@ -1,4 +1,4 @@
-package models;
+package api.translators;
 
 /**
  * APIModel class for facilitating communications between the computer and external APIs.
@@ -25,7 +25,7 @@ import org.json.*;
  *
  * @author preston.williamson
  */
-public class APIModel {
+public class APITranslator {
     protected static final int API_SUCCESS_CODE = 200;
     protected String apiReturn, parameterString, requestMethod, urlSite, userKey;
     protected LinkedHashMap <String, String> config = new LinkedHashMap <> ();
