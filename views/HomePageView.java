@@ -68,6 +68,7 @@ public class HomePageView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         this.restaurantPic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createCuisineEventHandler());
+        this.moviePic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createGenreEventHandler());
         this.myAccountLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createMyAccountEventHandler());
 
         Stop[] stops = new Stop[]{new Stop(0, Color.web("#5C258D")), new Stop(1, Color.web("#4389A2"))};
