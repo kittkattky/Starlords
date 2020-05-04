@@ -29,6 +29,7 @@ public class DBDriver {
         DatabaseAdapter adapter = new DatabaseAdapter();
         Connection con = ConnectionUtil.conDB();
         //PreparedStatement preparedStatement = con.prepareStatement("CREATE TABLE users (uuid VARCHAR(36), firstName VARCHAR(50), lastName VARCHAR(50), street VARCHAR(20), city VARCHAR(20), state VARCHAR(20), zipcode VARCHAR(5), email VARCHAR(50), password VARCHAR(50))");
+        PreparedStatement preparedStatement = con.prepareStatement("CREATE TABLE calendar (uuid VARCHAR(36), eventName VARCHAR(30), eventDate VARCHAR(30), eventTime VARCHAR(30))");
         PreparedStatement preparedStatement2 = con.prepareStatement("INSERT INTO users (UUID, firstName, lastName, STREET, CITY, STATE, ZIPCODE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
         PreparedStatement preparedStatement3 = con.prepareStatement("select * from users");
         PreparedStatement delete = con.prepareStatement("delete from users where uuid = '12797caf-5c2b-49d9-ba02-2fdc0c74c419'");
@@ -51,7 +52,7 @@ public class DBDriver {
 //        preparedStatement2.setString(8, "test@test.com");
 //        preparedStatement2.setString(9, "password");
         //delete.executeUpdate();
-        
+
         ResultSet rs = preparedStatement3.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();

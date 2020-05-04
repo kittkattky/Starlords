@@ -2,16 +2,15 @@ package utilities.DBConnectionUtil;
 
 /**
  * Helper class for creating prepared statements.
+ *
  * @author Diego Rodriguez
  */
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class PreparedStatementUtil {
 
@@ -50,7 +49,8 @@ public class PreparedStatementUtil {
     }
 
     /**
-     * Creates a prepared statement for selecting a UUID from the database that corresponds with the email and password.
+     * Creates a prepared statement for selecting a UUID from the database that
+     * corresponds with the email and password.
      *
      * @param _email
      * @param _password
@@ -70,12 +70,14 @@ public class PreparedStatementUtil {
         }
         return this.statementToReturn;
     }
-    
+
     /**
-     * Creates prepared statement for performing a query to check if email exists.
+     * Creates prepared statement for performing a query to check if email
+     * exists.
+     *
      * @param _email
      * @param _con
-     * @return 
+     * @return
      */
     public PreparedStatement statementToCheckEmail(String _email, Connection _con) {
         String selectStatement = "SELECT uuid FROM users WHERE email = ?";
@@ -91,13 +93,15 @@ public class PreparedStatementUtil {
     }
 
     /**
-     * Returns a prepared statement that queries for any attribute in the database based on UUID.
-     * Checks to make sure passed attribute is valid using helper method.
-     * Also note, SQL does not allow prepared statements to use ? after select clause.
+     * Returns a prepared statement that queries for any attribute in the
+     * database based on UUID. Checks to make sure passed attribute is valid
+     * using helper method. Also note, SQL does not allow prepared statements to
+     * use ? after select clause.
+     *
      * @param _uuid
      * @param _attribute
      * @param _con
-     * @return 
+     * @return
      */
     public PreparedStatement statementForQuery(String _uuid, String _attribute, Connection _con) {
         if (!checkForValidAttribute(_attribute)) {
@@ -117,8 +121,9 @@ public class PreparedStatementUtil {
     }
 
     /**
-     * Creates prepared statement that updates one specified attribute from in the database.
-     * Uses helper method to check to make sure the attribute being updated is in the database. 
+     * Creates prepared statement that updates one specified attribute from in
+     * the database. Uses helper method to check to make sure the attribute
+     * being updated is in the database.
      *
      * @param _uuid
      * @param _attribute
@@ -143,29 +148,69 @@ public class PreparedStatementUtil {
             return this.statementToReturn;
         }
     }
-    
+
     /**
-     * Creates prepared statement that deletes user info from database based on UUID
+     * Creates prepared statement that deletes user info from database based on
+     * UUID
+     *
      * @param _uuid
      * @param _con
-     * @return 
+     * @return
      */
-    
     public PreparedStatement statementForDelete(String _uuid, Connection _con) {
         String deleteStatement = "DELETE FROM users where uuid = ?";
-        
+
         try {
-                this.statementToReturn = _con.prepareStatement(deleteStatement);
-                this.statementToReturn.setString(1, _uuid);
-            } catch (SQLException ex) {
-                Logger.getLogger(PreparedStatementUtil.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Unable to construct prepared statement");
-            }
-            return this.statementToReturn;
+            this.statementToReturn = _con.prepareStatement(deleteStatement);
+            this.statementToReturn.setString(1, _uuid);
+        } catch (SQLException ex) {
+            Logger.getLogger(PreparedStatementUtil.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Unable to construct prepared statement");
+        }
+        return this.statementToReturn;
+    }
+
+    public PreparedStatement statementForCalendarInsert(String _uuid, String _eventName, String _eventDate, String _eventTime, Connection _con) throws SQLException {
+        String insertStatement = "INSERT INTO calendar (uuid, eventName, eventDate, eventTime) VALUES (?, ?, ?, ?)";
+
+        this.statementToReturn = _con.prepareStatement(insertStatement);
+        this.statementToReturn.setString(1, _uuid);
+        this.statementToReturn.setString(2, _eventName);
+        this.statementToReturn.setString(1, _eventDate);
+        this.statementToReturn.setString(1, _eventTime);
+
+        return this.statementToReturn;
+    }
+
+    public PreparedStatement statementToQueryEventNames(String _uuid, Connection _con) throws SQLException {
+        String insertStatement = "SELECT eventName FROM calendar WHERE uuid = ?";
+
+        this.statementToReturn = _con.prepareStatement(insertStatement);
+        this.statementToReturn.setString(1, _uuid);
+
+        return this.statementToReturn;
+    }
+
+    public PreparedStatement statementToQueryEventDates(String _uuid, Connection _con) throws SQLException {
+        String insertStatement = "SELECT eventDate FROM calendar WHERE uuid = ?";
+
+        this.statementToReturn = _con.prepareStatement(insertStatement);
+        this.statementToReturn.setString(1, _uuid);
+
+        return this.statementToReturn;
+    }
+
+    public PreparedStatement statementToQueryEventTimes(String _uuid, Connection _con) throws SQLException {
+        String insertStatement = "SELECT eventTime FROM calendar WHERE uuid = ?";
+
+        this.statementToReturn = _con.prepareStatement(insertStatement);
+        this.statementToReturn.setString(1, _uuid);
+
+        return this.statementToReturn;
     }
 
     /**
-     * Helper method for checking if an attribute matches one of the columns on 
+     * Helper method for checking if an attribute matches one of the columns on
      * the table called "users". If not then return false.
      *
      * @param _attribute

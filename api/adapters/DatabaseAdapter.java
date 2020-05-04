@@ -7,6 +7,7 @@ package api.adapters;
 
 import api.interfaces.DatabaseInterface;
 import api.translators.ApacheDerbyTranslator;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DatabaseAdapter implements DatabaseInterface {
@@ -41,6 +42,16 @@ public class DatabaseAdapter implements DatabaseInterface {
     @Override
     public boolean checkIfEmailExists(String _email) {
         return DatabaseAdapter.currentlyUsedDatabase.checkIfEmailExists(_email);
+    }
+
+    @Override
+    public boolean insertIntoCalendarTable(String _uuid, String _eventName, String _eventDate, String _eventTime) {
+        return DatabaseAdapter.currentlyUsedDatabase.insertIntoCalendarTable(_uuid, _eventName, _eventDate, _eventTime);
+    }
+
+    @Override
+    public ArrayList<String[]> queryForCalendarInfo(String _uuid) {
+        return DatabaseAdapter.currentlyUsedDatabase.queryForCalendarInfo(_uuid);
     }
     
 }

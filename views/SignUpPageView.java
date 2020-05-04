@@ -29,7 +29,7 @@ import utilities.Homepage.EventHandlers;
 public class SignUpPageView implements Initializable {
 
     @FXML
-    private TextField suFName;
+    public TextField suFName;
 
     @FXML
     private TextField suLName;
@@ -160,7 +160,7 @@ public class SignUpPageView implements Initializable {
      * This method performs checks to ensure the users data can be stored in the
      * database.
      */
-    private boolean checkCredentials() {
+    public boolean checkCredentials() {
         if (this.suEmail.getText().isEmpty() || this.suEmail.getText() == null) {
             errorLabel.setText("Must enter email");
             return false;
