@@ -160,7 +160,7 @@ public class SignUpPageView implements Initializable {
      * This method performs checks to ensure the users data can be stored in the
      * database.
      */
-    public boolean checkCredentials() {
+    private boolean checkCredentials() {
         if (this.suEmail.getText().isEmpty() || this.suEmail.getText() == null) {
             errorLabel.setText("Must enter email");
             return false;

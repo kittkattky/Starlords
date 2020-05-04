@@ -95,21 +95,36 @@ public class EventHandlers {
         return handler;
     }
     
-        public EventHandler<MouseEvent> createEventsEventHandler() {
+    public EventHandler<MouseEvent> createGenreEventHandler() {
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent _event) {
-                EventsView view;
+                GenreView view;
                 try {
-                    view = switchScenes(_event, "fxml/EventsMainView.fxml").getController();
-                    System.out.println("passing this UUID in eventEventhandler: " + getUUID());
-                    view.eventsController.uuidController.setUUID(getUUID());
-                    view.eventsController.setZipCode();
+                    view = switchScenes(_event, "fxml/GenreList.fxml").getController();
                 } catch (IOException ex) {
                     Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
+        };
+        return handler;
+    }
+
+    public EventHandler<MouseEvent> createEventsEventHandler() {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent _event) {
+            EventsView view;
+            try {
+                view = switchScenes(_event, "fxml/EventsMainView.fxml").getController();
+                System.out.println("passing this UUID in eventEventhandler: " + getUUID());
+                view.eventsController.uuidController.setUUID(getUUID());
+                view.eventsController.setZipCode();
+            } catch (IOException ex) {
+                Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         };
         return handler;
     }
@@ -133,5 +148,4 @@ public class EventHandlers {
 
         _view.setUserInfoLabels(firstName, lastName, street, city, state, zipCode, email);
     }
-
 }

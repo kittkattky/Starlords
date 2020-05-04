@@ -69,6 +69,7 @@ public class HomePageView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         this.restaurantPic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createCuisineEventHandler());
+        this.moviePic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createGenreEventHandler());
         this.myAccountLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createMyAccountEventHandler());
         this.eventPic.addEventHandler(MouseEvent.MOUSE_CLICKED, this.handler.createEventsEventHandler());
 

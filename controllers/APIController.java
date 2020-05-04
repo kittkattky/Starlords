@@ -1,18 +1,18 @@
 package controllers;
 
-import models.APIModel;
-import java.util.LinkedHashMap;
-import org.json.JSONException;
-
 /**
  * APIController class for facilitating interactions between the computer and the APIModel class.
- * Authors: Preston Williamson
- * Last Updated Date: 27-FEB-2020
+ * @author Preston Williamson Last Updated Date: 02-MAY-2020
  */
+
+import api.translators.APITranslator;
+import java.util.LinkedHashMap;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class APIController {
     protected final int KEY = 0, VALUE = 1;
-    protected APIModel model;
+    protected APITranslator model;
 
     /**
      * public APIController constructor class. Constructor allows model instantiation without providing a user model.
@@ -21,7 +21,7 @@ public class APIController {
      * @param _paramArr: API parameters stored in a LinkedHashMap.
      */
     public APIController (String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
-        this.model = new APIModel();
+        this.model = new APITranslator();
 
         if (_paramArr != null) {
             for (String key : _paramArr.keySet())
@@ -32,7 +32,11 @@ public class APIController {
         this.model.setURLString(_url);
     }
 
-    public APIController (APIModel _model) {
+    /**
+     * public APIController constructor class. Constructor allows model instantiation with only the APIModel.
+     * @param _model: Base API URL.
+     */    
+    public APIController (APITranslator _model) {
         this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
     }
 
@@ -83,9 +87,18 @@ public class APIController {
     public String getAPIResultString (String _requestMethod, String _attributes) {
 
         //submit request if result string is null.
-        if (this.model.getAPIResultString() == null)
+        if (this.model.getAPIResultString() == null) {
             this.submitAPIRequest(_requestMethod, _attributes);
+        }
 
+        return this.getAPIResultString ();
+    }
+
+    /**
+     * getAPIResultString: a method which returns the internally stored API result string value.
+     * @return String: String representation of API results.
+     */
+    public String getAPIResultString () {
         return this.model.getAPIResultString();
     }
 
@@ -105,5 +118,13 @@ public class APIController {
      */
     public void setAPIConfigParameter (String _key, String _val) {
         this.model.setAPIConfigParameter(_key, _val);
+    }
+
+    /**
+     * getAPIParseObject: a method which returns the internally stored API parsing mechanism object reference.
+     * @return JSONObject: JSONObject
+     */
+    public JSONObject getAPIParseObject() {
+        return this.model.getAPIParseObject();
     }
 }
