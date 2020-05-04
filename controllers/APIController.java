@@ -1,18 +1,18 @@
 package controllers;
 
-import api.translators.APITranslator;
+import models.APIModel;
 import java.util.LinkedHashMap;
 import org.json.JSONException;
 
 /**
- * APIController class for facilitating interactions between the computer and the APITranslator class.
+ * APIController class for facilitating interactions between the computer and the APIModel class.
  * Authors: Preston Williamson
  * Last Updated Date: 27-FEB-2020
  */
 
 public class APIController {
     protected final int KEY = 0, VALUE = 1;
-    protected APITranslator model;
+    protected APIModel model;
 
     /**
      * public APIController constructor class. Constructor allows model instantiation without providing a user model.
@@ -21,7 +21,7 @@ public class APIController {
      * @param _paramArr: API parameters stored in a LinkedHashMap.
      */
     public APIController (String _url, String _userKey, LinkedHashMap <String, String> _paramArr) {
-        this.model = new APITranslator();
+        this.model = new APIModel();
 
         if (_paramArr != null) {
             for (String key : _paramArr.keySet())
@@ -32,7 +32,7 @@ public class APIController {
         this.model.setURLString(_url);
     }
 
-    public APIController (APITranslator _model) {
+    public APIController (APIModel _model) {
         this (_model.getURLString(), _model.getUserKey(), _model.getConfigObject());
     }
 

@@ -1,6 +1,6 @@
 package api.adapters;
 
-import api.translators.APITranslator;
+import models.APIModel;
 import controllers.APIController;
 import api.interfaces.LocationAPIInterface;
 import java.util.LinkedHashMap;
@@ -16,7 +16,7 @@ import utilities.AppConfigUtil.AppConfigUtil;
  */
 public final class LocationAPIAdapter implements LocationAPIInterface {
     protected APIController control;
-    protected APITranslator model = new APITranslator ();
+    protected APIModel model = new APIModel ();
     protected double latitude, longitude;
     protected String BASE_URL;
     protected String USER_KEY;

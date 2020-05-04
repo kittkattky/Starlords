@@ -64,7 +64,7 @@ public class AccountController {
         if (attribute != null) {
             return attribute;
         } else {
-            System.out.println("Query request in account controller returned null string");
+            System.out.println("Query request with uuid: " + this.uuidController.getUUID() + "in account controller returned null string");
             return null;
         }
     }

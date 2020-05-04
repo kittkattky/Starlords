@@ -26,7 +26,7 @@ public class PreparedStatementUtil {
      * @return
      */
     public PreparedStatement statementForInsert(Map<String, String> _userInformation, Connection _con) {
-        String insertStatement = "INSERT INTO users (UUID, FIRSTNAME, LASTNAME, STREET, CITY, STATE, ZIPCODE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        String insertStatement = "INSERT INTO users (UUID, firstName, lastName, STREET, CITY, STATE, ZIPCODE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
         try {
             this.statementToReturn = _con.prepareStatement(insertStatement);
@@ -165,8 +165,8 @@ public class PreparedStatementUtil {
     }
 
     /**
-     * Helper method for checking if an attribute matches one of the columns on
-     * the table. If not then return false.
+     * Helper method for checking if an attribute matches one of the columns on 
+     * the table called "users". If not then return false.
      *
      * @param _attribute
      * @return

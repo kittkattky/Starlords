@@ -8,12 +8,15 @@ package views;
 import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,11 +60,6 @@ public class SignUpPageView implements Initializable {
 
     @FXML
     protected Label errorLabel;
-
-    private final ObservableList<String> STATELIST = FXCollections.observableArrayList("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii",
-            "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska",
-            "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-            "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
 
     protected AccountController signUpController = new AccountController();
     //EventHandlers has transition method for moving from one scene to the next.
@@ -113,13 +111,17 @@ public class SignUpPageView implements Initializable {
 
     /**
      * Initializes the scene elements associated with this view class.
-     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.combobox.setItems(STATELIST);
+        List<String> myList;
+      try {
+        myList = Files.lines(Paths.get("FiftyStates.txt")).collect(Collectors.toList());
+        combobox.setItems(FXCollections.observableArrayList(myList));
+    } catch (IOException e) {
+    }
     }
 
     /**
@@ -137,8 +139,8 @@ public class SignUpPageView implements Initializable {
             UUID uuid = UUID.randomUUID();
 
             userCredentials.put("uuid", uuid.toString());
-            userCredentials.put("firstname", this.suFName.getText());
-            userCredentials.put("lastname", this.suLName.getText());
+            userCredentials.put("firstName", this.suFName.getText());
+            userCredentials.put("lastName", this.suLName.getText());
             userCredentials.put("street", this.suStreet.getText());
             userCredentials.put("city", this.suCity.getText());
             userCredentials.put("state", this.combobox.getValue());

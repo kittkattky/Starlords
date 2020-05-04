@@ -2,10 +2,10 @@ package views;
 
 /**
  * This is the view associated with the myAccount scene.
+ *
  * @author: Diego Rodriguez
  * @date: 4/25/20
  */
-
 import controllers.AccountController;
 import java.io.IOException;
 import java.net.URL;
@@ -26,8 +26,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
 import utilities.Homepage.EventHandlers;
-
 
 public class myAccountView implements Initializable {
 
@@ -66,7 +66,7 @@ public class myAccountView implements Initializable {
 
     @FXML
     Label deleteLabel;
-    
+
     @FXML
     Label deleteLabel2;
 
@@ -78,12 +78,18 @@ public class myAccountView implements Initializable {
 
     @FXML
     PasswordField newPassword;
-    
+
     @FXML
     Button sureButton;
-    
+
     @FXML
     Button notSureButton;
+    
+    @FXML
+    Rectangle logOutRectangle;
+    
+    @FXML 
+    Rectangle homePageRectangle;
 
     private Boolean areYouSure = false;
     protected EventHandlers handler = new EventHandlers();
@@ -91,8 +97,9 @@ public class myAccountView implements Initializable {
 
     /**
      * Method is called when scene is created, sets gradient for anchorpane.
+     *
      * @param location
-     * @param resources 
+     * @param resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,13 +112,14 @@ public class myAccountView implements Initializable {
 
     /**
      * Sets all labels for displaying user data
+     *
      * @param fName
      * @param LName
      * @param street
      * @param city
      * @param state
      * @param zipCode
-     * @param email 
+     * @param email
      */
     public void setUserInfoLabels(String fName, String LName, String street, String city, String state, String zipCode, String email) {
         this.fNameLabel.setText(fName);
@@ -122,11 +130,13 @@ public class myAccountView implements Initializable {
         this.zipCodeLabel.setText(zipCode);
         this.emailLabel.setText(email);
     }
-    
+
     /**
-     * Goes back to home page when home page label is mouse clicked. Sets necessary fields in home page.
+     * Goes back to home page when home page label is mouse clicked. Sets
+     * necessary fields in home page.
+     *
      * @param _event
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     public void backToHomepage(MouseEvent _event) throws IOException {
@@ -136,9 +146,11 @@ public class myAccountView implements Initializable {
     }
 
     /**
-     * Returns to log in page when log out label is mouse clicked. Sets necessary fields on log in page
+     * Returns to log in page when log out label is mouse clicked. Sets
+     * necessary fields on log in page
+     *
      * @param _event
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     public void logOut(MouseEvent _event) throws IOException {
@@ -147,10 +159,10 @@ public class myAccountView implements Initializable {
     }
 
     /**
-     * Updates password when update button event is fired
-     * If password is incorrect display message
-     * Else perform update and display message
-     * @param _event 
+     * Updates password when update button event is fired If password is
+     * incorrect display message Else perform update and display message
+     *
+     * @param _event
      */
     @FXML
     public void updatePassword(ActionEvent _event) {
@@ -168,12 +180,12 @@ public class myAccountView implements Initializable {
     }
 
     /**
-     * Deletes account if buttons fire events.
-     * If password is not correct, display message.
-     * Else if the user has already click "I AM SURE!" button, then perform delete.
-     * Else, ask user if they are sure.
+     * Deletes account if buttons fire events. If password is not correct,
+     * display message. Else if the user has already click "I AM SURE!" button,
+     * then perform delete. Else, ask user if they are sure.
+     *
      * @param _event
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     public void deleteAccount(ActionEvent _event) throws IOException {
@@ -185,7 +197,7 @@ public class myAccountView implements Initializable {
             this.myAccountController.sendDeleteRequest();
             LogInPageView view = this.handler.switchScenes(_event, "fxml/LogInPage.fxml").getController();
             view.setLogOutLabel("Delete Successful");
-        } else {   
+        } else {
             this.deleteLabel.setText("ARE YOU SURE?");
             this.sureButton.setVisible(true);
             this.notSureButton.setVisible(true);
@@ -193,10 +205,12 @@ public class myAccountView implements Initializable {
             this.areYouSure = true;
         }
     }
-    
+
     /**
-     * Sets parameter when "I'm not sure!" button is clicked and makes buttons/text disappear.
-     * @param _event 
+     * Sets parameter when "I'm not sure!" button is clicked and makes
+     * buttons/text disappear.
+     *
+     * @param _event
      */
     @FXML
     public void notSure(ActionEvent _event) {
@@ -205,6 +219,22 @@ public class myAccountView implements Initializable {
         this.notSureButton.setVisible(false);
         this.deleteLabel.setText("");
         this.deleteLabel2.setText("");
+    }
+
+    public void setLightLogOutRectangle() {
+        this.logOutRectangle.setFill(Color.valueOf("95a1cf"));
+    }
+
+    public void setDarkLogOutRectangle() {
+        this.logOutRectangle.setFill(Color.valueOf("6b7497"));
+    }
+
+    public void setLightHomePageRectangle() {
+        this.homePageRectangle.setFill(Color.valueOf("95a1cf"));
+    }
+
+    public void setDarkHomePageRectangle() {
+        this.homePageRectangle.setFill(Color.valueOf("6b7497"));
     }
 
 }

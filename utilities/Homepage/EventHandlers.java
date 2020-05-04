@@ -11,10 +11,9 @@ package utilities.Homepage;
  */
 
 import controllers.AccountController;
+import controllers.EventsController;
 import controllers.UUIDController;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.Event;
@@ -24,9 +23,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.json.JSONException;
 import views.*;
 
 
@@ -96,27 +94,26 @@ public class EventHandlers {
         };
         return handler;
     }
-
-    public EventHandler<MouseEvent> changeToDarkRectangle(Rectangle _rectangle) {
+    
+        public EventHandler<MouseEvent> createEventsEventHandler() {
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent _event) {
+                EventsView view;
+                try {
+                    view = switchScenes(_event, "fxml/EventsMainView.fxml").getController();
+                    System.out.println("passing this UUID in eventEventhandler: " + getUUID());
+                    view.eventsController.uuidController.setUUID(getUUID());
+                    view.eventsController.setZipCode();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-                _rectangle.setFill(Color.valueOf("6b7497"));
             }
         };
         return handler;
     }
 
-    public EventHandler<MouseEvent> changeToLightRectangle(Rectangle _rectangle) {
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent _event) {
-                _rectangle.setFill(Color.valueOf("95a1cf"));
-            }
-        };
-        return handler;
-    }
 
 
     //================= GETTERS =============== 
@@ -125,7 +122,7 @@ public class EventHandlers {
     }
 
     public void loadUserAccountInfo(myAccountView _view) {
-
+        System.out.println("setting user info with: " + _view.myAccountController.uuidController.getUUID());
         String firstName = _view.myAccountController.sendQueryRequest("firstname");
         String lastName = _view.myAccountController.sendQueryRequest("lastname");
         String street = _view.myAccountController.sendQueryRequest("street");

@@ -13,6 +13,7 @@ and open the template in the editor.
 )
         
 }
-/*.panel:hover{
-    -fx-fill: #1F1E1E
-}*/
+.posterPane:hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
