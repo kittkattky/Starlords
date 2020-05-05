@@ -43,7 +43,6 @@ public class MovieListView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.lblSynopsisValue.setWrapText(true);
-        System.out.println (this.movieController.uuidController.getUUID());
     }
     
     @FXML
@@ -60,7 +59,6 @@ public class MovieListView implements Initializable {
     
     @FXML
     public void backToGenreScene (ActionEvent _event) throws IOException {
-        System.out.println (this.movieController.uuidController.getUUID());
         GenreView view = this.handler.switchScenes(_event, "fxml/GenreList.fxml").getController ();
         view.movieController.uuidController.setUUID(this.movieController.uuidController.getUUID());
     }

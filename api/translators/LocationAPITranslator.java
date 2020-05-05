@@ -1,4 +1,4 @@
-package utilities.LocationUtil;
+package api.translators;
 /**
  * LocationUtil public class for gathering location data.
  * Authors: Preston Williamson
@@ -9,7 +9,7 @@ import api.adapters.DatabaseAdapter;
 import api.adapters.LocationAPIAdapter;
 import java.util.LinkedHashMap;
 
-public class LocationUtil {
+public class LocationAPITranslator {
     public static final boolean GEO_CODE = false;
     public static final boolean GEO_LOCATION = true;
     
@@ -19,11 +19,11 @@ public class LocationUtil {
     private String GEO_CODE_INDICATOR = "api.geocode.";
     protected final static DatabaseAdapter dbAdapter = new DatabaseAdapter();
 
-    public LocationUtil(String _uuid, boolean _type) throws Exception {
+    public LocationAPITranslator(String _uuid, boolean _type) throws Exception {
         String indicator;       
         
         //set API indicator.
-        if (_type == LocationUtil.GEO_CODE) {
+        if (_type == LocationAPITranslator.GEO_CODE) {
             indicator = this.GEO_CODE_INDICATOR;
         }
         else {
@@ -33,13 +33,13 @@ public class LocationUtil {
         this.requestType = _type;
         this.api = new LocationAPIAdapter (indicator);
         
-        if (_type == LocationUtil.GEO_CODE) {
+        if (_type == LocationAPITranslator.GEO_CODE) {
             String zipCode = dbAdapter.queryForAttribute (_uuid, "zipcode");
             this.setAPIConfigParameter ("address", zipCode);
         }
     }
     
-    public LocationUtil (String _uuid, boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
+    public LocationAPITranslator (String _uuid, boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
         this (_uuid, _type);
         for (String key : _paramMap.keySet())
             this.api.setAPIConfigParameter(key, _paramMap.get(key));
@@ -49,6 +49,7 @@ public class LocationUtil {
         this.api.submitRequest();
     }
 
+    //================= GETTERS ===============
     public double getLatitude () {
         return this.api.getLatitude();
     }
@@ -57,9 +58,10 @@ public class LocationUtil {
         return this.api.getLongitude();
     }
 
+    //================= SETTERS ===============
     public void setAPIConfigParameter (String _key, String _val) throws Exception {
-        boolean isGeoCode = (this.requestType == LocationUtil.GEO_CODE);
-        boolean isGeoLocation = (this.requestType == LocationUtil.GEO_LOCATION);
+        boolean isGeoCode = (this.requestType == LocationAPITranslator.GEO_CODE);
+        boolean isGeoLocation = (this.requestType == LocationAPITranslator.GEO_LOCATION);
         boolean isUserKey = (_key.compareTo(this.api.getUserKeyAttributeName()) == 0);
         
         //GeoCode object may have multiple parameters.

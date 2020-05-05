@@ -27,7 +27,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
     protected String LAT_ATTR;
     protected String AUTH_KEY_ATTR;
     protected String API_INDICATOR;
-    
+
     private final AppConfigUtil config = new AppConfigUtil ("AppConfig.properties");
 
     /**
@@ -147,7 +147,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
     public String getAPIConfigParameters () {
         return this.control.getAPIConfigParameters ();
     }
-    
+
     @Override
     public String getAPIIndicator() {
         return this.API_INDICATOR;
@@ -170,7 +170,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
     public double getLongitude() {
        return this.longitude;
     }
-    
+
     @Override
     public String getConfigProperty (String _key) {
         return this.config.getProperty (this.getAPIIndicator () + _key);

@@ -19,6 +19,12 @@ public class MovieModel {
     protected String graphicURL;
     protected MovieAPIAdapter api = new MovieAPIAdapter ();
     
+    public void submitRequest () {
+        this.api.submitRequest();
+    }
+
+    
+    //================= GETTERS =============== 
     public TreeMap<Integer, String> getGenreMap () throws JSONException {
         return this.api.getGenreMap();
     }
@@ -39,6 +45,7 @@ public class MovieModel {
         return this.graphicURL;
     }    
     
+    //================= GETTERS =============== 
     public void setMovieID (String _id) {
         this.movieID = _id;
     }
@@ -53,10 +60,6 @@ public class MovieModel {
     
     public String getAPIResultString () {
         return this.api.getAPIResultString();
-    }
-    
-    public void submitRequest () {
-        this.api.submitRequest();
     }
     
     public void setAPIConfigParameter (String _key, String _value) {

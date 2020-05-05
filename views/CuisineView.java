@@ -57,7 +57,7 @@ public class CuisineView implements Initializable {
      * @param event
      */
     @FXML
-    private void handleSearchButtonAction(ActionEvent event) throws Exception {
+    private void handleSearchButtonAction (ActionEvent _event) throws Exception {
         this.isSearched = true;
         addCuisinesToList();
     }
@@ -111,7 +111,7 @@ public class CuisineView implements Initializable {
                  */
                 RestaurantListView view = this.handler.switchScenes(_event, "fxml/RestaurantList.fxml").getController();
                 //Set the UUID in the instance of the restaurant controller created in the RestaurantListView
-                view.restaurantController.uuidController.setUUID(this.handler.uuidController.getUUID());
+                view.restaurantController.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
                 view.addRestaurantsToList(this.restaurantController.getCuisineID());
                 view.setCuisineLabel(cuisineSelected);
             }
