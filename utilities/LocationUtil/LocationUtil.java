@@ -1,5 +1,6 @@
 package utilities.LocationUtil;
 
+import api.adapters.DatabaseAdapter;
 import api.adapters.LocationAPIAdapter;
 import java.util.LinkedHashMap;
 
@@ -11,22 +12,29 @@ public class LocationUtil {
     private LocationAPIAdapter api;
     private String GEO_LOCATION_INDICATOR = "api.geolocation.";
     private String GEO_CODE_INDICATOR = "api.geocode.";
+    protected final static DatabaseAdapter dbAdapter = new DatabaseAdapter();
 
-    public LocationUtil(boolean _type) throws Exception {
+    public LocationUtil(String _uuid, boolean _type) throws Exception {
         String indicator;       
         
-        if (_type == LocationUtil.GEO_CODE)
-            
+        if (_type == LocationUtil.GEO_CODE) {
             indicator = this.GEO_CODE_INDICATOR;
-        else
+        }
+        else {
             indicator = this.GEO_LOCATION_INDICATOR;
+        }
         
         this.requestType = _type;
         this.api = new LocationAPIAdapter (indicator);
+        
+        if (_type == LocationUtil.GEO_CODE) {
+            String zipCode = dbAdapter.queryForAttribute (_uuid, "zipcode");
+            this.setAPIConfigParameter ("address", zipCode);
+        }
     }
     
-    public LocationUtil (boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
-        this (_type);
+    public LocationUtil (String _uuid, boolean _type, LinkedHashMap <String, String> _paramMap) throws Exception {
+        this (_uuid, _type);
         for (String key : _paramMap.keySet())
             this.api.setAPIConfigParameter(key, _paramMap.get(key));
     }

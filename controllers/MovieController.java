@@ -1,25 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import java.util.TreeMap;
-import java.util.TreeSet;
 import models.MovieModel;
 import org.json.JSONException;
-import utilities.AppConfigUtil.AppConfigUtil;
 
-/**
- *
- * @author Preston.Williamson
- */
 public class MovieController {
     protected TreeMap <Integer, MovieModel> movieCollection = new TreeMap <> ();
-    protected String uuid = "test";
     protected TreeMap <Integer, String> mapSelectedGenres = new TreeMap <> ();
     protected MovieModel focusedMovie = new MovieModel ();
+    public UUIDController uuidController = new UUIDController ();
     
     public TreeMap <Integer, String> getGenreMap () throws JSONException {
         return this.focusedMovie.getGenreMap ();
@@ -80,8 +69,8 @@ public class MovieController {
         return this.focusedMovie.getMovieSynopsis ();
     }
     
-    public String getUUID () {
-        return this.uuid;
+    public String getUUID() {
+        return this.uuidController.getUUID();
     }
     
     public void setFocusedMovie (MovieModel _movieModel) {
@@ -107,9 +96,5 @@ public class MovieController {
     
     public void setGenreMap (TreeMap <Integer, String> _map) {
         this.mapSelectedGenres = _map;
-    }
-    
-    public void setUUID(String _uuid) {
-        this.uuid = _uuid;
     }
 }

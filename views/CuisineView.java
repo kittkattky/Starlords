@@ -16,15 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.Map;
-import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import utilities.Homepage.EventHandlers;
 
 public class CuisineView implements Initializable {
@@ -37,6 +31,9 @@ public class CuisineView implements Initializable {
 
     @FXML
     protected ListView<String> listViewCuisineList;
+    
+    @FXML
+    protected Button btnHome;
 
     protected boolean isSearched = false;
     protected boolean isSelected = false;
@@ -46,6 +43,12 @@ public class CuisineView implements Initializable {
 
     protected Map cuisineMap;
     protected Map cuisineIDMap;
+    
+    @FXML
+    public void homeButton  (ActionEvent _event) throws IOException {
+        HomePageView view = this.handler.switchScenes (_event, "fxml/HomePage.fxml").getController ();
+        view.handler.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
+    }
 
     /**
      * When the search button is clicked, this method handles the event.
@@ -104,23 +107,11 @@ public class CuisineView implements Initializable {
                  */
                 RestaurantListView view = this.handler.switchScenes(_event, "fxml/RestaurantList.fxml").getController();
                 //Set the UUID in the instance of the restaurant controller created in the RestaurantListView
-                view.restaurantController.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
+                view.restaurantController.uuidController.setUUID(this.handler.uuidController.getUUID());
                 view.addRestaurantsToList(this.restaurantController.getCuisineID());
                 view.setCuisineLabel(cuisineSelected);
             }
         }
-    }
-
-    /**
-     * Switch back to home page when button is pressed. 
-     * @param _event
-     * @throws IOException 
-     */
-    public void homeButton(ActionEvent _event) throws IOException {
-        HomePageView view = this.handler.switchScenes(_event, "fxml/HomePage.fxml").getController();
-        view.handler.uuidController.setUUID(this.restaurantController.uuidController.getUUID());
-        view.setHomePageText("Select an option");
-        
     }
 
 
@@ -145,11 +136,6 @@ public class CuisineView implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Stop[] stops = new Stop[]{new Stop(0, Color.web("#5C258D")), new Stop(1, Color.web("#4389A2"))};
-        LinearGradient linearGradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-        BackgroundFill fillBackground = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
-        this.anchorPane.setBackground(new Background(fillBackground));
-
     }
 
 }

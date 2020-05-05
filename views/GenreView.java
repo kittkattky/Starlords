@@ -14,10 +14,12 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import org.json.JSONException;
 import utilities.Homepage.EventHandlers;
 
@@ -37,8 +39,7 @@ public class GenreView implements Initializable {
     protected ListView checkListGenres;
     
     protected TreeMap <Integer, String> mapGenres;    
-    protected MovieController control = new MovieController ();
-    public UUIDController uuidControl = new UUIDController ();
+    public MovieController movieController = new MovieController ();
     protected EventHandlers handler = new EventHandlers ();
 
     public void populateGenreList () {        
@@ -50,9 +51,8 @@ public class GenreView implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //this.handler.setBackground(this.anchorPane);
         try {
-            this.mapGenres = this.control.getGenreMap();
+            this.mapGenres = this.movieController.getGenreMap();
         } catch (JSONException ex) {
             Logger.getLogger(GenreView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,20 +64,23 @@ public class GenreView implements Initializable {
         TreeMap <Integer, String> selectedItems = this.getGenreSelection ();
         
         if (selectedItems.isEmpty()) {
+            this.errorLabel.setTextFill(Paint.valueOf("#FF0000"));
             this.errorLabel.setText ("Please check at least one genre");
+            this.errorLabel.setAlignment(Pos.CENTER);
         }
         else{
             this.errorLabel.setText ("");
             MovieListView movieView = this.handler.switchScenes(_event, "fxml/MovieList.fxml").getController();
             
-            movieView.passUUIDToController(this.control.getUUID ());
+            movieView.movieController.uuidController.setUUID(this.movieController.uuidController.getUUID ());
             movieView.addMoviesToList (selectedItems);
         }
     }
     
     @FXML
     private void handleBackButtonAction (ActionEvent _event) throws IOException {
-        this.handler.switchScenes (_event, "fxml/HomePage.fxml");
+        HomePageView view = this.handler.switchScenes (_event, "fxml/HomePage.fxml").getController ();
+        view.handler.uuidController.setUUID(this.movieController.uuidController.getUUID());
     }
     
     public TreeMap <Integer, String> getGenreSelection () {
@@ -104,9 +107,5 @@ public class GenreView implements Initializable {
         }
         
         return selectedItems;
-    } 
-    
-    public void passUUIDtoController(String _uuid) {
-        this.control.setUUID(_uuid);
     }
 }

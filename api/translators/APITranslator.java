@@ -1,9 +1,9 @@
 package api.translators;
 
 /**
- * APIModel class for facilitating communications between the computer and external APIs.
+ * APITranslator class for facilitating communications between the computer and external APIs.
  * Authors: Preston Williamson
- * Last Updated Date: 21-APR-2020
+ * Last Updated Date: 04-MAY-2020
  */
 
 import java.io.BufferedReader;
@@ -16,19 +16,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
 
-/**
- *
- * @author preston.williamson
- */
 public class APITranslator {
-    protected static final int API_SUCCESS_CODE = 200;
+    protected final int API_SUCCESS_CODE = 200;
     protected String apiReturn, parameterString, requestMethod, urlSite, userKey;
     protected LinkedHashMap <String, String> config = new LinkedHashMap <> ();
     protected URL url;
@@ -42,11 +37,13 @@ public class APITranslator {
      */
     public void formatAPIResultString () {
         //continue chopping off leading and trailing characters until the expected first char is obtained.
-        String apiRet = this.getAPIResultString();
-        while (apiRet.charAt(0) != this.START_INIDCATOR)
-            apiRet = apiRet.substring(1, apiRet.length () - 1);
+        final int FIRST_CHAR = 0;
+        String apiRet = this.getAPIResultString ();
+        while (apiRet.charAt (FIRST_CHAR) != this.START_INIDCATOR) {
+            apiRet = apiRet.substring (1, apiRet.length () - 1);
+        }
 
-        this.setAPIResultString(apiRet);
+        this.setAPIResultString (apiRet);
     }
     
     
@@ -57,43 +54,45 @@ public class APITranslator {
      * @param _delimiter: delimiter that will separate each instance in the parameter string.
      */
     public void convertAPIConfigParameter (String _key, TreeMap <Integer, String> _map, String _delimiter) {
+        final int FIRST_CHAR = 0;
         String ret = "";
         
         //convert map to string, separated by delimiter.
-        for (Object key : _map.keySet())
-            ret = ret.concat(String.valueOf(key) + _delimiter);
+        for (Object key : _map.keySet ()) {
+            ret = ret.concat (String.valueOf (key) + _delimiter);
+        }
         
-        int delimiterLen = _delimiter.length();
-        int resultLen = ret.length();
+        int delimiterLen = _delimiter.length ();
+        int resultLen = ret.length ();
         
         //remove the trailing delimiter in the string.
         int removeChar = (delimiterLen < resultLen) ? (resultLen - delimiterLen) : delimiterLen;
         
         //set API parameter.
-        this.setAPIConfigParameter(_key, ret.substring(0, removeChar));
+        this.setAPIConfigParameter (_key, ret.substring (FIRST_CHAR, removeChar));
     }    
 
     /**
-     * submitAPIRequest - a method that handles parsing from an API POST/GET request.
+     * submitAPIRequest: a method that handles parsing from an API POST/GET request.
      * @param _requestMethod: Request Method ("GET", "POST")
      * @param _attributes: a String representation of the desired attribute from which to parse.
      */
-    public void submitAPIRequest(String _requestMethod, String _attributes) {
+    public void submitAPIRequest (String _requestMethod, String _attributes) {
         //set request method.
-        this.setRequestMethod(_requestMethod);
+        this.setRequestMethod (_requestMethod);
         try {
             //set up connection parameters.
-            this.configureConnectionProperties();
+            this.configureConnectionProperties ();
             
             //parse API results from the connection input stream.
-            this.parseAPIResults(_attributes);
+            this.parseAPIResults (_attributes);
 
             //disconnect system resources when finished.
-            this.closeConnection();
+            this.closeConnection ();
         }
         catch (Exception ex) {
             //throw exception if caught.
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger (this.getClass ().getName ()).log (Level.SEVERE, null, ex);
         }
     }
     
@@ -103,30 +102,31 @@ public class APITranslator {
      * @throws IOException
      */
     public void configureConnectionProperties () throws MalformedURLException, IOException, Exception {
-        String apiKey = this.getUserKey();
-        String reqMethod = this.getRequestMethod();
-        this.setURLObject();
-        this.setConnectionObject();
+        String apiKey = this.getUserKey ();
+        String reqMethod = this.getRequestMethod ();
+        this.setURLObject ();
+        this.setConnectionObject ();
 
         //get connection object with pre-configured URL.
-        HttpURLConnection connection = this.getConnectionObject();
+        HttpURLConnection connection = this.getConnectionObject ();
 
         //only set the user key if it is not null.
-        if (apiKey != null)
-            connection.setRequestProperty("user-key", apiKey);
+        if (apiKey != null) {
+            connection.setRequestProperty ("user-key", apiKey);
+        }
 
         //set request method.
-        this.setRequestMethod(reqMethod);
+        this.setRequestMethod (reqMethod);
 
         //switch statement dedicated to dictating next steps based on request method.
-        switch (reqMethod.toLowerCase()) {
+        switch (reqMethod.toLowerCase ()) {
             case "post":
                 //enable output.
-                connection.setDoOutput(true);
+                connection.setDoOutput (true);
 
                 //POST results to server.
                 DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
-                wr.writeUTF(this.getAPIConfigParameters());
+                wr.writeUTF (this.getAPIConfigParameters ());
                 break;
 
             //no further action defined for "GET" request methods.
@@ -146,32 +146,32 @@ public class APITranslator {
     private void parseAPIResults (String _attributes) throws IOException, Exception {
         String ret = "";
         String inputLine;
-        HttpURLConnection connection = this.getConnectionObject();
-        System.out.println (connection.getURL().toString());
+        HttpURLConnection connection = this.getConnectionObject ();
 
         //verify response code is 200, indicating that request was successful. Otherwise, throw exception.
-        if (connection.getResponseCode() != this.getClass().newInstance().API_SUCCESS_CODE)
-            throw new Exception ("API response code " + connection.getResponseCode() + ": " + connection.getResponseMessage());
+        if (connection.getResponseCode () != this.API_SUCCESS_CODE)
+            throw new Exception ("API response code " + connection.getResponseCode () + ": " + connection.getResponseMessage ());
         else {
             //set up buffer reader with the connection input stream.
-            BufferedReader response = new BufferedReader ( new InputStreamReader (connection.getInputStream()) );
+            BufferedReader response = new BufferedReader (new InputStreamReader (connection.getInputStream ()));
             //strBuff = new StringBuffer ();
 
             //continue appension until end of the buffer is reached.
-            while ((inputLine = response.readLine ()) != null)
-                ret = ret.concat(inputLine);
+            while ((inputLine = response.readLine ()) != null) {
+                ret = ret.concat (inputLine);
+            }
 
             //set the API return variable and format accordingly.
-            this.setAPIResultString(ret);
+            this.setAPIResultString (ret);
 
-            String [] attributes = _attributes.split(";");
+            String [] attributes = _attributes.split (";");
             for (String attribute : attributes) {
                 //parse desired attribute.
-                this.formatAPIResultString();
-                this.setAPIParseObject();
-                this.setAPIResultString(this.getAPIParseObject().getString(attribute));
+                this.formatAPIResultString ();
+                this.setAPIParseObject ();
+                this.setAPIResultString(this.getAPIParseObject ().getString (attribute));
             }
-            this.formatAPIResultString();
+            this.formatAPIResultString ();
         }
     }
 
@@ -179,12 +179,12 @@ public class APITranslator {
      * closeConnection: a method to close the dedicated connection.
      */
     public void closeConnection () {
-        this.getConnectionObject().disconnect();
+        this.getConnectionObject ().disconnect ();
     }
     
-    public LinkedHashMap<String, Object> toMap() throws JSONException {  
-        this.setAPIParseObject();
-        return this.toMap(this.getAPIParseObject());
+    public LinkedHashMap<String, Object> toMap () throws JSONException {  
+        this.setAPIParseObject ();
+        return this.toMap (this.getAPIParseObject ());
     }
 
     /**
@@ -193,23 +193,23 @@ public class APITranslator {
      * @return
      * @throws JSONException
      */
-    public LinkedHashMap<String, Object> toMap(JSONObject _apiParse) throws JSONException {
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+    public LinkedHashMap <String, Object> toMap (JSONObject _apiParse) throws JSONException {
+        LinkedHashMap <String, Object> map = new LinkedHashMap <> ();
 
         //continue iteration until end of the key set has been reached.
-        Iterator<String> keyIterator = _apiParse.keys();
-        while(keyIterator.hasNext()) {
-            String key = keyIterator.next();
-            Object value = _apiParse.get(key);
+        Iterator <String> keyIterator = _apiParse.keys ();
+        while (keyIterator.hasNext ()) {
+            String key = keyIterator.next ();
+            Object value = _apiParse.get (key);
 
             //determine next steps based on data type of value Object.
-            if(value instanceof JSONArray)
-                value = this.toArrayList((JSONArray) value);
-            else if(value instanceof JSONObject)
-                value = this.toMap((JSONObject) value);
+            if (value instanceof JSONArray)
+                value = this.toArrayList ((JSONArray) value);
+            else if (value instanceof JSONObject)
+                value = this.toMap ((JSONObject) value);
 
             //enter key-value pair into map.
-            map.put(key, value);
+            map.put (key, value);
         }
         return map;
     }
@@ -220,7 +220,7 @@ public class APITranslator {
      * @return ArrayList (Object): an ArrayList object with the attributes converted and stored.
      * @throws JSONException
      */
-    public ArrayList<Object> toArrayList(JSONArray _array) throws JSONException {
+    public ArrayList <Object> toArrayList (JSONArray _array) throws JSONException {
         ArrayList<Object> list = new ArrayList<>();
 
         for(int i = 0; i < _array.length(); i++) {
@@ -247,12 +247,12 @@ public class APITranslator {
     public String getAPIConfigParameters () {
         this.parameterString = "";
         char delimiter;
-        Set <String> set = this.getConfigObject().keySet();
+        Set <String> set = this.getConfigObject ().keySet();
 
         for (String key : set) {
             //if the parameter set is empty, the first parameter must have the '?' indicator; otherwise, set indicator to '&'.
-            delimiter = ( this.parameterString.isEmpty() ? '?' : '&');
-            this.parameterString = this.parameterString.concat( delimiter + key + "=" + this.getConfigObject().get(key));
+            delimiter = (this.parameterString.isEmpty () ? '?' : '&');
+            this.parameterString = this.parameterString.concat ( delimiter + key + "=" + this.getConfigObject ().get (key));
         }
         return this.parameterString;
     }
@@ -279,6 +279,10 @@ public class APITranslator {
      */
     public HttpURLConnection getConnectionObject () {
         return this.connect;
+    }
+    
+    public int getAPIResponseCode () throws IOException {
+        return this.getConnectionObject().getResponseCode();
     }
 
     /**

@@ -49,7 +49,7 @@ public class RestaurantModel {
      */
     public static RestaurantModel loadCuisinesByLocation(String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
-        LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
+        LocationUtil location = new LocationUtil(_uuid, LocationUtil.GEO_CODE);
         String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
         location.setAPIConfigParameter("address", zipCode);
         location.submitRequest();
@@ -80,7 +80,7 @@ public class RestaurantModel {
      */
     public static RestaurantModel loadRestaurantsByID(int _id, String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
-        LocationUtil location = new LocationUtil(LocationUtil.GEO_CODE);
+        LocationUtil location = new LocationUtil(_uuid, LocationUtil.GEO_CODE);
         String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
         
         location.setAPIConfigParameter("address", zipCode);
@@ -181,6 +181,4 @@ public class RestaurantModel {
     public void setRestaurantRatingMap(Map _restaurantRatingMap) {
         this.restaurantRatingMap = _restaurantRatingMap;
     }
-    
-
 }

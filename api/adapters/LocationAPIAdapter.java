@@ -1,5 +1,11 @@
 package api.adapters;
 
+/**
+ * LocationAPIAdapter public class for implementing LocationAPIInterface
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
+
 import api.translators.APITranslator;
 import controllers.APIController;
 import api.interfaces.LocationAPIInterface;
@@ -9,11 +15,6 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import utilities.AppConfigUtil.AppConfigUtil;
 
-/**
- * LocationAPI public class for implementing LocationAPIInterface
- * Authors: Preston Williamson
- * Last Updated Date: 10-MAR-2020
- */
 public final class LocationAPIAdapter implements LocationAPIInterface {
     protected APIController control;
     protected APITranslator model = new APITranslator ();
@@ -29,44 +30,48 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
     
     private final AppConfigUtil config = new AppConfigUtil ("AppConfig.properties");
 
+    /**
+     * public constructor
+     * @param _property; String value of property name for which to search.
+     */
     public LocationAPIAdapter (String _property) {
-        this.setAPIIndicator(_property);
-        this.setURL(this.getConfigProperty("url"));
-        this.setUserKey(this.getConfigProperty("userKey"));
-        this.setUserKeyAttributeName(this.getConfigProperty("userKeyAttribute"));
-        this.setRequestMethod(this.getConfigProperty("requestMethod"));
-        this.setLocationAttributeName(this.getConfigProperty("locationAttribute"));
-        this.setLongitudeAttributeName(this.getConfigProperty("longitudeAttribute"));
-        this.setLatitudeAttributeName(this.getConfigProperty("latitudeAttribute"));
+        this.setAPIIndicator (_property);
+        this.setURL (this.getConfigProperty ("url"));
+        this.setUserKey (this.getConfigProperty ("userKey"));
+        this.setUserKeyAttributeName (this.getConfigProperty ("userKeyAttribute"));
+        this.setRequestMethod (this.getConfigProperty ("requestMethod"));
+        this.setLocationAttributeName (this.getConfigProperty ("locationAttribute"));
+        this.setLongitudeAttributeName (this.getConfigProperty ("longitudeAttribute"));
+        this.setLatitudeAttributeName (this.getConfigProperty ("latitudeAttribute"));
 
         //set user key.
-        this.setAPIConfigParameter(this.getConfigProperty("userKeyAttribute"), this.getConfigProperty("userKey"));
+        this.setAPIConfigParameter (this.getConfigProperty ("userKeyAttribute"), this.getConfigProperty ("userKey"));
     }
 
     /**
      * submitRequest: method dedicated to submitting the API request and store values from the result string.
      */
     @Override
-    public void submitRequest() {
+    public void submitRequest () {
 
         //submit request.
-        this.control = new APIController(this.model);
-        this.control.submitAPIRequest(this.getRequestMethod(), this.getLocationAttributeName());
+        this.control = new APIController (this.model);
+        this.control.submitAPIRequest (this.getRequestMethod (), this.getLocationAttributeName ());
 
         try {
             //get the map representation of the results and extract latitude and longitude.
-            LinkedHashMap <String, Object> map = (LinkedHashMap <String, Object>) this.control.toMap();
-            String lat = map.get (this.getLatitudeAttributeName()).toString();
-            String lng = map.get (this.getLongitudeAttributeName()).toString();
+            LinkedHashMap <String, Object> map = (LinkedHashMap <String, Object>) this.control.toMap ();
+            String lat = map.get (this.getLatitudeAttributeName ()).toString ();
+            String lng = map.get (this.getLongitudeAttributeName ()).toString ();
 
-            double parseLat = Double.parseDouble(lat);
-            double parseLong = Double.parseDouble(lng);
+            double parseLat = Double.parseDouble (lat);
+            double parseLong = Double.parseDouble (lng);
 
-            this.setLatitude(parseLat);
-            this.setLongitude(parseLong);
+            this.setLatitude (parseLat);
+            this.setLongitude (parseLong);
 
         } catch (JSONException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass ().getName ()).log (Level.SEVERE, null, ex);
         }
     }
 
@@ -76,7 +81,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getURL() {
+    public String getURL () {
         return this.model.getURLString();
     }
 
@@ -85,7 +90,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getUserKey() {
+    public String getUserKey () {
         return this.model.getUserKey();
     }
 
@@ -94,8 +99,8 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getRequestMethod() {
-        return this.model.getRequestMethod();
+    public String getRequestMethod () {
+        return this.model.getRequestMethod ();
     }
 
     /**
@@ -103,7 +108,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getLocationAttributeName() {
+    public String getLocationAttributeName () {
         return this.ATTRIBUTE;
     }
 
@@ -112,7 +117,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getLatitudeAttributeName() {
+    public String getLatitudeAttributeName () {
         return this.LAT_ATTR;
     }
 
@@ -121,7 +126,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getLongitudeAttributeName() {
+    public String getLongitudeAttributeName () {
         return this.LONG_ATTR;
     }
 
@@ -130,7 +135,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @return String
      */
     @Override
-    public String getUserKeyAttributeName() {
+    public String getUserKeyAttributeName () {
         return this.AUTH_KEY_ATTR;
     }
 
@@ -140,7 +145,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      */
     @Override
     public String getAPIConfigParameters () {
-        return this.control.getAPIConfigParameters();
+        return this.control.getAPIConfigParameters ();
     }
     
     @Override
@@ -168,7 +173,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
     
     @Override
     public String getConfigProperty (String _key) {
-        return this.config.getProperty(this.getAPIIndicator() + _key);
+        return this.config.getProperty (this.getAPIIndicator () + _key);
     }
 
     //================= SETTERS ===============
@@ -177,8 +182,8 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _url
      */
     @Override
-    public void setURL(String _url) {
-        this.model.setURLString(_url);
+    public void setURL (String _url) {
+        this.model.setURLString (_url);
     }
 
     /**
@@ -186,8 +191,8 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _userKey
      */
     @Override
-    public void setUserKey(String _userKey) {
-        this.model.setUserKey(_userKey);
+    public void setUserKey (String _userKey) {
+        this.model.setUserKey (_userKey);
     }
 
     /**
@@ -195,8 +200,8 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _reqMethod
      */
     @Override
-    public void setRequestMethod(String _reqMethod) {
-        this.model.setRequestMethod(_reqMethod);
+    public void setRequestMethod (String _reqMethod) {
+        this.model.setRequestMethod (_reqMethod);
     }
 
     /**
@@ -204,7 +209,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _attr
      */
     @Override
-    public void setLocationAttributeName(String _attr) {
+    public void setLocationAttributeName (String _attr) {
         this.ATTRIBUTE = _attr;
     }
 
@@ -213,7 +218,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _attr
      */
     @Override
-    public void setLatitudeAttributeName(String _attr) {
+    public void setLatitudeAttributeName (String _attr) {
         this.LAT_ATTR = _attr;
     }
 
@@ -222,7 +227,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _attr
      */
     @Override
-    public void setLongitudeAttributeName(String _attr) {
+    public void setLongitudeAttributeName (String _attr) {
         this.LONG_ATTR = _attr;
     }
 
@@ -231,7 +236,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _attr
      */
     @Override
-    public void setUserKeyAttributeName(String _attr) {
+    public void setUserKeyAttributeName (String _attr) {
         this.AUTH_KEY_ATTR = _attr;
     }
 
@@ -241,12 +246,17 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _val: value the key will store.
      */
     @Override
-    public void setAPIConfigParameter(String _key, String _val) {
-        this.model.setAPIConfigParameter(_key, _val);
+    public void setAPIConfigParameter (String _key, String _val) {
+        this.model.setAPIConfigParameter (_key, _val);
     }
-    
+
+
+    /**
+     * setAPIIndicator: method to set the tag name storing the API indicator that is used to reference api configurations.
+     * @param _indicator: value storing the key
+     */
     @Override
-    public void setAPIIndicator(String _indicator) {
+    public void setAPIIndicator (String _indicator) {
         this.API_INDICATOR = _indicator;
     }
 
@@ -255,7 +265,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _lat: double representation of latitude value.
      */
     @Override
-    public void setLatitude(double _lat) {
+    public void setLatitude (double _lat) {
         this.latitude = _lat;
     }
 
@@ -264,7 +274,7 @@ public final class LocationAPIAdapter implements LocationAPIInterface {
      * @param _lng: double representation of longitude value.
      */
     @Override
-    public void setLongitude(double _lng) {
+    public void setLongitude (double _lng) {
         this.longitude = _lng;
     }
 }

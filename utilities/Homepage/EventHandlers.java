@@ -16,6 +16,7 @@ import controllers.UUIDController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +69,7 @@ public class EventHandlers {
                     view = switchScenes(_event, "fxml/CuisineListUI.fxml").getController();
                     System.out.println("passing this UUID in cuisineEventhandler: " + getUUID());
                     view.restaurantController.uuidController.setUUID(getUUID());
+
                 } catch (IOException ex) {
                     Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -102,10 +104,11 @@ public class EventHandlers {
                 GenreView view;
                 try {
                     view = switchScenes(_event, "fxml/GenreList.fxml").getController();
+                    view.movieController.uuidController.setUUID(getUUID ());
+                    System.out.println("passing this UUID in genreEventhandler: " + getUUID());
                 } catch (IOException ex) {
-                    Logger.getLogger(HomePageView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(this.getClass ().getName ()).log (Level.SEVERE, null, ex);
                 }
-
             }
         };
         return handler;
@@ -127,8 +130,7 @@ public class EventHandlers {
         }
         };
         return handler;
-    }
-
+    }   
 
 
     //================= GETTERS =============== 
@@ -147,5 +149,5 @@ public class EventHandlers {
         String email = _view.myAccountController.sendQueryRequest("email");
 
         _view.setUserInfoLabels(firstName, lastName, street, city, state, zipCode, email);
-    }
+    }   
 }

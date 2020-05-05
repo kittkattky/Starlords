@@ -1,4 +1,4 @@
-BorderPane, ScrollPane, VBox, HBox, FlowPane, AnchorPane{
+ScrollPane, VBox, HBox, FlowPane, AnchorPane{
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
     -fx-background: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
     -fx-border-width: 0px;
@@ -94,11 +94,11 @@ Button:hover{
     -fx-text-fill: #403F3F;
 }
 
-TextField{
-    -fx-background-color: #403F3F;
+TextField, PasswordField{
+    -fx-background-color: white;
     -fx-background-radius: 2em;
     -fx-border-radius: 2em;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 TextField:focused, TextField:hover{

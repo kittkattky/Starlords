@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -16,34 +17,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.SignUpPageView">
+<AnchorPane styleClass = "paneHome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.SignUpPageView">
    <children>
-      <BorderPane prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;" styleClass="pane" stylesheets="@../views/css.css">
+      <BorderPane prefHeight="800.0" prefWidth="1333.0" style="-fx-background-color: #ffff;" styleClass="pane">
          <left>
-            <Pane prefHeight="800.0" prefWidth="668.0" styleClass="pane" stylesheets="@../views/css.css" BorderPane.alignment="CENTER">
+            <Pane styleClass = "paneLeft" prefHeight="800.0" prefWidth="668.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="191.0" layoutY="31.0" prefHeight="53.0" prefWidth="245.0" text="Create Account" textFill="#e5e4e4">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
-                     </font>
-                  </Label>
+                  <Label styleClass = "headerLabel" layoutX="191.0" layoutY="31.0" prefHeight="53.0" prefWidth="245.0" text="Create Account"/>
                   <TextField fx:id="suFName" layoutX="38.0" layoutY="137.0" prefHeight="68.0" prefWidth="179.0" promptText="First Name" />
                   <TextField fx:id="suLName" layoutX="245.0" layoutY="137.0" prefHeight="68.0" prefWidth="194.0" promptText="Last Name" />
-                  <Label layoutX="38.0" layoutY="84.0" prefHeight="53.0" prefWidth="379.0" text="Personal" textFill="#e5e4e4">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="38.0" layoutY="239.0" prefHeight="53.0" prefWidth="379.0" text="Address" textFill="#e5e4e4">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="167.0" layoutY="244.0" prefHeight="44.0" prefWidth="336.0" text="Because the functionality of this application is centralized around your location, a valid U.S. address is required." textFill="#e5e4e4" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
+                  <Label layoutX="38.0" layoutY="84.0" prefHeight="53.0" prefWidth="379.0" text="Personal"/>
+                  <Label styleClass = "headerLabel" layoutX="38.0" layoutY="239.0" prefHeight="53.0" prefWidth="379.0" text="Address" />
+                  <Label styleClass = "locationExplanation" layoutX="167.0" layoutY="244.0" prefHeight="44.0" prefWidth="336.0" text="Because the functionality of this application is centralized around your location, a valid U.S. address is required." />
                   <TextField fx:id="suStreet" layoutX="38.0" layoutY="292.0" prefHeight="68.0" prefWidth="499.0" promptText="Street" />
                   <TextField fx:id="suCity" layoutX="38.0" layoutY="377.0" prefHeight="68.0" prefWidth="153.0" promptText="City" />
                   <ComboBox fx:id="combobox" layoutX="214.0" layoutY="377.0" prefHeight="68.0" prefWidth="153.0" promptText="State" />
@@ -58,14 +43,14 @@
                         <Font name="System Bold" size="11.0" />
                      </font>
                   </Label>
-                  <Button fx:id="signUpBtn" layoutX="42.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleSignUpButtonAction" prefHeight="55.0" prefWidth="251.0" styleClass="pane" stylesheets="@../views/css.css" text="Sign up" textFill="WHITE">
+                  <Button fx:id="signUpBtn" layoutX="42.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleSignUpButtonAction" prefHeight="55.0" prefWidth="251.0" styleClass="pane" text="Sign up" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
                   <TextField fx:id="suEmail" layoutX="39.0" layoutY="467.0" prefHeight="68.0" prefWidth="498.0" promptText="Email" />
                   <TextField fx:id="suPassword" layoutX="39.0" layoutY="552.0" prefHeight="68.0" prefWidth="498.0" promptText="Password" />
                   <Label fx:id="errorLabel" alignment="CENTER" layoutX="191.0" layoutY="736.0" prefHeight="17.0" prefWidth="251.0" textFill="#00ff47" />
-                  <Button fx:id="backBtn" layoutX="317.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="55.0" prefWidth="251.0" styleClass="pane" stylesheets="@../views/css.css" text="Back" textFill="WHITE">
+                  <Button fx:id="backBtn" layoutX="317.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="55.0" prefWidth="251.0" styleClass="pane" text="Back" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -88,6 +73,12 @@
                </children>
             </Pane>
          </right>
+        <stylesheets>
+          <URL value="@Main_Styles.css" />
+        </stylesheets>         
       </BorderPane>
    </children>
+    <stylesheets>
+      <URL value="@Main_Styles.css" />
+    </stylesheets>
 </AnchorPane>

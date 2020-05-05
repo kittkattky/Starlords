@@ -18,13 +18,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EventInfoView">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@Main_Styles.css" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToEventsButtonClick" styleClass="pane" text="Back">
-               <stylesheets>
-                  <URL value="@MainScreenCss.css" />
-                  <URL value="@css.css" />
-               </stylesheets></Button>
+          <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToEventsButtonClick" styleClass="pane" text="Back"/>
         </items>
       </ToolBar>
    </top>
@@ -77,6 +73,5 @@
    </center>
    <stylesheets>
       <URL value="@Main_Styles.css" />
-      <URL value="@MainScreenCss.css" />
    </stylesheets>
 </BorderPane>

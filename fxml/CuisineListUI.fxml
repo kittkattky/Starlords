@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
 <AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CuisineView">
     <children>
@@ -23,14 +24,17 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView fx:id="listViewCuisineList" fixedCellSize="24.0" onMouseClicked="#isSelected" prefHeight="250.0" prefWidth="300.0" />
+            <ListView styleClass = "listViewCuisineList" fx:id="listViewCuisineList" fixedCellSize="24.0" onMouseClicked="#isSelected" prefHeight="250.0" prefWidth="300.0" />
          </children>
       </VBox>
       <HBox layoutX="124.0" layoutY="471.0" prefHeight="26.0" prefWidth="255.0">
          <children>
-            <Label fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="266.0" textFill="#00ff47" />
+            <Label styleClass = "errorLabel" fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="266.0" textFill="RED"/>
          </children>
       </HBox>
       <Button layoutX="226.0" layoutY="524.0" onAction="#homeButton" text="Home" />
     </children>
+   <stylesheets>
+      <URL value="@Main_Styles.css" />
+   </stylesheets>
 </AnchorPane>

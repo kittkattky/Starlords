@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -10,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="775.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MovieListView">
+<AnchorPane id="AnchorPane" prefHeight="572.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MovieListView">
    <children>
       <VBox layoutX="14.0" layoutY="75.0" prefHeight="325.0" prefWidth="216.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="110.0" text="Results for">
+                  <Label alignment="CENTER" prefHeight="74.0" prefWidth="290.0" text="Search Results">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -40,17 +41,18 @@
             </Label>
          </children>
       </HBox>
-      <VBox layoutX="249.0" layoutY="142.0" prefHeight="578.0" prefWidth="340.0">
+      <VBox layoutX="249.0" layoutY="142.0" prefHeight="398.0" prefWidth="621.0">
          <children>
-            <Label fx:id="lblWhy" prefHeight="31.0" prefWidth="200.0" text="Why?" />
-            <Label fx:id="lblWhyValue" alignment="TOP_LEFT" prefHeight="23.0" prefWidth="192.0" text="Because you picked Genre:" />
             <Label fx:id="lblMovieTitle" prefHeight="25.0" prefWidth="200.0" text="Name" />
-            <Label fx:id="lblMovieTitleValue" alignment="TOP_LEFT" prefHeight="16.0" prefWidth="192.0" />
-            <ImageView fx:id="imgMovieGraphic" fitHeight="270.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblMovieTitleValue" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="548.0" />
+            <ImageView fx:id="imgMovieGraphic" fitHeight="291.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
-      <Button layoutX="73.0" layoutY="477.0" mnemonicParsing="false" onAction="#backToGenreScene" text="Back To Genres" />
-      <TextArea fx:id="lblSynopsisValue" editable="false" layoutX="491.0" layoutY="296.0" prefHeight="211.0" prefWidth="340.0" />
+      <Button layoutX="73.0" layoutY="430.0" mnemonicParsing="false" onAction="#backToGenreScene" text="Back To Genres" />
+      <TextArea fx:id="lblSynopsisValue" editable="false" layoutX="491.0" layoutY="296.0" prefHeight="165.0" prefWidth="262.0" />
       <Label fx:id="lblSynopsis" layoutX="500.0" layoutY="258.0" prefHeight="31.0" prefWidth="200.0" text="Synopsis" />
    </children>
+   <stylesheets>
+      <URL value="@Main_Styles.css" />
+   </stylesheets>
 </AnchorPane>

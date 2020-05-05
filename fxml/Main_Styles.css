@@ -1,6 +1,10 @@
-BorderPane, ScrollPane, VBox, HBox, FlowPane, AnchorPane{
-    -fx-background-color: #1d1d1d;
-    -fx-background: #1d1d1d;
+.paneHome {
+    -fx-background-color : white;
+}
+
+AnchorPane, ScrollPane, FlowPane, .paneLeft{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
+    -fx-background: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
     -fx-border-width: 0px;
 }
 
@@ -59,11 +63,7 @@ MenuBar{
     -fx-text-fill: white;
 }
 
-MenuBar .label{
-    -fx-text-fill: white;
-}
-
-MenuBar .label{
+MenuBar .label, CheckBox{
     -fx-text-fill: white;
 }
 
@@ -85,24 +85,17 @@ MenuBar .context-menu{
 
 Button{
     -fx-background-radius: 2em;
-    -fx-background-color: #403F3F;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
+    -fx-font-family: System Bold;
     -fx-text-fill: white;
 }
 
-Button:hover{
+TextField, PasswordField{
     -fx-background-color: white;
-    -fx-text-fill: #403F3F;
-}
-
-TextField{
-    -fx-background-color: #403F3F;
     -fx-background-radius: 2em;
     -fx-border-radius: 2em;
-    -fx-text-fill: white;
-}
-
-TextField:focused, TextField:hover{
-    -fx-border-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
 }
 
 ListView{
@@ -112,11 +105,34 @@ ListView{
 
 Label{
     -fx-text-fill: white;
+    -fx-font-size: 12pt;
+}
+
+Label.colHeader{
+    -fx-text-fill: white;
+    -fx-font-family: Verdana;
+}
+
+.headerLabel {
+    -fx-font-family: System Bold;
+    -fx-font-size: 30px;
+    -fx-text-fill: #e5e4e4;
 }
 
 .titleLabel{
-    -fx-font-size: 12pt;
     -fx-font-family: Verdana;
+}
+
+.locationExplanation {
+    -fx-font-size: 11px;
+    -fx-text-wrap: true;
+    -fx-text-fill: #e5e4e4;
+}
+
+.homePageLabel {
+    -fx-text-fill: black;
+    -fx-font-family: System Bold;
+    -fx-font-size: 30px;
 }
 
 .subtitle{
@@ -129,7 +145,12 @@ Label{
     -fx-scale-y: 1.2;
 }
 
-Label.colHeader{
-    -fx-text-fill: white;
-    -fx-font-family: Verdana;
+Label .errorLabel {
+    -fx-text-fill:red;
+    -fx-font-size: 11px;
+}
+
+Label .welcomeLabel {
+    -fx-font-family: Corbel Bold Italic;
+    -fx-font-size: 36px;
 }

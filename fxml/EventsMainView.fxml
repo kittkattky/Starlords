@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" stylesheets="@MainScreenCss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EventsView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EventsView">
    <left>
       <VBox fx:id="eventCategoryVBox" alignment="TOP_CENTER" prefHeight="371.0" prefWidth="273.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,17 +45,16 @@
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="track" stylesheets="@css.css">
+            <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="track">
                <items>
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToHomePageButtonClick" prefHeight="31.0" prefWidth="377.0" styleClass="pane" text="Home" translateX="500.0">
-                     <stylesheets>
-                        <URL value="@MainScreenCss.css" />
-                        <URL value="@css.css" />
-                     </stylesheets>
                   </Button>
                </items>
             </ToolBar>
          </children>
       </VBox>
    </top>
+    <stylesheets>
+       <URL value="@MainScreenCss.css" />
+    </stylesheets>   
 </BorderPane>

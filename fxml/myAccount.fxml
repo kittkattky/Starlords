@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -169,4 +170,7 @@
          </children>
       </HBox>
    </children>
+    <stylesheets>
+      <URL value="@Main_Styles.css" />
+    </stylesheets>   
 </AnchorPane>
