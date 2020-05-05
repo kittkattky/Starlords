@@ -41,7 +41,7 @@ public class GenreView implements Initializable {
     
     protected TreeMap <Integer, String> mapGenres;    
     public MovieController movieController = new MovieController ();
-    protected EventHandlers handler = new EventHandlers ();
+    public EventHandlers handler = new EventHandlers ();
 
     public void populateGenreList () {        
         for (int k : this.mapGenres.keySet ()) {            

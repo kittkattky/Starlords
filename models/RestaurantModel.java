@@ -7,7 +7,7 @@ package models;
  * @author Diego Rodriguez Updated: 4/11/2020
  */
 import api.adapters.DatabaseAdapter;
-import api.translators.LocationAPITranslator;
+import utilities.LocationUtil.LocationUtil;
 import api.adapters.RestaurantAPIAdapter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class RestaurantModel {
      */
     public static RestaurantModel loadCuisinesByLocation(String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
-        LocationAPITranslator location = new LocationAPITranslator(_uuid, LocationAPITranslator.GEO_CODE);
+        LocationUtil location = new LocationUtil(_uuid, LocationUtil.GEO_CODE);
         String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
         location.setAPIConfigParameter("address", zipCode);
         location.submitRequest();
@@ -80,7 +80,7 @@ public class RestaurantModel {
      */
     public static RestaurantModel loadRestaurantsByID(int _id, String _uuid) throws Exception {
         //use location util class to get lat/lon based on zip code
-        LocationAPITranslator location = new LocationAPITranslator(_uuid, LocationAPITranslator.GEO_CODE);
+        LocationUtil location = new LocationUtil(_uuid, LocationUtil.GEO_CODE);
         String zipCode = dbAdapter.queryForAttribute(_uuid, "zipcode");
         
         location.setAPIConfigParameter("address", zipCode);
