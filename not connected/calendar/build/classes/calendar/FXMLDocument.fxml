@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" onMousePressed="#handleButtonAction" prefHeight="515.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calendar.FXMLDocumentController">
+   <children>
+      <Pane layoutX="-4.0" layoutY="-1.0" prefHeight="531.0" prefWidth="295.0" style="-fx-background-color: #4389A2;">
+         <children>
+            <ImageView fitHeight="202.0" fitWidth="231.0" layoutX="34.0" layoutY="114.0">
+               <image>
+                  <Image url="@../../../HeyFriday%20transparent.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="22.0" layoutY="250.0" text="By using the Calendar feature provided by &#10;Team Starlords in the desktop application,&#10;&quot;HeyFriday!&quot; &#10;you agree to Team Starlords privacy&#10;policy. &#10;" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="15.0" prefHeight="49.0" prefWidth="483.0" text="Lets Schedule Your Plans" textAlignment="CENTER" textFill="#5c258d" textOverrun="CENTER_WORD_ELLIPSIS" underline="true">
+         <font>
+            <Font name="Calisto MT Bold" size="36.0" />
+         </font>
+      </Label>
+      <JFXDatePicker fx:id="jfxpDate" defaultColor="#5c258d" layoutX="385.0" layoutY="183.0" prefHeight="31.0" prefWidth="322.0" />
+      <Label layoutX="390.0" layoutY="133.0" prefHeight="46.0" prefWidth="260.0" text="Please Choose a Date for your plans" textAlignment="CENTER" textFill="#4389a2">
+         <font>
+            <Font name="Calisto MT" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="382.0" layoutY="240.0" prefHeight="46.0" prefWidth="265.0" text="Please Choose a Time for your plans" textAlignment="CENTER" textFill="#4389a2">
+         <font>
+            <Font name="Calisto MT" size="15.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="jfxpTime" defaultColor="#5c258d" layoutX="380.0" layoutY="294.0" prefHeight="31.0" prefWidth="334.0" />
+      <JFXButton buttonType="RAISED" layoutX="484.0" layoutY="403.0" onMouseClicked="#handleButtonAction" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 5em; -fx-background-color: #5C258D;" text="Create" textFill="#f5f2f2">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField layoutX="392.0" layoutY="102.0" prefHeight="31.0" prefWidth="231.0" />
+      <Label layoutX="385.0" layoutY="72.0" prefHeight="46.0" prefWidth="260.0" text="Name Of plan/event" textAlignment="CENTER" textFill="#4389a2">
+         <font>
+            <Font name="Calisto MT" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
