@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -191,12 +192,16 @@ public class SignUpPageView implements Initializable {
         } else if (this.suCity.getText().length() > 20) {
             errorLabel.setText("City name cannot exceed 20 characters");
             return false;
-        } else if (this.suZipCode.getText().length() > 5) {
+        } else if (this.suZipCode.getText().length() != 5 || checkZipCode(this.suZipCode.getText())) {
             errorLabel.setText("Invalid zip code");
             return false;
         } else {
             return true;
         }
+    }
+    
+    public boolean checkZipCode(String _zipcode) {
+        return Pattern.compile("[a-z]").matcher(_zipcode).find();
     }
 
 }
