@@ -19,6 +19,7 @@ import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import utilities.Homepage.EventHandlers;
 
 public class CuisineView implements Initializable {
@@ -87,6 +88,9 @@ public class CuisineView implements Initializable {
      */
     @FXML
     public void selectCuisine(ActionEvent _event) throws IOException, Exception {
+        
+        this.errorLabel.setTextFill(Paint.valueOf("#FF0000"));
+        
         if (!this.isSearched) {
             this.errorLabel.setText("Please search for cuisines near you");
         } else {
