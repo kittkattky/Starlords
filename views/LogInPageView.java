@@ -14,12 +14,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class LogInPageView extends SetWindow implements Initializable {
@@ -81,8 +83,10 @@ public class LogInPageView extends SetWindow implements Initializable {
                 }
 
             }
-            else
+            else {
+                this.labelError.setTextFill(Paint.valueOf("#FF0000"));
                 labelError.setText("Incorrect Username/Password");
+            }
         }
     }
 
@@ -127,6 +131,7 @@ public class LogInPageView extends SetWindow implements Initializable {
         String userPassword = this.password.getText();
         this.logOutLabel.setText("");
         if (userEmail.isEmpty() || userPassword.isEmpty()) {
+            this.labelError.setTextFill(Paint.valueOf("#FF0000"));
             labelError.setText("Please enter email/password");
             return false;
         } else {
@@ -141,6 +146,7 @@ public class LogInPageView extends SetWindow implements Initializable {
     }
     
     public void setLogOutLabel(String _message) {
+        this.logOutLabel.setTextFill (Paint.valueOf ("#00FF00"));
         this.logOutLabel.setText(_message);
     }
 }

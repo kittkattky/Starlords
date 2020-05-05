@@ -150,3 +150,11 @@ Label .welcomeLabel {
     -fx-font-size: 36px;
     -fx-text-alignment:center;
 }
+
+.errorLabel {
+    -fx-font-color: #ff0000;
+}
+
+.logOutLabel {
+    -fx-font-color: #00ff00;
+}
