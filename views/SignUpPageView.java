@@ -29,7 +29,7 @@ import utilities.Homepage.EventHandlers;
 public class SignUpPageView implements Initializable {
 
     @FXML
-    private TextField suFName;
+    public TextField suFName;
 
     @FXML
     private TextField suLName;

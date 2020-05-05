@@ -2,8 +2,9 @@ package api.translators;
 
 /**
  * Translator that defines how interface methods should work with ApacheDerby
- * Utilizes a helper class (PreparedStatementUtil) for constructing prepared statements. 
- * 
+ * Utilizes a helper class (PreparedStatementUtil) for constructing prepared
+ * statements.
+ *
  * @author Diego Rodriguez Updated: 4/17/2020
  */
 import api.interfaces.DatabaseInterface;
@@ -11,7 +12,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,7 +118,7 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
         //try executing query. If result set is empty return null, else, set it equal to uuid then return it. 
         try {
             resultSet = this.pStatement.executeQuery();
-            if (!resultSet.next()) {           
+            if (!resultSet.next()) {
                 System.out.println("No database match found");
             } else {
                 uuid = resultSet.getString(1);
@@ -148,7 +151,7 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
             System.out.println("Unable to exectue update");
             return false;
         }
-        
+
         //if update is successful return true
         return true;
     }
@@ -161,10 +164,10 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ApacheDerbyTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //use helper class to create prepared statement
         this.pStatement = createPreparedStatement.statementForDelete(_uuid, this.con);
-        
+
         //try executing the preparedStatement, if its not able to execute it then return false
         try {
             pStatement.executeUpdate();
@@ -173,10 +176,10 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
             System.out.println("Unable to exectue update");
             return false;
         }
-        
+
         //if update is successful return true
         return true;
-        
+
     }
 
     /**
@@ -200,11 +203,13 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
     }
 
     /**
-     * Checks if email is already associated with an account. Returns true if yes, and false if no. 
-     * Returns true if query is unable to execute because I thought it might be a safer option to not
-     * let an account be created with that email if the query cannot execute for whatever reason. 
+     * Checks if email is already associated with an account. Returns true if
+     * yes, and false if no. Returns true if query is unable to execute because
+     * I thought it might be a safer option to not let an account be created
+     * with that email if the query cannot execute for whatever reason.
+     *
      * @param _email
-     * @return 
+     * @return
      */
     @Override
     public boolean checkIfEmailExists(String _email) {
@@ -234,6 +239,64 @@ public class ApacheDerbyTranslator implements DatabaseInterface {
             System.out.println("Unable to exectue query");
             return true;
         }
+    }
+
+    @Override
+    public boolean insertIntoCalendarTable(String _uuid, String _eventName, String _eventDate, String _eventTime) {
+        try {
+            this.con = connectToDatabase();
+            this.pStatement = createPreparedStatement.statementForCalendarInsert(_uuid, _eventName, _eventDate, _eventTime, this.con);
+            this.pStatement.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ApacheDerbyTranslator.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Unable to execture calendar insert");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public ArrayList<String[]> queryForCalendarInfo(String _uuid) {
+        String[] eventNames = null;
+        String[] eventDates = null;
+        String[] eventTimes = null;
+        ArrayList<String[]> calendarInfo = null;
+        int i = 0;
+        ResultSet resultSet = null;
+        try {
+            //try connecting to database using helper method
+            this.con = connectToDatabase();
+            //use helper class to create prepared statement
+            this.pStatement = createPreparedStatement.statementToQueryEventNames(_uuid, this.con);
+            resultSet = this.pStatement.executeQuery();
+
+            while (resultSet.next()) {
+                eventNames[i] = resultSet.getString("eventName");
+                i++;
+            }
+            i = 0;
+            this.pStatement = createPreparedStatement.statementToQueryEventDates(_uuid, this.con);
+            resultSet = this.pStatement.executeQuery();
+            while (resultSet.next()) {
+                eventDates[i] = resultSet.getString("eventDate");
+                i++;
+            }
+            i = 0;
+            this.pStatement = createPreparedStatement.statementToQueryEventTimes(_uuid, this.con);
+            resultSet = this.pStatement.executeQuery();
+            while (resultSet.next()) {
+                eventTimes[i] = resultSet.getString("eventTime");
+                i++;
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ApacheDerbyTranslator.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("unable to retrieve calendar information");
+        }
+        calendarInfo.add(eventNames);
+        calendarInfo.add(eventDates);
+        calendarInfo.add(eventTimes);
+        return calendarInfo;
     }
 
 }
