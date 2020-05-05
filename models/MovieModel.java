@@ -1,13 +1,16 @@
 package models;
 
+/**
+ * MovieModel public class for housing individual movie data.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
+
 import api.adapters.MovieAPIAdapter;
 import java.util.TreeMap;
 import org.json.JSONException;
 
-/**
- *
- * @author Preston.Williamson
- */
+
 public class MovieModel {
 
     protected String movieID;

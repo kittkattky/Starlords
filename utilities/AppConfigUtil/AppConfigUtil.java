@@ -1,12 +1,14 @@
 package utilities.AppConfigUtil;
 
+/**
+ * AppConfigUtil public class for extracting external properties.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
+
 import java.io.FileInputStream;
 import java.util.Properties;
 
-/**
- *
- * @author Preston.Williamson
- */
 public class AppConfigUtil {
     private final Properties configFile = new java.util.Properties();
     private final String srcDirectoryPath = System.getProperty("user.dir") + "\\src\\utilities\\AppConfigUtil\\";

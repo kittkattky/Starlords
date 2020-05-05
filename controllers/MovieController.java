@@ -1,5 +1,11 @@
 package controllers;
 
+/**
+ * MovieAPITranslator public class for housing movie data.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
+
 import java.util.TreeMap;
 import models.MovieModel;
 import org.json.JSONException;
@@ -30,12 +36,14 @@ public class MovieController {
     public TreeMap <Integer, MovieModel> setMovieCollection () {
         this.movieCollection.clear();
         
+        //get movie collection by genres.
         TreeMap <Integer, TreeMap <String, String>> mapCollection = this.setMovieCollection(this.getGenreSelection ());
         
         for (int key : mapCollection.keySet()) {
             MovieModel temp = new MovieModel ();
             TreeMap <String, String> mapMovies = mapCollection.get(key);
             
+            //extract movie data.
             for (String keyStr : mapMovies.keySet()) {
                 temp.setMovieID(mapMovies.get("id"));
                 temp.setMovieTitle(mapMovies.get("title"));
@@ -43,6 +51,7 @@ public class MovieController {
                 temp.setGraphicURL(mapMovies.get ("poster_path"));
             }
             
+            //insert movie into collection.
             this.movieCollection.put(key, temp);
         }
         

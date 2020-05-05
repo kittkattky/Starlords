@@ -1,9 +1,9 @@
 package api.translators;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MovieAPITranslator public class for implementing MovieAPIInterface
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
  */
 
 import api.interfaces.MovieAPIInterface;
@@ -16,10 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import utilities.AppConfigUtil.AppConfigUtil;
 
-/**
- *
- * @author Preston.Williamson
- */
 public class MovieAPITranslator implements MovieAPIInterface {
     private final String MOVIE_API_INDICATOR = "api.movie.";
     private final String API_DELIMITER = "%2C%20";
@@ -61,6 +57,7 @@ public class MovieAPITranslator implements MovieAPIInterface {
         String prev = this.model.getURLString();
         String result;
         
+        //set URL properties
         this.model.setURLString (prev + this.getConfigProperty ("genreListKeyword"));
         this.control = new APIController (this.model);
         
@@ -68,8 +65,8 @@ public class MovieAPITranslator implements MovieAPIInterface {
         this.control.submitAPIRequest(this.model.getRequestMethod(), this.getConfigProperty ("genreResultAttribute"));
         result = "{\"" + this.getConfigProperty ("genreResultAttribute") + "\": [ " + this.getAPIResultString() + "]}";
         JSONArray arr = (JSONArray) new JSONObject (result).get(this.getConfigProperty ("genreResultAttribute"));
-        //JSONObject json = new JSONObject ("{\"genres\": [{\"name\":\"Action\",\"id\":28},{\"name\":\"Adventure\",\"id\":12},{\"name\":\"Animation\",\"id\":16},{\"name\":\"Comedy\",\"id\":35},{\"name\":\"Crime\",\"id\":80},{\"name\":\"Documentary\",\"id\":99},{\"name\":\"Drama\",\"id\":18},{\"name\":\"Family\",\"id\":10751},{\"name\":\"Fantasy\",\"id\":14},{\"name\":\"History\",\"id\":36},{\"name\":\"Horror\",\"id\":27},{\"name\":\"Music\",\"id\":10402},{\"name\":\"Mystery\",\"id\":9648},{\"name\":\"Romance\",\"id\":10749},{\"name\":\"Science Fiction\",\"id\":878},{\"name\":\"TV Movie\",\"id\":10770},{\"name\":\"Thriller\",\"id\":53},{\"name\":\"War\",\"id\":10752},{\"name\":\"Western\",\"id\":37}]}");
         
+        //iterate through each genre and enter id-name paire into map
         for (int i = 0; i < arr.length(); i++) {
             JSONObject item = (JSONObject) arr.get(i);
             String name = (String) item.get(this.getConfigProperty ("genreNameAttribute"));
@@ -87,11 +84,13 @@ public class MovieAPITranslator implements MovieAPIInterface {
         this.model.convertAPIConfigParameter(this.config.getProperty(this.MOVIE_API_INDICATOR + "genreRequestKeyword"), _map, this.API_DELIMITER);
         this.submitRequest ();
         
+        //extract results/
         String results = "{\"" + this.config.getProperty(this.MOVIE_API_INDICATOR + "movieRequestKeyword") + "\": [ " + this.getAPIResultString() + "]}";
         try {
                 JSONObject json = new JSONObject (results);
                 JSONArray movieData = new JSONArray (json.getString(this.config.getProperty(this.MOVIE_API_INDICATOR + "movieRequestKeyword")));
                 
+                //collect individual movie data.
                 for (int i = 0; i < movieData.length (); i++) {
                     json = (JSONObject) movieData.get (i);
                     

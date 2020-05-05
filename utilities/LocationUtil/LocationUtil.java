@@ -1,4 +1,9 @@
 package utilities.LocationUtil;
+/**
+ * LocationUtil public class for gathering location data.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
 
 import api.adapters.DatabaseAdapter;
 import api.adapters.LocationAPIAdapter;
@@ -17,6 +22,7 @@ public class LocationUtil {
     public LocationUtil(String _uuid, boolean _type) throws Exception {
         String indicator;       
         
+        //set API indicator.
         if (_type == LocationUtil.GEO_CODE) {
             indicator = this.GEO_CODE_INDICATOR;
         }

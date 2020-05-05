@@ -1,7 +1,12 @@
 package views;
 
+/**
+ * GenreView public class for rendering genre list UI into view.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
+ */
+
 import controllers.MovieController;
-import controllers.UUIDController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,10 +28,6 @@ import javafx.scene.paint.Paint;
 import org.json.JSONException;
 import utilities.Homepage.EventHandlers;
 
-/**
- *
- * @author Preston.Williamson
- */
 public class GenreView implements Initializable {
     
     @FXML
@@ -64,14 +65,16 @@ public class GenreView implements Initializable {
         TreeMap <Integer, String> selectedItems = this.getGenreSelection ();
         
         if (selectedItems.isEmpty()) {
+            //error handling if user did not select anything.
             this.errorLabel.setTextFill(Paint.valueOf("#FF0000"));
             this.errorLabel.setText ("Please check at least one genre");
             this.errorLabel.setAlignment(Pos.CENTER);
         }
         else{
             this.errorLabel.setText ("");
-            MovieListView movieView = this.handler.switchScenes(_event, "fxml/MovieList.fxml").getController();
             
+            //switch to movie list.
+            MovieListView movieView = this.handler.switchScenes(_event, "fxml/MovieList.fxml").getController();            
             movieView.movieController.uuidController.setUUID(this.movieController.uuidController.getUUID ());
             movieView.addMoviesToList (selectedItems);
         }
@@ -89,6 +92,7 @@ public class GenreView implements Initializable {
         TreeSet <String> selectedGenres = new TreeSet <> ();
         ObservableList <Node> components = this.checkListGenres.getItems();
         
+        //for loop to create checkboxes on the grid.
         for (Node component : components) {
             if (component instanceof CheckBox) {
                 if (((CheckBox) component).isSelected())
@@ -96,6 +100,7 @@ public class GenreView implements Initializable {
             }                    
         }
         
+        //for loop to extract selected genres.
         for (String item : selectedGenres) {
             for (int key : this.mapGenres.keySet()) {
                 String curr = this.mapGenres.get(key);
