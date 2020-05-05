@@ -15,9 +15,9 @@ public class LocationUtil {
     
     private final boolean requestType;
     private LocationAPIAdapter api;
-    private String GEO_LOCATION_INDICATOR = "api.geolocation.";
-    private String GEO_CODE_INDICATOR = "api.geocode.";
-    protected final static DatabaseAdapter dbAdapter = new DatabaseAdapter();
+    private final String GEO_LOCATION_INDICATOR = "api.geolocation.";
+    private final String GEO_CODE_INDICATOR = "api.geocode.";
+    private final static DatabaseAdapter dbAdapter = new DatabaseAdapter();
 
     public LocationUtil(String _uuid, boolean _type) throws Exception {
         String indicator;       

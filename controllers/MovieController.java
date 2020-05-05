@@ -16,6 +16,7 @@ public class MovieController {
     protected MovieModel focusedMovie = new MovieModel ();
     public UUIDController uuidController = new UUIDController ();
     
+    //================= GETTERS ===============
     public TreeMap <Integer, String> getGenreMap () throws JSONException {
         return this.focusedMovie.getGenreMap ();
     }
@@ -33,6 +34,27 @@ public class MovieController {
         return -1;
     }
     
+    public String getImageGraphicURL () {
+        return this.focusedMovie.getImageGraphicURL();
+    }
+    
+    public String getMovieID () {        
+        return this.focusedMovie.getMovieID();
+    }
+    
+    public String getMovieTitle () {
+        return this.focusedMovie.getMovieTitle();
+    }
+    
+    public String getMovieSynopsis () {
+        return this.focusedMovie.getMovieSynopsis ();
+    }
+    
+    public String getUUID() {
+        return this.uuidController.getUUID();
+    }
+    
+    //================= SETTERS ===============
     public TreeMap <Integer, MovieModel> setMovieCollection () {
         this.movieCollection.clear();
         
@@ -60,27 +82,7 @@ public class MovieController {
     
     public TreeMap <Integer, TreeMap <String, String>> setMovieCollection (TreeMap <Integer, String> _map) {
         return this.focusedMovie.setMovieCollection(_map);
-    }
-    
-    public String getImageGraphicURL () {
-        return this.focusedMovie.getImageGraphicURL();
-    }
-    
-    public String getMovieID () {        
-        return this.focusedMovie.getMovieID();
-    }
-    
-    public String getMovieTitle () {
-        return this.focusedMovie.getMovieTitle();
-    }
-    
-    public String getMovieSynopsis () {
-        return this.focusedMovie.getMovieSynopsis ();
-    }
-    
-    public String getUUID() {
-        return this.uuidController.getUUID();
-    }
+    }    
     
     public void setFocusedMovie (MovieModel _movieModel) {
         this.focusedMovie = _movieModel;

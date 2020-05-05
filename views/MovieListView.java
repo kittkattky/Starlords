@@ -1,12 +1,12 @@
 package views;
 
 /**
- *
- * @author Preston.Williamson
+ * MovieListView public class for rendering movie data UI.
+ * Authors: Preston Williamson
+ * Last Updated Date: 05-MAY-2020
  */
 
 import controllers.MovieController;
-import java.awt.Font;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,18 +46,6 @@ public class MovieListView implements Initializable {
     }
     
     @FXML
-    public void setMovieLabels () {
-        String selectedItem = this.listMovies.getSelectionModel().getSelectedItem().toString();
-        this.movieController.setFocusedMovie(this.movieController.getMovieIDByTitle(selectedItem)); 
-        this.lblMovieTitleValue.setText (this.movieController.getMovieTitle());
-        this.lblSynopsisValue.setText(this.movieController.getMovieSynopsis());
-        this.lblSynopsisValue.autosize();
-        Image image = new Image (this.movieController.getImageGraphicURL());
-        this.imgMovieGraphic.setImage (image);
-        this.imgMovieGraphic.autosize();
-    }
-    
-    @FXML
     public void backToGenreScene (ActionEvent _event) throws IOException {
         GenreView view = this.handler.switchScenes(_event, "fxml/GenreList.fxml").getController ();
         view.movieController.uuidController.setUUID(this.movieController.uuidController.getUUID());
@@ -71,11 +59,23 @@ public class MovieListView implements Initializable {
         }
     }
     
+    public TreeMap <Integer, String> getGenreMap () throws JSONException {
+        return this.movieController.getGenreMap();
+    }    
+    
     public void setGenreMap (TreeMap <Integer, String> _map) {
         this.movieController.setGenreMap(_map);
     }
-
-    public TreeMap <Integer, String> getGenreMap () throws JSONException {
-        return this.movieController.getGenreMap();
+    
+    @FXML
+    public void setMovieLabels () {
+        String selectedItem = this.listMovies.getSelectionModel().getSelectedItem().toString();
+        this.movieController.setFocusedMovie(this.movieController.getMovieIDByTitle(selectedItem)); 
+        this.lblMovieTitleValue.setText (this.movieController.getMovieTitle());
+        this.lblSynopsisValue.setText(this.movieController.getMovieSynopsis());
+        this.lblSynopsisValue.autosize();
+        Image image = new Image (this.movieController.getImageGraphicURL());
+        this.imgMovieGraphic.setImage (image);
+        this.imgMovieGraphic.autosize();
     }
 }
