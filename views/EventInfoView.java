@@ -1,56 +1,54 @@
 package views;
 
 /* Displays the events details, Title
- * image, description, etc
+ * image, description, etc.
  *
  * @author Kahlie
- * @date 4/27/20
+ * @date 5/5/20
  */
 
 import controllers.EventsController;
+import java.awt.Desktop;
 import java.io.IOException;
-import java.util.Map;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import main.Main;
 import org.json.JSONException;
 import utilities.Homepage.EventHandlers;
 
 public class EventInfoView extends SetWindow {
 
     @FXML
-    private Label TitleLabel;
+    private Label titleLabel;
     @FXML
-    private Label VenueNameLabel;
+    private Label venueNameLabel;
     @FXML
-    private Label VenueAddressLabel;
+    private Label venueAddressLabel;
     @FXML
-    private Hyperlink VenueUrlLink;
+    private Hyperlink venueUrlLink;
     @FXML
-    private Label DescriptionLabel;
+    private Label descriptionLabel;
     @FXML
-    private ImageView ImageView;
+    private ImageView imageView;
     @FXML
-    private ScrollPane ScrollPane;
+    private ScrollPane scrollPane;
     @FXML
-    private VBox MainVBox;
+    private VBox mainVBox;
     @FXML
-    private GridPane GridPane;
+    private GridPane gridPane;
+
+    protected boolean hyperLink = true;
 
     public EventsController eventsController = new EventsController();
-    
-    protected EventHandlers handler = new EventHandlers();
 
-    protected Map<String, String> VenueNameMap;
-    protected Map<String, String> TitleMap;
-    protected Map<String, String> DescriptionMap;
-    protected Map<String, String> ImageMap;
-    protected Map<String, String> UrlMap;
-    protected Map<String, String> VenueAddressMap;
+    protected EventHandlers handler = new EventHandlers();
 
     private EventsView eventsView;
     private String title;
@@ -67,19 +65,20 @@ public class EventInfoView extends SetWindow {
         loadImage();
 
         // Bind main vbox layout width to scroll pane width so it grows in width with the scroll pane
-        MainVBox.prefWidthProperty().bind(ScrollPane.widthProperty());
+        mainVBox.prefWidthProperty().bind(scrollPane.widthProperty());
 
         // Setup the backdrop image view
-        ImageView.setPreserveRatio(true);
+        imageView.setPreserveRatio(true);
 
         // Setup the gridpane column
-        GridPane.prefWidthProperty().bind(ScrollPane.widthProperty());
+        gridPane.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
     /**
-     * Takes the user back to the EventsMain view
+     * This method will take the user back to the EventsMain view.
      * @param _event
-     * @throws IOException 
+     * @throws IOException
+     * @throws org.json.JSONException
      */
     @FXML
     public void backToEventsButtonClick(ActionEvent _event) throws IOException, JSONException {
@@ -89,7 +88,8 @@ public class EventInfoView extends SetWindow {
     }
 
     /**
-     * Loads the image if image is null returns substitute image
+     * This method loads the image, if the image is null uses a substitute image
+     * and if image link is incorrect use the substitute image.
      */
     private void loadImage() {
         if (this.image != null) {
@@ -97,80 +97,89 @@ public class EventInfoView extends SetWindow {
             if (url == null) {
                 url = "https://i.imgur.com/QeEdrPk.jpg";
             }
-
             if (url.startsWith("//")) {
                 url = "https://i.imgur.com/QeEdrPk.jpg";
             }
-
             Image eventImage = new Image(url);
-
-            ImageView.setImage(eventImage);
+            imageView.setImage(eventImage);
         }
     }
 
     /**
-     * Sets the event details to the labels 
+     * Sets the event details to the labels.
      *
      * @throws IOException
      * @throws JSONException
      */
     public void Events() throws IOException, JSONException {
-//        this.VenueNameMap = this.eventsController.getComedyEventVenueNameMap();
-//        this.TitleMap = this.eventsController.getComedyEventTitleMap();
-//        this.DescriptionMap = this.eventsController.getComedyEventDescriptionMap();
-//        this.ImageMap = eventsController.getComedyEventImageMap();
-//        this.UrlMap = this.eventsController.getComedyEventUrlMap();
-//        this.VenueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
-
-        TitleLabel.setText(this.title);
-
+        titleLabel.setText(this.title);
         if (this.venueName != null) {
-            VenueNameLabel.setText(this.venueName);
+            venueNameLabel.setText(this.venueName);
         } else {
-            VenueNameLabel.setText("N/A");
+            venueNameLabel.setText("N/A");
         }
-
-        VenueUrlLink.setText(this.venueUrl);
-
+        venueUrlLink.setText(this.venueUrl);
         if (this.venueAddress != null) {
-            VenueAddressLabel.setText(this.venueAddress);
+            venueAddressLabel.setText(this.venueAddress);
         } else {
-            VenueAddressLabel.setText("N/A");
+            venueAddressLabel.setText("N/A");
         }
-
         if (this.description != null) {
-            this.DescriptionLabel.setText(this.description);
+            this.descriptionLabel.setText(this.description);
             loadImage();
         } else {
-            this.DescriptionLabel.setText("Description Not Avaialable");
+            this.descriptionLabel.setText("Description Not Avaialable");
         }
     }
 
     /**
-     * Sets the event details from the EventsView
+     * When user clicks on the link it will open the link in the browser.
      *
-     * @param title
+     * @param _hyperLinkClicked
+     * @throws URISyntaxException
+     */
+    public void openURL(ActionEvent _hyperLinkClicked) throws URISyntaxException {
+        if (this.hyperLink) {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    Desktop.getDesktop().browse(new URI(this.venueUrlLink.getText()));
+                } catch (IOException ex) {
+                    Logger.getLogger(RestaurantListView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    /**
+     * Sets the event details from the EventsView.
+     *
+     * @param _title
+     * @param _image
+     * @param _description
+     * @param _venueName
+     * @param _venueAddress
+     * @param _venueUrl
      * @throws IOException
      * @throws JSONException
      */
-    public void setEvent(String title, String image, String description, String venueName, String venueAddress, String venueUrl) throws IOException, JSONException {
+    public void setEvent(String _title, String _image, String _description, String _venueName, String _venueAddress, String _venueUrl) throws IOException, JSONException {
         this.title = this.eventsView.title;
-        this.title = title;
+        this.title = _title;
 
         this.image = this.eventsView.image;
-        this.image = image;
+        this.image = _image;
 
         this.description = this.eventsView.description;
-        this.description = description;
+        this.description = _description;
 
         this.venueName = this.eventsView.venueName;
-        this.venueName = venueName;
+        this.venueName = _venueName;
 
         this.venueAddress = this.eventsView.venueAddress;
-        this.venueAddress = venueAddress;
+        this.venueAddress = _venueAddress;
 
         this.venueUrl = this.eventsView.venueUrl;
-        this.venueUrl = venueUrl;
+        this.venueUrl = _venueUrl;
 
         initialize();
     }

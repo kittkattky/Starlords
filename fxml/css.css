@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 9, 2020, 6:29:00 PM
+    Author     : Kahlie
+*/
+
+
+
+.pane{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2)
+}
+
+.posterPane:hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}

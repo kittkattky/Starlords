@@ -2,13 +2,22 @@
     -fx-background-color : white;
 }
 
-AnchorPane, ScrollPane, FlowPane, .paneLeft{
+ScrollPane, FlowPane, .paneLeft{
+    -fx-background-color: transparent;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
+    -fx-background: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
+    -fx-border-width: 0px;
+}
+
+AnchorPane > .viewport {
+    -fx-background-color: transparent;
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
     -fx-background: linear-gradient(from 25% 25% to 100% 100%, #5C258D, #4389A2);
     -fx-border-width: 0px;
 }
 
 ScrollPane .scroll-bar:vertical{
+	
     -fx-background-color: #292727;
 }
 

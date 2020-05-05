@@ -16,27 +16,31 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EventInfoView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="648.0" styleClass="pane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="views.EventInfoView">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="40.0" prefWidth="648.0" stylesheets="@MainScreenCss.css" BorderPane.alignment="CENTER">
         <items>
-          <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToEventsButtonClick" styleClass="pane" text="Back"/>
+          <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToEventsButtonClick" styleClass="pane" text="Back">
+               <stylesheets>
+                  <URL value="@MainScreenCss.css" />
+                  <URL value="@css.css" />
+               </stylesheets></Button>
         </items>
       </ToolBar>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fx:id="ScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <VBox fx:id="MainVBox" alignment="TOP_CENTER" prefHeight="433.0" prefWidth="646.0" spacing="8.0">
+                  <VBox fx:id="mainVBox" alignment="TOP_CENTER" prefHeight="433.0" prefWidth="646.0" spacing="8.0">
                      <children>
-                        <Label fx:id="TitleLabel" styleClass="titleLabel" text="Title" />
-                        <ImageView fx:id="ImageView" fitHeight="141.0" fitWidth="542.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                        <Label fx:id="titleLabel" styleClass="titleLabel" text="Title" />
+                        <ImageView fx:id="imageView" fitHeight="141.0" fitWidth="542.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <effect>
                               <Reflection />
                            </effect></ImageView>
-                        <GridPane fx:id="GridPane" hgap="10.0" vgap="8.0" VBox.vgrow="ALWAYS">
+                        <GridPane fx:id="gridPane" hgap="10.0" vgap="8.0" VBox.vgrow="ALWAYS">
                           <columnConstraints>
                             <ColumnConstraints hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="141.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="515.0" minWidth="10.0" prefWidth="479.0" />
@@ -52,10 +56,10 @@
                               <Label styleClass="colHeader" text="Venue Url" GridPane.rowIndex="2" />
                               <Label styleClass="colHeader" text="Description" GridPane.rowIndex="3" />
                               <Label prefHeight="19.0" prefWidth="145.0" styleClass="colHeader" text="Venue Address" GridPane.rowIndex="1" />
-                              <Label fx:id="VenueNameLabel" text="Label" GridPane.columnIndex="1" />
-                              <Label fx:id="VenueAddressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="DescriptionLabel" text="Description" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-                              <Hyperlink fx:id="VenueUrlLink" prefHeight="38.0" prefWidth="424.0" text="Hyperlink" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="venueNameLabel" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="venueAddressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="descriptionLabel" text="Description" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+                              <Hyperlink fx:id="venueUrlLink" onAction="#openURL" prefHeight="38.0" prefWidth="424.0" text="Hyperlink" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                            <padding>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -72,6 +76,7 @@
       </AnchorPane>
    </center>
    <stylesheets>
-      <URL value="@Main_Styles.css" />
+      <URL value="@MainScreenCss.css" />
+      <URL value="@css.css" />
    </stylesheets>
 </BorderPane>

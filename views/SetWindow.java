@@ -4,7 +4,7 @@ package views;
  * Abstract class that is used with the views.
  * 
  * @author Kahlie
- * @date 4/29/20
+ * @date 5/5/20
  */
 
 import javafx.scene.image.Image;
@@ -16,15 +16,15 @@ public abstract class SetWindow {
     protected Main mainApplication;
 
     // Sets the window for this controller
-    public void setWindow(Stage window) {
-        this.window = window;
+    public void setWindow(Stage _window) {
+        this.window = _window;
         this.window.setTitle("Hey Friday!");
         Image icon = new Image(getClass().getResourceAsStream("/gui artifacts/HeyFriday.png"));
         this.window.getIcons().add(icon);
     }
 
-    // Sets the main application for this controller
-    public void setMainApplication(Main mainApplication) {
-        this.mainApplication = mainApplication;
+    // Sets the main application for this view
+    public void setMainApplication(Main _mainApplication) {
+        this.mainApplication = _mainApplication;
     }
 }

@@ -15,8 +15,8 @@ import java.util.Map;
 import org.json.JSONException;
 
 public interface EventsAPIInterface {
-        
-    public ArrayList<Map>  loadEventsByZipcode(String _category, int _zipcode) throws JSONException, MalformedURLException, ProtocolException, IOException;
     
     public ArrayList<Map>  loadCategories() throws JSONException, MalformedURLException, ProtocolException, IOException;
+
+    public ArrayList<Map>  loadEventsByZipcode(String _category, int _zipcode) throws JSONException, MalformedURLException, ProtocolException, IOException;
 }
