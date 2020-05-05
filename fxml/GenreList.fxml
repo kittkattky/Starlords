@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="682.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GenreView">
+<AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="682.0" prefWidth="571.0" styleClass="pane" stylesheets="@css.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="views.GenreView">
     <children>
       <Label fx:id="errorLabel" layoutX="139.0" layoutY="601.0" prefHeight="20.0" prefWidth="306.0" />
       <Button fx:id="btnBackToHome" layoutX="205.0" layoutY="536.0" onAction="#handleBackButtonAction" prefHeight="32.0" prefWidth="162.0" styleClass="button" text="Home" />
       <Button fx:id="btnSearchGenres" layoutX="205.0" layoutY="496.0" onAction="#handleSearchButtonAction" prefHeight="30.0" prefWidth="162.0" text="Confirm Genre Choice(s)" />
       <Label fx:id="labelGenres" layoutX="232.0" layoutY="14.0" styleClass="titleLabel" text="Movie Genres" />
       <ListView fx:id="checkListGenres" layoutX="158.0" layoutY="41.0" prefHeight="435.0" prefWidth="256.0" />
-    </children>
-   <stylesheets>
-      <URL value="@Main_Styles.css" />
-   </stylesheets>    
+    </children>    
 </AnchorPane>

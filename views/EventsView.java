@@ -5,7 +5,7 @@ package views;
  * the user to select an event
  *
  * @author Kahlie
- * @date 4/29/20
+ * @date 5/5/20
  */
 import controllers.EventsController;
 import java.net.URL;
@@ -38,6 +38,7 @@ public class EventsView extends SetWindow implements Initializable {
     @FXML
     private ScrollPane eventsScrollPane;
     
+    @FXML
     private FlowPane eventsFlowPane;
     
     protected EventHandlers handler = new EventHandlers();
@@ -51,24 +52,23 @@ public class EventsView extends SetWindow implements Initializable {
     
     protected Map<Integer, String> categoriesMap;
     
-    protected Map<Integer, String> TitleMap;
-    protected Map<String, String> ImageMap;
-    protected Map<String, String> VenueNameMap;
-    protected Map<String, String> DescriptionMap;
-    protected Map<String, String> VenueUrlMap;
-    protected Map<String, String> VenueAddressMap;
+    protected Map<Integer, String> titleMap;
+    protected Map<String, String> imageMap;
+    protected Map<String, String> venueNameMap;
+    protected Map<String, String> descriptionMap;
+    protected Map<String, String> venueUrlMap;
+    protected Map<String, String> venueAddressMap;
 
     public EventsController eventsController = new EventsController();
 
-
     /**
-     * Builds the flow pane by populating with image views
+     * Builds the flow pane by populating with image views.
      * @throws JSONException
      * @throws IOException 
      */
     private void buildComedyEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -76,19 +76,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = this.eventsController.getComedyEventTitleMap();
-        this.ImageMap = this.eventsController.getComedyEventImageMap();
-        this.VenueNameMap = this.eventsController.getComedyEventVenueNameMap();
-        this.DescriptionMap = this.eventsController.getComedyEventDescriptionMap();
-        this.VenueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
-        this.VenueUrlMap = this.eventsController.getComedyEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = this.eventsController.getComedyEventTitleMap();
+        this.imageMap = this.eventsController.getComedyEventImageMap();
+        this.venueNameMap = this.eventsController.getComedyEventVenueNameMap();
+        this.descriptionMap = this.eventsController.getComedyEventDescriptionMap();
+        this.venueAddressMap = this.eventsController.getComedyEventVenueAddressMap();
+        this.venueUrlMap = this.eventsController.getComedyEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -102,7 +102,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildMusicEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -110,19 +110,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = this.eventsController.getMusicEventTitleMap();
-        this.ImageMap = this.eventsController.getMusicEventImageMap();
-        this.DescriptionMap = this.eventsController.getMusicEventDescriptionMap();
-        this.VenueNameMap = this.eventsController.getMusicEventVenueNameMap();
-        this.VenueAddressMap = this.eventsController.getMusicEventVenueAddressMap();
-        this.VenueUrlMap = this.eventsController.getMusicEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = this.eventsController.getMusicEventTitleMap();
+        this.imageMap = this.eventsController.getMusicEventImageMap();
+        this.descriptionMap = this.eventsController.getMusicEventDescriptionMap();
+        this.venueNameMap = this.eventsController.getMusicEventVenueNameMap();
+        this.venueAddressMap = this.eventsController.getMusicEventVenueAddressMap();
+        this.venueUrlMap = this.eventsController.getMusicEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -136,7 +136,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildConferenceEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -144,19 +144,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getConferenceEventTitleMap();
-        this.ImageMap = eventsController.getConferenceEventImageMap();
-        this.DescriptionMap = eventsController.getConferenceEventDescriptionMap();
-        this.VenueNameMap = eventsController.getConferenceEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getConferenceEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getConferenceEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getConferenceEventTitleMap();
+        this.imageMap = eventsController.getConferenceEventImageMap();
+        this.descriptionMap = eventsController.getConferenceEventDescriptionMap();
+        this.venueNameMap = eventsController.getConferenceEventVenueNameMap();
+        this.venueAddressMap = eventsController.getConferenceEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getConferenceEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -170,7 +170,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildEducationEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -178,19 +178,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getEducationEventTitleMap();
-        this.ImageMap = eventsController.getEducationEventImageMap();
-        this.DescriptionMap = eventsController.getEducationEventDescriptionMap();
-        this.VenueNameMap = eventsController.getEducationEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getEducationEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getEducationEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getEducationEventTitleMap();
+        this.imageMap = eventsController.getEducationEventImageMap();
+        this.descriptionMap = eventsController.getEducationEventDescriptionMap();
+        this.venueNameMap = eventsController.getEducationEventVenueNameMap();
+        this.venueAddressMap = eventsController.getEducationEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getEducationEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -204,7 +204,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildFamilyEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -212,19 +212,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getFamilyEventTitleMap();
-        this.ImageMap = eventsController.getFamilyEventImageMap();
-        this.DescriptionMap = eventsController.getFamilyEventDescriptionMap();
-        this.VenueNameMap = eventsController.getFamilyEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getFamilyEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getFamilyEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getFamilyEventTitleMap();
+        this.imageMap = eventsController.getFamilyEventImageMap();
+        this.descriptionMap = eventsController.getFamilyEventDescriptionMap();
+        this.venueNameMap = eventsController.getFamilyEventVenueNameMap();
+        this.venueAddressMap = eventsController.getFamilyEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getFamilyEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -238,7 +238,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildFestivalsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -246,19 +246,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getFestivalsEventTitleMap();
-        this.ImageMap = eventsController.getFestivalsEventImageMap();
-        this.DescriptionMap = eventsController.getFestivalsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getFestivalsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getFestivalsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getFestivalsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getFestivalsEventTitleMap();
+        this.imageMap = eventsController.getFestivalsEventImageMap();
+        this.descriptionMap = eventsController.getFestivalsEventDescriptionMap();
+        this.venueNameMap = eventsController.getFestivalsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getFestivalsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getFestivalsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -272,7 +272,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildFilmEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -280,19 +280,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getFilmEventTitleMap();
-        this.ImageMap = eventsController.getFilmEventImageMap();
-        this.DescriptionMap = eventsController.getFilmEventDescriptionMap();
-        this.VenueNameMap = eventsController.getFilmEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getFilmEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getFilmEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getFilmEventTitleMap();
+        this.imageMap = eventsController.getFilmEventImageMap();
+        this.descriptionMap = eventsController.getFilmEventDescriptionMap();
+        this.venueNameMap = eventsController.getFilmEventVenueNameMap();
+        this.venueAddressMap = eventsController.getFilmEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getFilmEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -306,7 +306,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildFoodandWineEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -314,19 +314,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getFoodandWineEventTitleMap();
-        this.ImageMap = eventsController.getFoodandWineEventImageMap();
-        this.DescriptionMap = eventsController.getFoodandWineEventDescriptionMap();
-        this.VenueNameMap = eventsController.getFoodandWineEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getFoodandWineEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getFoodandWineEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getFoodandWineEventTitleMap();
+        this.imageMap = eventsController.getFoodandWineEventImageMap();
+        this.descriptionMap = eventsController.getFoodandWineEventDescriptionMap();
+        this.venueNameMap = eventsController.getFoodandWineEventVenueNameMap();
+        this.venueAddressMap = eventsController.getFoodandWineEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getFoodandWineEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }           
@@ -340,7 +340,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildCharityEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -348,19 +348,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getCharityEventTitleMap();
-        this.ImageMap = eventsController.getCharityEventImageMap();
-        this.DescriptionMap = eventsController.getCharityEventDescriptionMap();
-        this.VenueNameMap = eventsController.getCharityEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getCharityEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getCharityEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getCharityEventTitleMap();
+        this.imageMap = eventsController.getCharityEventImageMap();
+        this.descriptionMap = eventsController.getCharityEventDescriptionMap();
+        this.venueNameMap = eventsController.getCharityEventVenueNameMap();
+        this.venueAddressMap = eventsController.getCharityEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getCharityEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -374,7 +374,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildExhibitsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -382,19 +382,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getExhibitsEventTitleMap();
-        this.ImageMap = eventsController.getExhibitsEventImageMap();
-        this.DescriptionMap = eventsController.getExhibitsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getExhibitsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getExhibitsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getExhibitsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getExhibitsEventTitleMap();
+        this.imageMap = eventsController.getExhibitsEventImageMap();
+        this.descriptionMap = eventsController.getExhibitsEventDescriptionMap();
+        this.venueNameMap = eventsController.getExhibitsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getExhibitsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getExhibitsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane); 
         }
@@ -408,7 +408,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildHealthEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout 
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -416,19 +416,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getHealthEventTitleMap();
-        this.ImageMap = eventsController.getHealthEventImageMap();
-        this.DescriptionMap = eventsController.getHealthEventDescriptionMap();
-        this.VenueNameMap = eventsController.getHealthEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getHealthEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getHealthEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getHealthEventTitleMap();
+        this.imageMap = eventsController.getHealthEventImageMap();
+        this.descriptionMap = eventsController.getHealthEventDescriptionMap();
+        this.venueNameMap = eventsController.getHealthEventVenueNameMap();
+        this.venueAddressMap = eventsController.getHealthEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getHealthEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);    
         }
@@ -442,7 +442,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildHolidayEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout 
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -450,19 +450,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getHolidayEventTitleMap();
-        this.ImageMap = eventsController.getHolidayEventImageMap();
-        this.DescriptionMap = eventsController.getHolidayEventDescriptionMap();
-        this.VenueNameMap = eventsController.getHolidayEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getHolidayEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getHolidayEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getHolidayEventTitleMap();
+        this.imageMap = eventsController.getHolidayEventImageMap();
+        this.descriptionMap = eventsController.getHolidayEventDescriptionMap();
+        this.venueNameMap = eventsController.getHolidayEventVenueNameMap();
+        this.venueAddressMap = eventsController.getHolidayEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getHolidayEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -476,7 +476,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildBooksEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout 
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -484,19 +484,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getBooksEventTitleMap();
-        this.ImageMap = eventsController.getBooksEventImageMap();
-        this.DescriptionMap = eventsController.getBooksEventDescriptionMap();
-        this.VenueNameMap = eventsController.getBooksEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getBooksEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getBooksEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getBooksEventTitleMap();
+        this.imageMap = eventsController.getBooksEventImageMap();
+        this.descriptionMap = eventsController.getBooksEventDescriptionMap();
+        this.venueNameMap = eventsController.getBooksEventVenueNameMap();
+        this.venueAddressMap = eventsController.getBooksEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getBooksEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);  
         }
@@ -510,7 +510,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildAttractionsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -518,19 +518,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getAttractionsEventTitleMap();
-        this.ImageMap = eventsController.getAttractionsEventImageMap();
-        this.DescriptionMap = eventsController.getAttractionsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getAttractionsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getAttractionsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getAttractionsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getAttractionsEventTitleMap();
+        this.imageMap = eventsController.getAttractionsEventImageMap();
+        this.descriptionMap = eventsController.getAttractionsEventDescriptionMap();
+        this.venueNameMap = eventsController.getAttractionsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getAttractionsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getAttractionsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -544,7 +544,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildNeighborhoodEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -552,19 +552,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getNeighborhoodEventTitleMap();
-        this.ImageMap = eventsController.getNeighborhoodEventImageMap();
-        this.DescriptionMap = eventsController.getNeighborhoodEventDescriptionMap();
-        this.VenueNameMap = eventsController.getNeighborhoodEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getNeighborhoodEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getNeighborhoodEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getNeighborhoodEventTitleMap();
+        this.imageMap = eventsController.getNeighborhoodEventImageMap();
+        this.descriptionMap = eventsController.getNeighborhoodEventDescriptionMap();
+        this.venueNameMap = eventsController.getNeighborhoodEventVenueNameMap();
+        this.venueAddressMap = eventsController.getNeighborhoodEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getNeighborhoodEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -578,7 +578,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildBusinessEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -586,19 +586,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getBusinessEventTitleMap();
-        this.ImageMap = eventsController.getBusinessEventImageMap();
-        this.DescriptionMap = eventsController.getBusinessEventDescriptionMap();
-        this.VenueNameMap = eventsController.getBusinessEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getBusinessEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getBusinessEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getBusinessEventTitleMap();
+        this.imageMap = eventsController.getBusinessEventImageMap();
+        this.descriptionMap = eventsController.getBusinessEventDescriptionMap();
+        this.venueNameMap = eventsController.getBusinessEventVenueNameMap();
+        this.venueAddressMap = eventsController.getBusinessEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getBusinessEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -612,7 +612,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildNightlifeEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -620,19 +620,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getNightlifeEventTitleMap();
-        this.ImageMap = eventsController.getNightlifeEventImageMap();
-        this.DescriptionMap = eventsController.getNightlifeEventDescriptionMap();
-        this.VenueNameMap = eventsController.getNightlifeEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getNightlifeEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getNightlifeEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getNightlifeEventTitleMap();
+        this.imageMap = eventsController.getNightlifeEventImageMap();
+        this.descriptionMap = eventsController.getNightlifeEventDescriptionMap();
+        this.venueNameMap = eventsController.getNightlifeEventVenueNameMap();
+        this.venueAddressMap = eventsController.getNightlifeEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getNightlifeEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);    
         }
@@ -646,7 +646,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildUniversityEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -654,19 +654,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getUniversityEventTitleMap();
-        this.ImageMap = eventsController.getUniversityEventImageMap();
-        this.DescriptionMap = eventsController.getUniversityEventDescriptionMap();
-        this.VenueNameMap = eventsController.getUniversityEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getUniversityEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getUniversityEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getUniversityEventTitleMap();
+        this.imageMap = eventsController.getUniversityEventImageMap();
+        this.descriptionMap = eventsController.getUniversityEventDescriptionMap();
+        this.venueNameMap = eventsController.getUniversityEventVenueNameMap();
+        this.venueAddressMap = eventsController.getUniversityEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getUniversityEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);   
         }
@@ -680,7 +680,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildMeetupEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -688,19 +688,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getMeetupEventTitleMap();
-        this.ImageMap = eventsController.getMeetupEventImageMap();
-        this.DescriptionMap = eventsController.getMeetupEventDescriptionMap();
-        this.VenueNameMap = eventsController.getMeetupEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getMeetupEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getMeetupEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getMeetupEventTitleMap();
+        this.imageMap = eventsController.getMeetupEventImageMap();
+        this.descriptionMap = eventsController.getMeetupEventDescriptionMap();
+        this.venueNameMap = eventsController.getMeetupEventVenueNameMap();
+        this.venueAddressMap = eventsController.getMeetupEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getMeetupEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -714,7 +714,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildRecreationEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -722,19 +722,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getRecreationEventTitleMap();
-        this.ImageMap = eventsController.getRecreationEventImageMap();
-        this.DescriptionMap = eventsController.getRecreationEventDescriptionMap();
-        this.VenueNameMap = eventsController.getRecreationEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getRecreationEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getRecreationEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getRecreationEventTitleMap();
+        this.imageMap = eventsController.getRecreationEventImageMap();
+        this.descriptionMap = eventsController.getRecreationEventDescriptionMap();
+        this.venueNameMap = eventsController.getRecreationEventVenueNameMap();
+        this.venueAddressMap = eventsController.getRecreationEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getRecreationEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);  
         }
@@ -748,7 +748,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildPerformingArtsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -756,19 +756,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getPerformingArtsEventTitleMap();
-        this.ImageMap = eventsController.getPerformingArtsEventImageMap();
-        this.DescriptionMap = eventsController.getPerformingArtsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getPerformingArtsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getPerformingArtsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getPerformingArtsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getPerformingArtsEventTitleMap();
+        this.imageMap = eventsController.getPerformingArtsEventImageMap();
+        this.descriptionMap = eventsController.getPerformingArtsEventDescriptionMap();
+        this.venueNameMap = eventsController.getPerformingArtsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getPerformingArtsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getPerformingArtsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -782,7 +782,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildPetsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -790,19 +790,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getPetsEventTitleMap();
-        this.ImageMap = eventsController.getPetsEventImageMap();
-        this.DescriptionMap = eventsController.getPetsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getPetsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getPetsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getPetsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getPetsEventTitleMap();
+        this.imageMap = eventsController.getPetsEventImageMap();
+        this.descriptionMap = eventsController.getPetsEventDescriptionMap();
+        this.venueNameMap = eventsController.getPetsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getPetsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getPetsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -816,7 +816,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildPoliticsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -824,19 +824,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getPoliticsEventTitleMap();
-        this.ImageMap = eventsController.getPoliticsEventImageMap();
-        this.DescriptionMap = eventsController.getPoliticsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getPoliticsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getPoliticsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getPoliticsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getPoliticsEventTitleMap();
+        this.imageMap = eventsController.getPoliticsEventImageMap();
+        this.descriptionMap = eventsController.getPoliticsEventDescriptionMap();
+        this.venueNameMap = eventsController.getPoliticsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getPoliticsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getPoliticsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);   
         }
@@ -850,7 +850,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildRetailEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -858,19 +858,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getRetailEventTitleMap();
-        this.ImageMap = eventsController.getRetailEventImageMap();
-        this.DescriptionMap = eventsController.getRetailEventDescriptionMap();
-        this.VenueNameMap = eventsController.getRetailEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getRetailEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getRetailEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getRetailEventTitleMap();
+        this.imageMap = eventsController.getRetailEventImageMap();
+        this.descriptionMap = eventsController.getRetailEventDescriptionMap();
+        this.venueNameMap = eventsController.getRetailEventVenueNameMap();
+        this.venueAddressMap = eventsController.getRetailEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getRetailEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -884,7 +884,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildScienceEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -892,19 +892,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getScienceEventTitleMap();
-        this.ImageMap = eventsController.getScienceEventImageMap();
-        this.DescriptionMap = eventsController.getScienceEventDescriptionMap();
-        this.VenueNameMap = eventsController.getScienceEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getScienceEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getScienceEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getScienceEventTitleMap();
+        this.imageMap = eventsController.getScienceEventImageMap();
+        this.descriptionMap = eventsController.getScienceEventDescriptionMap();
+        this.venueNameMap = eventsController.getScienceEventVenueNameMap();
+        this.venueAddressMap = eventsController.getScienceEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getScienceEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);
         }
@@ -918,7 +918,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildReligionEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -926,19 +926,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getReligionEventTitleMap();
-        this.ImageMap = eventsController.getReligionEventImageMap();
-        this.DescriptionMap = eventsController.getReligionEventDescriptionMap();
-        this.VenueNameMap = eventsController.getReligionEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getReligionEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getReligionEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getReligionEventTitleMap();
+        this.imageMap = eventsController.getReligionEventImageMap();
+        this.descriptionMap = eventsController.getReligionEventDescriptionMap();
+        this.venueNameMap = eventsController.getReligionEventVenueNameMap();
+        this.venueAddressMap = eventsController.getReligionEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getReligionEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);    
         }
@@ -952,7 +952,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildSportsEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -960,19 +960,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getSportsEventTitleMap();
-        this.ImageMap = eventsController.getSportsEventImageMap();
-        this.DescriptionMap = eventsController.getSportsEventDescriptionMap();
-        this.VenueNameMap = eventsController.getSportsEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getSportsEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getSportsEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getSportsEventTitleMap();
+        this.imageMap = eventsController.getSportsEventImageMap();
+        this.descriptionMap = eventsController.getSportsEventDescriptionMap();
+        this.venueNameMap = eventsController.getSportsEventVenueNameMap();
+        this.venueAddressMap = eventsController.getSportsEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getSportsEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);    
         }
@@ -986,7 +986,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildTechnologyEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -994,19 +994,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getTechnologyEventTitleMap();
-        this.ImageMap = eventsController.getTechnologyEventImageMap();
-        this.DescriptionMap = eventsController.getTechnologyEventDescriptionMap();
-        this.VenueNameMap = eventsController.getTechnologyEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getTechnologyEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getTechnologyEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getTechnologyEventTitleMap();
+        this.imageMap = eventsController.getTechnologyEventImageMap();
+        this.descriptionMap = eventsController.getTechnologyEventDescriptionMap();
+        this.venueNameMap = eventsController.getTechnologyEventVenueNameMap();
+        this.venueAddressMap = eventsController.getTechnologyEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getTechnologyEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane); 
         }
@@ -1020,7 +1020,7 @@ public class EventsView extends SetWindow implements Initializable {
      */
     private void buildOthersEventsFlowPane() throws JSONException, IOException {
 
-        // Build a flow pane layout with the width and size of the
+        // Build a flow pane layout
         eventsFlowPane = new FlowPane(Orientation.HORIZONTAL);
         eventsFlowPane.setHgap(50);
         eventsFlowPane.setVgap(10);
@@ -1028,19 +1028,19 @@ public class EventsView extends SetWindow implements Initializable {
         // bind to scroll pane width
         eventsFlowPane.prefWrapLengthProperty().bind(eventsScrollPane.widthProperty());
 
-        this.TitleMap = eventsController.getOthersEventTitleMap();
-        this.ImageMap = eventsController.getOthersEventImageMap();
-        this.DescriptionMap = eventsController.getOthersEventDescriptionMap();
-        this.VenueNameMap = eventsController.getOthersEventVenueNameMap();
-        this.VenueAddressMap = eventsController.getOthersEventVenueAddressMap();
-        this.VenueUrlMap = eventsController.getOthersEventUrlMap();
-        for (int i = 0; i < this.TitleMap.size(); i++) {
-            title = this.TitleMap.get(i);
-            image = this.ImageMap.get(title);
-            description = this.DescriptionMap.get(title);
-            venueName = this.VenueNameMap.get(title);
-            venueAddress = this.VenueAddressMap.get(title);
-            venueUrl = this.VenueUrlMap.get(title);
+        this.titleMap = eventsController.getOthersEventTitleMap();
+        this.imageMap = eventsController.getOthersEventImageMap();
+        this.descriptionMap = eventsController.getOthersEventDescriptionMap();
+        this.venueNameMap = eventsController.getOthersEventVenueNameMap();
+        this.venueAddressMap = eventsController.getOthersEventVenueAddressMap();
+        this.venueUrlMap = eventsController.getOthersEventUrlMap();
+        for (int i = 0; i < this.titleMap.size(); i++) {
+            title = this.titleMap.get(i);
+            image = this.imageMap.get(title);
+            description = this.descriptionMap.get(title);
+            venueName = this.venueNameMap.get(title);
+            venueAddress = this.venueAddressMap.get(title);
+            venueUrl = this.venueUrlMap.get(title);
             AnchorPane posterPane = buildEventPane(title, image, description, venueName, venueAddress, venueUrl, image);
             eventsFlowPane.getChildren().add(posterPane);  
         }
@@ -1096,7 +1096,6 @@ public class EventsView extends SetWindow implements Initializable {
         for (int i = 0; i < this.categoriesMap.size(); i++) {
             this.categoriesListView.getItems().add((String) this.categoriesMap.get(i));
         }
-        //this.categoriesListView.getSelectionModel().select(0);
     }
 
     /**
@@ -1109,9 +1108,9 @@ public class EventsView extends SetWindow implements Initializable {
      * @param venueUrl
      * @throws JSONException 
      */
-    private void EventImageClicked(String title, String image, String description, String venueName, String venueAddress, String venueUrl, Event _event) throws JSONException {
+    private void EventImageClicked(String _title, String _image, String _description, String _venueName, String _venueAddress, String _venueUrl, Event _event) throws JSONException {
         // Request main application to set new scene to hand over control to the event info controller
-        Main.transitionToEventInfoView(this.eventsController.uuidController.getUUID(), title, image, description, venueName, venueAddress, venueUrl);
+        Main.transitionToEventInfoView(this.eventsController.uuidController.getUUID(), _title, _image, _description, _venueName, _venueAddress, _venueUrl);
     }
 
     /**
@@ -1121,15 +1120,15 @@ public class EventsView extends SetWindow implements Initializable {
      * @throws JSONException
      * @throws IOException
      */
-    private void EventTypeSelectionChanged(int oldIndex, int newIndex) throws JSONException, IOException {
-        if (newIndex >= 0 && (newIndex != oldIndex)) {
+    private void EventTypeSelectionChanged(int _oldIndex, int _newIndex) throws JSONException, IOException {
+        if (_newIndex >= 0 && (_newIndex != _oldIndex)) {
 
             if (eventsFlowPane != null) {
                 eventsFlowPane.getChildren().clear();
             }
 
             // switch on the selected index and place a request to fetch that type of event data
-            switch (newIndex) {
+            switch (_newIndex) {
                 case 0:
                     this.buildMusicEventsFlowPane();
                     break;
@@ -1252,7 +1251,7 @@ public class EventsView extends SetWindow implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL _url, ResourceBundle _rb) {
         categoriesListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 EventTypeSelectionChanged(oldValue.intValue(), newValue.intValue());

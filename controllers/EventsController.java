@@ -16,7 +16,7 @@ public class EventsController {
 
     public UUIDController uuidController = new UUIDController();
 
-    private DatabaseAdapter da = new DatabaseAdapter();
+    private final DatabaseAdapter databaseAdapter = new DatabaseAdapter();
 
     private int zipcode;
 
@@ -53,13 +53,13 @@ public class EventsController {
 
     protected EventsModel eventsModel = new EventsModel();
 
-    //=================  GETTERS ===============
+    //================= GETTERS ===============
     public Map getCategoriesMap() throws IOException, JSONException {
         this.eventsModel = eventsModel.loadCategories();
         return this.eventsModel.getCategoriesMap();
     }
 
-    //=================  Comedy ===============
+    //================= Comedy ===============
     public Map getComedyEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.comedy, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -137,7 +137,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= education ===============
+    //================= Education ===============
     public Map getEducationEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.education, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -163,7 +163,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= family ===============
+    //================= Family ===============
     public Map getFamilyEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.family, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -189,7 +189,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= festivals ===============
+    //================= Festivals ===============
     public Map getFestivalsEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.festivals, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -215,7 +215,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= film ===============
+    //================= Film ===============
     public Map getFilmEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.film, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -241,7 +241,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= food&wine ===============
+    //================= Food&Wine ===============
     public Map getFoodandWineEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.foodandWine, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -267,7 +267,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= fundraisers ===============
+    //================= Fundraisers ===============
     public Map getCharityEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.charity, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -293,7 +293,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= exhibits ===============
+    //================= Exhibits ===============
     public Map getExhibitsEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.exhibits, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -319,7 +319,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= health ===============
+    //================= Health ===============
     public Map getHealthEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.health, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -345,7 +345,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= holiday ===============
+    //================= Holiday ===============
     public Map getHolidayEventTitleMap() throws IOException, JSONException {
         this.eventsModel = this.eventsModel.setMapsBasedOnEvent(this.holiday, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -371,7 +371,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= books ===============
+    //================= Books ===============
     public Map getBooksEventTitleMap() throws IOException, JSONException {
         this.eventsModel = eventsModel.setMapsBasedOnEvent(this.books, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -397,7 +397,7 @@ public class EventsController {
         return this.eventsModel.getEventVenueAddressMap();
     }
 
-    //================= attractions ===============
+    //================= Attractions ===============
     public Map getAttractionsEventTitleMap() throws IOException, JSONException {
         this.eventsModel = eventsModel.setMapsBasedOnEvent(this.attractions, this.zipcode);
         return this.eventsModel.getEventTitleMap();
@@ -816,7 +816,7 @@ public class EventsController {
     
     //================= SETTERS ===============
     public void setZipCode() {
-        this.zipcode = Integer.parseInt(this.da.queryForAttribute(this.uuidController.getUUID(), "zipcode"));
+        this.zipcode = Integer.parseInt(this.databaseAdapter.queryForAttribute(this.uuidController.getUUID(), "zipcode"));
         System.out.println("searching for events with zipcode: " + this.zipcode);
     }
 }

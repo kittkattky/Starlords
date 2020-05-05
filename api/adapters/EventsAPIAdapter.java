@@ -17,14 +17,13 @@ import org.json.JSONException;
 
 public class EventsAPIAdapter {
     
-    protected static final EventsAPIInterface currentlyUsedApi = (EventsAPIInterface) new EventfulApi();
+   protected static final EventsAPIInterface currentlyUsedApi = (EventsAPIInterface) new EventfulApi();
     
-    public ArrayList<Map> loadEventsByZipcode(String category, int _zipcode) throws JSONException, ProtocolException, IOException{
-        return EventsAPIAdapter.currentlyUsedApi.loadEventsByZipcode(category, _zipcode);
-    }
-
-  public ArrayList<Map> loadCategories() throws JSONException, ProtocolException, IOException{
+   public ArrayList<Map> loadCategories() throws JSONException, ProtocolException, IOException{
         return EventsAPIAdapter.currentlyUsedApi.loadCategories();
-    }
-    
+    }  
+   
+   public ArrayList<Map> loadEventsByZipcode(String category, int _zipcode) throws JSONException, ProtocolException, IOException{
+        return EventsAPIAdapter.currentlyUsedApi.loadEventsByZipcode(category, _zipcode);
+    } 
 }

@@ -4,12 +4,11 @@ package models;
  * Model class for the events
  *
  * @author Kahlie
- * @date 4/28/20
+ * @date 5/5/20
  */
 import api.adapters.EventsAPIAdapter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONException;
@@ -37,7 +36,7 @@ public class EventsModel {
     protected final static EventsAPIAdapter adapter = new EventsAPIAdapter();
 
     /**
-     * Returns the model with set maps that have information regarding the catagory selected
+     * Returns the model with set maps that have information regarding the category selected
      * Implements Lazy Loading by only loading events for selected category.
      * 
      * @param _category
@@ -57,7 +56,6 @@ public class EventsModel {
         useModel.setEventUrlMap(temp.get(eventUrlMapINDEX));
         useModel.setEventVenueAddressMap(temp.get(eventVenueAddressMapINDEX));
         return useModel;
-
     }
 
     /**
@@ -70,10 +68,8 @@ public class EventsModel {
     public static EventsModel loadCategories() throws IOException, JSONException {
         EventsModel useModel = new EventsModel();
         ArrayList<Map> tempStorageForMaps = adapter.loadCategories();
-
         Map categoriesMap = tempStorageForMaps.get(categoriesMapINDEX);
         useModel.setCategoriesMap(categoriesMap);
-
         return useModel;
     }
 
@@ -111,35 +107,35 @@ public class EventsModel {
     }
 
     //================= SETTERS ===============
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
+    public void setZipcode(int _zipcode) {
+        this.zipcode = _zipcode;
     }
 
-    public void setEventUrlMap(Map comedyEventUrlMap) {
-        this.eventUrlMap = comedyEventUrlMap;
+    public void setEventUrlMap(Map _comedyEventUrlMap) {
+        this.eventUrlMap = _comedyEventUrlMap;
     }
 
-    public void setEventVenueAddressMap(Map comedyEventVenueAddressMap) {
-        this.eventVenueAddressMap = comedyEventVenueAddressMap;
+    public void setEventVenueAddressMap(Map _comedyEventVenueAddressMap) {
+        this.eventVenueAddressMap = _comedyEventVenueAddressMap;
     }
 
-    public void setEventTitleMap(Map comedyEventTitleMap) {
-        this.eventTitleMap = comedyEventTitleMap;
+    public void setEventTitleMap(Map _comedyEventTitleMap) {
+        this.eventTitleMap = _comedyEventTitleMap;
     }
 
-    public void setCategoriesMap(Map categoriesMap) {
-        this.categoriesMap = categoriesMap;
+    public void setCategoriesMap(Map _categoriesMap) {
+        this.categoriesMap = _categoriesMap;
     }
 
-    public void setEventImageMap(Map comedyEventImageMap) {
-        this.eventImageMap = comedyEventImageMap;
+    public void setEventImageMap(Map _comedyEventImageMap) {
+        this.eventImageMap = _comedyEventImageMap;
     }
 
-    public void setEventDescriptionMap(Map comedyEventDescriptionMap) {
-        this.eventDescriptionMap = comedyEventDescriptionMap;
+    public void setEventDescriptionMap(Map _comedyEventDescriptionMap) {
+        this.eventDescriptionMap = _comedyEventDescriptionMap;
     }
 
-    public void setEventVenueNameMap(Map comedyEventVenueNameMap) {
-        this.eventVenueNameMap = comedyEventVenueNameMap;
+    public void setEventVenueNameMap(Map _comedyEventVenueNameMap) {
+        this.eventVenueNameMap = _comedyEventVenueNameMap;
     }
 }
