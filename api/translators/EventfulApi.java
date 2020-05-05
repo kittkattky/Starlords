@@ -82,7 +82,6 @@ public class EventfulApi implements EventsAPIInterface {
         JSONObject categories;
 
         for (int i = 0; i < arr.length(); i++) {
-
             categories = (JSONObject) arr.get(i);
             categoriesMap.put(i, categories.getString("name").replaceAll("&amp;", "and"));
         }
@@ -137,9 +136,12 @@ public class EventfulApi implements EventsAPIInterface {
         }
 
         JSONObject obj = new JSONObject(responseContent.toString());
-        JSONObject events = obj.getJSONObject("events");
+        JSONObject events;
+        JSONArray event;
 
-        JSONArray event = events.getJSONArray("event");
+        events = obj.getJSONObject("events");
+
+        event = events.getJSONArray("event");
 
         Map<Integer, String> title = new LinkedHashMap<Integer, String>();
         Map<String, String> venueName = new HashMap<String, String>();
