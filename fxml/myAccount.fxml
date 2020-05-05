@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import java.net.URL?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
@@ -23,8 +24,8 @@
             <Font name="Corbel Bold" size="36.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
-      <Label fx:id="homePageLabel" alignment="CENTER" layoutY="1.0" onMouseClicked="#backToHomepage" prefHeight="115.0" prefWidth="238.0" text="Home" textFill="#e4e5e5">
+      <Rectangle fx:id="homePageRectangle" arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
+      <Label fx:id="homePageLabel" alignment="CENTER" layoutY="1.0" onMouseClicked="#backToHomepage" onMouseEntered="#setLightHomePageRectangle" onMouseExited="#setDarkHomePageRectangle" prefHeight="115.0" prefWidth="238.0" text="Home" textFill="#e4e5e5">
          <font>
             <Font name="Corbel Bold" size="36.0" />
          </font>
@@ -131,8 +132,8 @@
             <Label fx:id="deleteLabel2" alignment="CENTER" layoutX="10.0" layoutY="172.0" prefHeight="35.0" prefWidth="490.0" textFill="#f5d005" />
          </children>
       </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutX="1062.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
-      <Label fx:id="logOutLabel" alignment="CENTER" layoutX="1062.0" layoutY="1.0" onMouseClicked="#logOut" prefHeight="115.0" prefWidth="238.0" text="Log Out" textFill="#e4e5e5">
+      <Rectangle fx:id="logOutRectangle" arcHeight="5.0" arcWidth="5.0" fill="#95a1cf" height="122.0" layoutX="1062.0" layoutY="-6.0" opacity="0.5" stroke="#9796ab" strokeType="INSIDE" width="239.0" />
+      <Label fx:id="logOutLabel" alignment="CENTER" layoutX="1062.0" layoutY="1.0" onMouseClicked="#logOut" onMouseEntered="#setDarkLogOutRectangle" onMouseExited="#setLightLogOutRectangle" prefHeight="115.0" prefWidth="238.0" text="Log Out" textFill="#e4e5e5">
          <font>
             <Font name="Corbel Bold" size="36.0" />
          </font>
