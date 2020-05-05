@@ -43,7 +43,7 @@
       </HBox>
       <VBox layoutX="249.0" layoutY="142.0" prefHeight="398.0" prefWidth="621.0">
          <children>
-            <Label fx:id="lblMovieTitle" prefHeight="25.0" prefWidth="200.0" text="Name" />
+            <Label fx:id="lblMovieTitle" prefHeight="25.0" prefWidth="200.0" text="Name:" />
             <Label fx:id="lblMovieTitleValue" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="548.0" />
             <ImageView fx:id="imgMovieGraphic" fitHeight="291.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" />
          </children>

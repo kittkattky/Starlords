@@ -6,6 +6,7 @@ package views;
  */
 
 import controllers.MovieController;
+import java.awt.Font;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +26,7 @@ import utilities.Homepage.EventHandlers;
 public class MovieListView implements Initializable {
     
     @FXML
-    protected Label lblWhy, lblWhyValue, lblMovieTitle, lblMovieTitleValue, lblSynopsis, lblCast, lblCastValue;
+    protected Label lblMovieTitle, lblMovieTitleValue, lblSynopsis;
     
     @FXML
     protected TextArea lblSynopsisValue;
