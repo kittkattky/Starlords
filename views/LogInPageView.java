@@ -29,7 +29,7 @@ public class LogInPageView extends SetWindow implements Initializable {
     private Label labelError;
     
     @FXML
-    private Label logOutLabel;
+    protected Label logOutLabel;
 
     @FXML
     private TextField email;
